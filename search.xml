@@ -3,7 +3,7 @@
   <entry>
     <title>BUU-web</title>
     <url>/2021/08/22/BUU-web/</url>
-    <content><![CDATA[<h1 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h1><img src="/2021/08/22/BUU-web/Blog\source\_posts\CTF靶场wp\21.jpg" style="zoom:50%;">
+    <content><![CDATA[<h1 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h1><img src="/2021/08/22/BUU-web/Blog\source\_posts\BUU-web\21.jpg" style="zoom:50%;">
 
 <p>撸猫(<em>/ω＼</em>) 猫猫最可爱了</p>
 <p>审计源码</p>
@@ -30,23 +30,23 @@
 <h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>打开环境提示管理员才能得到flag</p>
 <p>使用EditThisCookie查看，有一个名为admin的cookie值为0，修改为1，刷新得到flag</p>
 <h3 id="基础认证"><a href="#基础认证" class="headerlink" title="基础认证"></a>基础认证</h3><p>打开环境，有个获得flag的click按钮，点一下弹出窗口需要登陆验证，随便输一个<code>admin/123</code>，bp抓包</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\1.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\1.jpg" style="zoom:33%;">
 
 <p>头部有一个Authorization字段，后面的值解码发现是base64加密的<code>admin:123</code></p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\2.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\2.jpg" style="zoom:33%;">
 
 <p>在返回包里发现提示</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\3.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\3.jpg" style="zoom:33%;">
 
 <p>猜测用户名为admin</p>
 <p>下面就可以尝试爆破了，发送到Intruder模块，添加payload position</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\4.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\4.jpg" style="zoom:33%;">
 
 <p>选择模式，加载字典</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\5.jpg" style="zoom: 33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\5.jpg" style="zoom: 33%;">
 
 <p>添加前缀<code>admin:</code>，并对密码进行base64加密处理（同时取消勾选URL编码，不然你会看到 base64 之后的 <code>=</code> 会被转成 <code>%3d</code> ，你就算爆破到天荒地老也不会出来）</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\6.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\6.jpg" style="zoom:33%;">
 
 <p>最后在一个状态码为200的响应返回包中发现flag</p>
 <h3 id="响应包源代码"><a href="#响应包源代码" class="headerlink" title="响应包源代码"></a>响应包源代码</h3><p>饿饿. 打开环境查看源码 发现flag…我人傻了</p>
@@ -54,7 +54,7 @@
 <p>目录遍历（路径遍历）是由于web服务器或者web应用程序对用户输入的文件名称的安全性验证不足而导致的一种安全漏洞，使得攻击者通过利用一些特殊字符就可以绕过服务器的安全限制，访问任意的文件（可以是web根目录以外的文件），甚至执行系统命令</p>
 </blockquote>
 <p>打开环境 点击按钮，会跳到这个界面</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\8.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\8.jpg" style="zoom:33%;">
 
 <p>对目录进行地毯式搜索，可找到一个flag.txt文件，打开得到flag</p>
 <h2 id="phpinfo"><a href="#phpinfo" class="headerlink" title="phpinfo"></a>phpinfo</h2><blockquote>
@@ -80,7 +80,7 @@
 <p><code>.DS_Store</code> 是 Mac OS 保存文件夹的自定义属性的隐藏文件，通过<code>.DS_Store</code>可以知道这个目录里面所有文件的清单</p>
 </blockquote>
 <p>在URL尾部添加<code>/.DS_Store</code>下载到本地打开为乱码，得不到有效信息，使用<a href="https://github.com/gehaxelt/Python-dsstore">github</a>上的一个工具对DS_Store文件进行解析</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\9.jpg" style="zoom: 50%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\9.jpg" style="zoom: 50%;">
 
 <p>得到一个文件名，在URL尾部添加后读取到flag</p>
 <h2 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h2><blockquote>
@@ -94,10 +94,10 @@
 <p>看了wp发现差的不是一点半点啊，</p>
 <p>后来才知道现在用的这个工具不行…（被工具背刺 妹想到的</p>
 <p>换了个工具克隆，这回没问题了</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\10.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\10.jpg" style="zoom:33%;">
 
 <p>打开克隆的文件夹，根据题目信息，使用<code>git log</code>命令查看版本信息</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\11.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\11.jpg" style="zoom:33%;">
 
 <p>可以看到现在的版本将flag移除，回退到上一个版本即可得到flag</p>
 <p><code>git reset --hard HEAD^</code>回退到上一个版本</p>
@@ -109,7 +109,7 @@
 </blockquote>
 <p>本题还可以使用<code>git reset --hard 358fe9789f3d1f9eaafe913bb335df0c6c517d3e</code>来回退</p>
 <p>回退后使用<code>ls</code>命令查看目录，然后使用<code>cat</code>命令查看文件 得到flag</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTF靶场wp\12.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/Blog\source\_posts\CTFHub-技能树\12.jpg" style="zoom:33%;">
 
 <h3 id="Stash"><a href="#Stash" class="headerlink" title="Stash"></a>Stash</h3><h2 id="SVN泄露"><a href="#SVN泄露" class="headerlink" title="SVN泄露"></a>SVN泄露</h2><p><a href="http://www.qishunwang.net/news_show_62103.aspx">http://www.qishunwang.net/news_show_62103.aspx</a></p>
 <p><a href="https://www.freesion.com/article/98721217183/">https://www.freesion.com/article/98721217183/</a></p>
@@ -234,7 +234,7 @@
 </blockquote>
 <p>根据题目提示的技术文档，打开环境后以为会在博客页面中有所发现，但打开后未获取到有效信息</p>
 <p>在从头到尾的尝试后，在页面底部发现一个<strong>document</strong>带有链接</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\7.jpg" style="zoom: 33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\7.jpg" style="zoom: 33%;">
 
 <p>打开后得到一个系统使用手册<code>/document.pdf</code>，在其中得到后台登陆地址及用户名密码</p>
 <p>打开后台登录，get flag</p>
@@ -242,27 +242,27 @@
 <p>默认配置泄露：editor泄露：常用：直接访问example.com/editor，插入处可获知路径</p>
 </blockquote>
 <p>根据题目信息在URL尾部添加<code>/editor/</code>访问编辑器</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\13.jpg" style="zoom: 50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\13.jpg" style="zoom: 50%;">
 
 <p>发现一个上传文件选项 打开</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\14.jpg" style="zoom: 50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\14.jpg" style="zoom: 50%;">
 
 <p>打开文件空间</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\15.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\15.jpg" style="zoom:33%;">
 
 <p>逐个搜索后，在<code>var/www/html/nothinghere/</code>中发现<strong>fl000g.txt</strong>文件</p>
 <p>最后回到初始界面，在URL尾部添加<code>/nothinghere/fl000g.txt</code>打开，得到flag</p>
 <h2 id="web15"><a href="#web15" class="headerlink" title="web15"></a>web15</h2><p>根据题目信息在页面底部发现一个邮箱，肯定要利用到登录</p>
 <p>点击页面上方的登录是个空链接</p>
 <p>使用dirsearch扫描到一个<code>/admin/</code>界面，访问</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\16.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\16.jpg" style="zoom:33%;">
 
 <p>不知道密码，点击忘记密码试试</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\17.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\17.jpg" style="zoom:33%;">
 
 <p>根据QQ邮箱的QQ号查到所在地址为西安</p>
 <p>输入西安</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\18.jpg" style="zoom: 50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\18.jpg" style="zoom: 50%;">
 
 <p>使用<code>1156631961@qq.com/admin7789</code>登录显示用户名错误</p>
 <p>改用<code>admin/admin7789</code>试试</p>
@@ -272,12 +272,12 @@
 </blockquote>
 <p>在URL尾部添加<code>/tz.php</code>，打开此页面</p>
 <p>试了一下，<strong>dirsearch</strong>和<strong>dirmap</strong>扫描目录都没有扫到<code>/tz.php</code></p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\19.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\19.jpg" style="zoom:33%;">
 
 <p>在PHP相关参数中打开PHPINFO界面，搜索flag，get</p>
 <h2 id="web17"><a href="#web17" class="headerlink" title="web17"></a>web17</h2><p><code>ping</code>了一下<strong>ctfer.com</strong>，<code>ping</code>不通</p>
 <p>原来…</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\20.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\20.jpg" style="zoom:33%;">
 
 <h2 id="web18"><a href="#web18" class="headerlink" title="web18"></a>web18</h2><p>打开环境是一个游戏，f12审查元素</p>
 <p>打开<code>/js/Flappy_js.js</code>审计代码</p>
@@ -298,34 +298,34 @@
 </blockquote>
 <p>没思路，通过hint提示查看<code>/db/db.mdb</code>，下载到本地，查看<strong>db.mdb</strong>文件，搜索flag/ctfhub，get it!</p>
 <h1 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h1><h2 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h2><p>一个登录界面，bp抓包，随便输入<code>admin/123456</code>登录</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\22.jpg" style="zoom: 50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\22.jpg" style="zoom: 50%;">
 
 <p>消息头有一行这样的东西，base64解码一下发现是<code>admin:123456</code></p>
 <p>然后添加爆破点，加载附件里的字典</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\23.jpg" style="zoom: 33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\23.jpg" style="zoom: 33%;">
 
 <p>添加头部<code>admin:</code>，再添加base64编码</p>
 <p>开始爆破，最终可得到flag</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\24.jpg" style="zoom:33%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\24.jpg" style="zoom:33%;">
 
 <h2 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h2><p>爆破域名，尝试子域名爆破，但感觉没得到啥有用的信息</p>
 <p>看了视频题解之后</p>
 <p>。。。</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\25.jpg" style="zoom:50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\25.jpg" style="zoom:50%;">
 
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\表情包\1.gif" style="zoom:33%;">
 
 <h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h2><p>打开环境有提示前端验证不可靠，试着提交几个webshell，确实<code>php</code>格式不行，但是<code>jpg</code>竟然也不行???</p>
 <p><code>png</code>格式可以（瞧不起我？.jpg</p>
 <p>提交一个png的webshell，然后bp改包将扩展名改成<code>.php</code></p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\26.jpg" style="zoom: 50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\26.jpg" style="zoom: 50%;">
 
 <p>好耶，接下来就是愉快的getshell过程</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\27.jpg" style="zoom:50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\27.jpg" style="zoom:50%;">
 
 <p>从此爱上绿色（bushi</p>
 <p>打开虚拟终端，</p>
-<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTF靶场wp\28.jpg" style="zoom: 50%;">
+<img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/Blog\source\_posts\CTFshow-web入门\28.jpg" style="zoom: 50%;">
 
 <p>一套组合拳直接带走</p>
 <h2 id="web152"><a href="#web152" class="headerlink" title="web152"></a>web152</h2><p>打开环境提示后端校验，</p>
@@ -890,7 +890,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#x6e;&#46;&#68;&#111;&#101;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#111;&#109;">&#x4a;&#x6f;&#104;&#x6e;&#46;&#68;&#111;&#101;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#111;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#x6e;&#x2e;&#68;&#x6f;&#101;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#74;&#111;&#x68;&#x6e;&#x2e;&#68;&#x6f;&#101;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
