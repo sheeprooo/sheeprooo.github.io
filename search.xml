@@ -141,868 +141,6 @@
       </tags>
   </entry>
   <entry>
-    <title>BUU-web</title>
-    <url>/2021/08/22/BUU-web/</url>
-    <content><![CDATA[<h1 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h1><img src="/2021/08/22/BUU-web/21.jpg" style="zoom:50%;">
-
-<p>撸猫(<em>/ω＼</em>) 猫猫最可爱了</p>
-<p>审计源码</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cat</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;cat&#x27;</span>];</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$cat</span>;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$cat</span>==<span class="string">&#x27;dog&#x27;</span>)&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;Syc&#123;cat_cat_cat_cat&#125;&#x27;</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在URL后面<code>?cat=dog</code>，得到flag</p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>BUU</tag>
-        <tag>WEB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTFHub-技能树</title>
-    <url>/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="web前置技能"><a href="#web前置技能" class="headerlink" title="web前置技能"></a>web前置技能</h1><h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><h3 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h3><p>HTTP/1.1 八种请求方式: GET,POST,HEAD,OPTIONS,PUT,DELETE,TRACE,CONNECT</p>
-<p>打开环境提示HTTP方法为GET，使用CTFHUB方法，我会给你flag</p>
-<p>bp抓包改包重放，得到flag</p>
-<h3 id="302跳转"><a href="#302跳转" class="headerlink" title="302跳转"></a>302跳转</h3><p>看了wp才做出来</p>
-<p>打开环境，点击got flag后没反应，f12查看新出现了一个302的index.php页面，使用curl工具<code>-v</code>参数输出通信的整个过程，得到flag</p>
-<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>打开环境提示管理员才能得到flag</p>
-<p>使用EditThisCookie查看，有一个名为admin的cookie值为0，修改为1，刷新得到flag</p>
-<h3 id="基础认证"><a href="#基础认证" class="headerlink" title="基础认证"></a>基础认证</h3><p>打开环境，有个获得flag的click按钮，点一下弹出窗口需要登陆验证，随便输一个<code>admin/123</code>，bp抓包</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/1.jpg" style="zoom:33%;">
-
-<p>头部有一个Authorization字段，后面的值解码发现是base64加密的<code>admin:123</code></p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/2.jpg" style="zoom:33%;">
-
-<p>在返回包里发现提示</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/3.jpg" style="zoom:33%;">
-
-<p>猜测用户名为admin</p>
-<p>下面就可以尝试爆破了，发送到Intruder模块，添加payload position</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/4.jpg" style="zoom:33%;">
-
-<p>选择模式，加载字典</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/5.jpg" style="zoom: 33%;">
-
-<p>添加前缀<code>admin:</code>，并对密码进行base64加密处理（同时取消勾选URL编码，不然你会看到 base64 之后的 <code>=</code> 会被转成 <code>%3d</code> ，你就算爆破到天荒地老也不会出来）</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/6.jpg" style="zoom:33%;">
-
-<p>最后在一个状态码为200的响应返回包中发现flag</p>
-<h3 id="响应包源代码"><a href="#响应包源代码" class="headerlink" title="响应包源代码"></a>响应包源代码</h3><p>饿饿. 打开环境查看源码 发现flag…我人傻了</p>
-<h1 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h1><h2 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h2><blockquote>
-<p>目录遍历（路径遍历）是由于web服务器或者web应用程序对用户输入的文件名称的安全性验证不足而导致的一种安全漏洞，使得攻击者通过利用一些特殊字符就可以绕过服务器的安全限制，访问任意的文件（可以是web根目录以外的文件），甚至执行系统命令</p>
-</blockquote>
-<p>打开环境 点击按钮，会跳到这个界面</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/8.jpg" style="zoom:33%;">
-
-<p>对目录进行地毯式搜索，可找到一个flag.txt文件，打开得到flag</p>
-<h2 id="phpinfo"><a href="#phpinfo" class="headerlink" title="phpinfo"></a>phpinfo</h2><blockquote>
-<p><code>phpinfo()</code> 是php中查看相关信息的函数，当在页面中执行<code>phpinfo()</code>函数时，php会将自身的所有信息全部打印出来。在phpinfo中会泄露很多服务端的一些信息，例如安装的一些模块、网站绝对路径、服务器自身的操作系统、使用的组件版本等等，在phpinfo中获得的这些信息会为下一步的渗透/做题提供一些帮助</p>
-</blockquote>
-<p>正好之前碰到的一个漏洞就是phpinfo信息泄露，要不然还不了解这个</p>
-<p>就是在本题的phpinfo页面中<code>ctrl+f</code>，查找ctfhub，然后就找到flag了</p>
-<h2 id="备份文件下载"><a href="#备份文件下载" class="headerlink" title="备份文件下载"></a>备份文件下载</h2><h3 id="网站源码"><a href="#网站源码" class="headerlink" title="网站源码"></a>网站源码</h3><blockquote>
-<p>常见的网站源码备份文件名：<code>web</code>，<code>website</code>，<code>backup</code>，<code>back</code>，<code>www</code>，<code>wwwroot</code>，<code>temp</code><br>常见的网站源码备份文件后缀：<code>.zip</code>，<code>.rar</code>，<code>.tar</code>，<code>.tar.gz</code>，<code>.7z</code>，<code>.bak</code>，<code>.txt</code> ，<code>.old</code>，<code>.temp</code></p>
-</blockquote>
-<p>试了一下<code>www.zip</code>   一发入魂</p>
-<p>下载到本地解压发现一个<code>flag_46657223.txt</code>文件，但打开没有flag</p>
-<p>然后回到环境中，在URL尾部添加<code>/flag_46657223.txt</code>打开，得到flag</p>
-<h3 id="bak文件"><a href="#bak文件" class="headerlink" title="bak文件"></a>bak文件</h3><blockquote>
-<p>常见的备份文件后缀名有: <code>.git</code>， <code>.svn</code>， <code>.swp</code>， <code>.svn</code> ，<code>.~</code> ，<code>.bak</code> ，<code>.bash_history</code></p>
-</blockquote>
-<p>打开环境提示flag在index.php的源码里，根据题目信息，在URL尾部添加<code>/index.php.bak</code>，下载文件到本地打开 得到flag</p>
-<h3 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h3><blockquote>
-<p>原理同<strong>ctfshow/web入门/信息搜集/web9</strong></p>
-</blockquote>
-<p>但本题需在URL尾部添加<code>/.index.php.swp</code>  （奇了个怪</p>
-<h3 id="DS-Store"><a href="#DS-Store" class="headerlink" title=".DS_Store"></a>.DS_Store</h3><blockquote>
-<p><code>.DS_Store</code> 是 Mac OS 保存文件夹的自定义属性的隐藏文件，通过<code>.DS_Store</code>可以知道这个目录里面所有文件的清单</p>
-</blockquote>
-<p>在URL尾部添加<code>/.DS_Store</code>下载到本地打开为乱码，得不到有效信息，使用<a href="https://github.com/gehaxelt/Python-dsstore">github</a>上的一个工具对DS_Store文件进行解析</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/9.jpg" style="zoom: 50%;">
-
-<p>得到一个文件名，在URL尾部添加后读取到flag</p>
-<h2 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h2><blockquote>
-<p>开发人员会使用 git 进行版本控制，对站点自动部署。但如果配置不当，可能会将 .git 文件夹直接部署到线上环境，这就引起了 git 泄露漏洞，我们可以利用这个漏洞直接获得网页源码</p>
-</blockquote>
-<h3 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h3><blockquote>
-<p><code>git log</code>命令可以查看历史版本信息</p>
-</blockquote>
-<p>git泄露肯定要用到githack工具</p>
-<p>打开环境用githack克隆一下发现没啥东西？？？</p>
-<p>看了wp发现差的不是一点半点啊，</p>
-<p>后来才知道现在用的这个工具不行…（被工具背刺 妹想到的</p>
-<p>换了个工具克隆，这回没问题了</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/10.jpg" style="zoom:33%;">
-
-<p>打开克隆的文件夹，根据题目信息，使用<code>git log</code>命令查看版本信息</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/11.jpg" style="zoom:33%;">
-
-<p>可以看到现在的版本将flag移除，回退到上一个版本即可得到flag</p>
-<p><code>git reset --hard HEAD^</code>回退到上一个版本</p>
-<blockquote>
-<p>在Git中，用HEAD表示当前版本，</p>
-<p>所以回退到上一个版本就只需要使用命令：<code>git reset --hard HEAD^ </code></p>
-<p>回退到上上个版本则使用命令：<code>git reset --hard HEAD^^</code></p>
-<p>要是需要回退到20个版本之前的话，就可以使用命令：<code>git reset --hard HEAD~20</code></p>
-</blockquote>
-<p>本题还可以使用<code>git reset --hard 358fe9789f3d1f9eaafe913bb335df0c6c517d3e</code>来回退</p>
-<p>回退后使用<code>ls</code>命令查看目录，然后使用<code>cat</code>命令查看文件 得到flag</p>
-<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/12.jpg" style="zoom:33%;">
-
-<h3 id="Stash"><a href="#Stash" class="headerlink" title="Stash"></a>Stash</h3><h2 id="SVN泄露"><a href="#SVN泄露" class="headerlink" title="SVN泄露"></a>SVN泄露</h2><p><a href="http://www.qishunwang.net/news_show_62103.aspx">http://www.qishunwang.net/news_show_62103.aspx</a></p>
-<p><a href="https://www.freesion.com/article/98721217183/">https://www.freesion.com/article/98721217183/</a></p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTFHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Bugku-web</title>
-    <url>/2021/08/22/Bugku-web/</url>
-    <content><![CDATA[<h1 id="web1"><a href="#web1" class="headerlink" title="web1"></a>web1</h1><p>…滑稽脸<br><img src="https://z3.ax1x.com/2021/04/16/cf8LQK.jpg" style="zoom: 25%;"><br>F12打开源码，找到flag</p>
-<h1 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h1><p>是一个填写验证码的输入框，然后发现无法输入两个字符，F12审查元素，果然输入框限制了maxlength，修改maxlength为2即可</p>
-<h1 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h1><p>打开场景是一段PHP代码，</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$what</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;what&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$what</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$what</span>==<span class="string">&#x27;flag&#x27;</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;flag&#123;****&#125;&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>审计，是要通过get的方式提交一个变量<code>what=flag</code>，<br>在地址栏输入<code>http://114.67.246.176:16477/?what=flag</code>即可得到flag</p>
-<h1 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h1><p>打开场景又是一段PHP代码，</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$what</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;what&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$what</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$what</span>==<span class="string">&#x27;flag&#x27;</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;flag&#123;****&#125;&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>审计，是要通过post的方式提交一个变量<code>what=flag</code>,通过hackbar post一下即可</p>
-<h1 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h1><p>打开场景又是一段PHP代码，</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$num</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!is_numeric(<span class="variable">$num</span>))</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$num</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$num</span>==<span class="number">1</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;flag&#123;**********&#125;&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>审计，是弱类型比较，要求num变量既不是数字又满足等于1的条件，所以在1后面加一个字母即可<br>通过get方式提交<code>http://114.67.246.176:12222/?num=1a</code><br>得到flag</p>
-<h1 id="web6"><a href="#web6" class="headerlink" title="web6"></a>web6</h1><p>打开场景一堆弹窗，关都关不完，查看网页源码，<br><img src="https://z3.ax1x.com/2021/04/13/cyMAh9.png" style="zoom:33%;"><br>…发现写了一堆alert…绝了<br>在最下面发现了注释掉的编码，<br><img src="https://z3.ax1x.com/2021/04/13/cyMunK.png" style="zoom: 33%;"><br>查了一下是Unicode编码，通过工具Unicode转ASCII得到flag</p>
-<h1 id="web7"><a href="#web7" class="headerlink" title="web7"></a>web7</h1><p>弹窗提示停止网页刷新可得到flag<br>查看网页源代码，发现<br><img src="https://z3.ax1x.com/2021/04/20/cH8KiT.jpg" style="zoom: 50%;"><br>并且前面的图片命名为num.jpg，于是尝试刷新，发现图片num确实随着刷新改变，然后不断刷新，最后在一次刷新后圈圈的地方出现flag</p>
-<h1 id="web8"><a href="#web8" class="headerlink" title="web8"></a>web8</h1><blockquote>
-<p>PHP暂略</p>
-</blockquote>
-<h1 id="web9"><a href="#web9" class="headerlink" title="web9"></a>web9</h1><blockquote>
-<p>PHP暂略</p>
-</blockquote>
-<h1 id="web10"><a href="#web10" class="headerlink" title="web10"></a>web10</h1><p>打开页面显示什么也没有？信个鬼<br>根据描述头等舱，联想到消息头，BP抓包，在消息头中得到flag</p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>WEB</tag>
-        <tag>Bugku</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTFshow-crypto</title>
-    <url>/2021/08/22/CTFshow-crypto/</url>
-    <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><h2 id="密码学签到"><a href="#密码学签到" class="headerlink" title="密码学签到"></a>密码学签到</h2><p>倒置即可</p>
-<h2 id="crypto2"><a href="#crypto2" class="headerlink" title="crypto2"></a>crypto2</h2>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTFshow</tag>
-        <tag>CRYPTO</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTFshow-misc入门</title>
-    <url>/2021/08/22/CTFshow-misc%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h1 id="图片篇（基础操作）"><a href="#图片篇（基础操作）" class="headerlink" title="图片篇（基础操作）"></a>图片篇（基础操作）</h1><h2 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h2><p>一个简单的图片，通过识别文字获取flag</p>
-<h2 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h2><blockquote>
-<p><a href="https://sheeprooo.top/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F">十六进制文件头</a></p>
-</blockquote>
-<p>一个<strong>txt</strong>文件 打开之后是乱码，使用winhex查看16进制文件头发现是<code>.png</code>格式，修改后缀名打开即可得到flag</p>
-<h2 id="misc3"><a href="#misc3" class="headerlink" title="misc3"></a>misc3</h2><p>是一个bpg文件，可使用Bandzip附带的Honeyview打开查看，得到flag</p>
-<h2 id="misc4"><a href="#misc4" class="headerlink" title="misc4"></a>misc4</h2><p>一共六个txt文件，使用winhex查看文件头，通过对照<a href="https://sheeprooo.top/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F">十六进制文件头</a>中的信息，将其分别修改为<code>.jpg</code>，<code>.png</code>，<code> </code></p>
-<h1 id="图片篇（信息附加）"><a href="#图片篇（信息附加）" class="headerlink" title="图片篇（信息附加）"></a>图片篇（信息附加）</h1><h2 id="misc5"><a href="#misc5" class="headerlink" title="misc5"></a>misc5</h2>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTFshow</tag>
-        <tag>MISC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTFshow-web</title>
-    <url>/2021/08/22/CTFshow-web/</url>
-    <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><h2 id="web签到题"><a href="#web签到题" class="headerlink" title="web签到题"></a>web签到题</h2><p>f12查看源码发现一串注释的字符，丢到<strong>hasher</strong>里解码，在<strong>base64</strong>解码后得到flag</p>
-<h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>WEB</tag>
-        <tag>CTFshow</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tag Plugins</title>
-    <url>/2021/08/15/Butterfly%E4%B8%BB%E9%A2%98%E6%A0%87%E7%AD%BE%E5%A4%96%E6%8C%82/</url>
-    <content><![CDATA[<blockquote>
-<p>标签外挂是Hexo独有的功能，并不是标准的Markdown格式</p>
-<p>以下的写法，只适用于Butterfly主题，用在其它主题上不会有效果，甚至可能会报错，使用前请留意</p>
-</blockquote>
-<h1 id="Note-Bootstrap-Callout"><a href="#Note-Bootstrap-Callout" class="headerlink" title="Note (Bootstrap Callout)"></a>Note (Bootstrap Callout)</h1><h2 id="用法一"><a href="#用法一" class="headerlink" title="用法一"></a>用法一</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">Any content (support inline tags too.io).</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>class</td>
-<td>【可选】标识，不同的标识有不同的配色<br>（ default / primary / success / info / warning / danger ）</td>
-</tr>
-<tr>
-<td>no-icon</td>
-<td>【可选】不显示 icon</td>
-</tr>
-<tr>
-<td>style</td>
-<td>【可选】可以覆盖配置中的 style<br>（simple/modern/flat/disabled）</td>
-</tr>
-</tbody></table>
-<h3 id="simple"><a href="#simple" class="headerlink" title="simple"></a>simple</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note simple %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default simple %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary simple %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success simple %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info simple %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning simple %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger simple %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note simple"><p>默认 提示块标籤</p>
-</div>
-
-<div class="note default simple"><p>default 提示块标籤</p>
-</div>
-
-<div class="note primary simple"><p>primary 提示块标籤</p>
-</div>
-
-<div class="note success simple"><p>success 提示块标籤</p>
-</div>
-
-<div class="note info simple"><p>info 提示块标籤</p>
-</div>
-
-<div class="note warning simple"><p>warning 提示块标籤</p>
-</div>
-
-<div class="note danger simple"><p>danger 提示块标籤</p>
-</div>
-
-<h3 id="modern"><a href="#modern" class="headerlink" title="modern"></a>modern</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note modern %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default modern %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary modern %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success modern %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info modern %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning modern %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger modern %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note modern"><p>默认 提示块标籤</p>
-</div>
-
-<div class="note default modern"><p>default 提示块标籤</p>
-</div>
-
-<div class="note primary modern"><p>primary 提示块标籤</p>
-</div>
-
-<div class="note success modern"><p>success 提示块标籤</p>
-</div>
-
-<div class="note info modern"><p>info 提示块标籤</p>
-</div>
-
-<div class="note warning modern"><p>warning 提示块标籤</p>
-</div>
-
-<div class="note danger modern"><p>danger 提示块标籤</p>
-</div>
-
-<h3 id="flat"><a href="#flat" class="headerlink" title="flat"></a>flat</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note flat %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default flat %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary flat %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success flat %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info flat %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning flat %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger flat %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note flat"><p>默认 提示块标籤</p>
-</div>
-
-<div class="note default flat"><p>default 提示块标籤</p>
-</div>
-
-<div class="note primary flat"><p>primary 提示块标籤</p>
-</div>
-
-<div class="note success flat"><p>success 提示块标籤</p>
-</div>
-
-<div class="note info flat"><p>info 提示块标籤</p>
-</div>
-
-<div class="note warning flat"><p>warning 提示块标籤</p>
-</div>
-
-<div class="note danger flat"><p>danger 提示块标籤</p>
-</div>
-
-<h3 id="disabled"><a href="#disabled" class="headerlink" title="disabled"></a>disabled</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note disabled %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default disabled %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary disabled %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success disabled %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info disabled %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning disabled %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger disabled %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note disabled"><p>默认 提示块标籤</p>
-</div>
-
-<div class="note default disabled"><p>default 提示块标籤</p>
-</div>
-
-<div class="note primary disabled"><p>primary 提示块标籤</p>
-</div>
-
-<div class="note success disabled"><p>success 提示块标籤</p>
-</div>
-
-<div class="note info disabled"><p>info 提示块标籤</p>
-</div>
-
-<div class="note warning disabled"><p>warning 提示块标籤</p>
-</div>
-
-<div class="note danger disabled"><p>danger 提示块标籤</p>
-</div>
-
-<h3 id="no-icon"><a href="#no-icon" class="headerlink" title="no-icon"></a>no-icon</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note no-icon %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default no-icon %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary no-icon %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success no-icon %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info no-icon %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning no-icon %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger no-icon %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note no-icon flat"><p>默认 提示块标籤</p>
-</div>
-
-<div class="note default no-icon flat"><p>default 提示块标籤</p>
-</div>
-
-<div class="note primary no-icon flat"><p>primary 提示块标籤</p>
-</div>
-
-<div class="note success no-icon flat"><p>success 提示块标籤</p>
-</div>
-
-<div class="note info no-icon flat"><p>info 提示块标籤</p>
-</div>
-
-<div class="note warning no-icon flat"><p>warning 提示块标籤</p>
-</div>
-
-<div class="note danger no-icon flat"><p>danger 提示块标籤</p>
-</div>
-
-<h2 id="用法二"><a href="#用法二" class="headerlink" title="用法二"></a>用法二</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [color] [icon] [style] %&#125;</span><br><span class="line">Any content (support inline tags too.io).</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>color</td>
-<td>【可选】顔色<br>(default / blue / pink / red / purple / orange / green)</td>
-</tr>
-<tr>
-<td>icon</td>
-<td>【可选】可配置自定义 icon (只支持 fontawesome 图标, 也可以配置 no-icon )</td>
-</tr>
-<tr>
-<td>style</td>
-<td>【可选】可以覆盖配置中的 style<br>（simple/modern/flat/disabled）</td>
-</tr>
-</tbody></table>
-<h3 id="simple-1"><a href="#simple-1" class="headerlink" title="simple"></a>simple</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; simple %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; simple %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; simple %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; simple%&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; simple %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; simple %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; simple %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note icon simple"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note blue icon simple"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
-</div>
-<div class="note pink icon simple"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
-</div>
-<div class="note red icon simple"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
-</div>
-<div class="note orange icon simple"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note purple icon simple"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
-</div>
-<div class="note green icon simple"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
-</div>
-
-<h3 id="modern-1"><a href="#modern-1" class="headerlink" title="modern"></a>modern</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; modern %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; modern %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; modern %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; modern%&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; modern %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; modern %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; modern %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note icon modern"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note blue icon modern"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
-</div>
-<div class="note pink icon modern"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
-</div>
-<div class="note red icon modern"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
-</div>
-<div class="note orange icon modern"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note purple icon modern"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
-</div>
-<div class="note green icon modern"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
-</div>
-
-<h3 id="flat-1"><a href="#flat-1" class="headerlink" title="flat"></a>flat</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; flat %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; flat %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; flat %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; flat%&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; flat %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; flat %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; flat %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note icon flat"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
-</div>
-<div class="note pink icon flat"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
-</div>
-<div class="note red icon flat"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
-</div>
-<div class="note orange icon flat"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note purple icon flat"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
-</div>
-<div class="note green icon flat"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
-</div>
-
-<h3 id="disabled-1"><a href="#disabled-1" class="headerlink" title="disabled"></a>disabled</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; disabled %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; disabled %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; disabled %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; disabled %&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; disabled %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; disabled %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; disabled %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note icon disabled"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note blue icon disabled"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
-</div>
-<div class="note pink icon disabled"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
-</div>
-<div class="note red icon disabled"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
-</div>
-<div class="note orange icon disabled"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note purple icon disabled"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
-</div>
-<div class="note green icon disabled"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
-</div>
-
-<h3 id="no-icon-1"><a href="#no-icon-1" class="headerlink" title="no-icon"></a>no-icon</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note no-icon %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue no-icon %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink no-icon %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red no-icon %&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange no-icon %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple no-icon %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green no-icon %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="note no-icon flat"><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note blue no-icon flat"><p>2021年快到了….</p>
-</div>
-<div class="note pink no-icon flat"><p>小心开车 安全至上</p>
-</div>
-<div class="note red no-icon flat"><p>这是三片呢？还是四片？</p>
-</div>
-<div class="note orange no-icon flat"><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note purple no-icon flat"><p>剪刀石头布</p>
-</div>
-<div class="note green no-icon flat"><p>前端最讨厌的浏览器</p>
-</div>
-
-<h1 id="Gallery相册图库"><a href="#Gallery相册图库" class="headerlink" title="Gallery相册图库"></a>Gallery相册图库</h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;gallery-group-main&quot;</span>&gt;</span></span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>name</td>
-<td>图库名字</td>
-</tr>
-<tr>
-<td>description</td>
-<td>图库描述</td>
-</tr>
-<tr>
-<td>link</td>
-<td>连接到对应相册的地址</td>
-</tr>
-<tr>
-<td>img-url</td>
-<td>图库封面的地址</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>e.g.</strong></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;gallery-group-main&quot;</span>&gt;</span></span><br><span class="line">&#123;% galleryGroup &#x27;壁纸&#x27; &#x27;收藏的一些壁纸&#x27; &#x27;/Gallery/wallpaper&#x27; https://i.loli.net/2019/11/10/T7Mu8Aod3egmC4Q.png %&#125;</span><br><span class="line">&#123;% galleryGroup &#x27;漫威&#x27; &#x27;关于漫威的图片&#x27; &#x27;/Gallery/marvel&#x27; https://i.loli.net/2019/12/25/8t97aVlp4hgyBGu.jpg %&#125;</span><br><span class="line">&#123;% galleryGroup &#x27;OH MY GIRL&#x27; &#x27;关于OH MY GIRL的图片&#x27; &#x27;/Gallery/ohmygirl&#x27; https://i.loli.net/2019/12/25/hOqbQ3BIwa6KWpo.jpg %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<div class="gallery-group-main">
-
-  <figure class="gallery-group">
-  <img class="gallery-group-img" src="https://i.loli.net/2019/11/10/T7Mu8Aod3egmC4Q.png" alt="Group Image Gallery">
-  <figcaption>
-  <div class="gallery-group-name">壁纸</div>
-  <p>收藏的一些壁纸</p>
-  <a href="/Gallery/wallpaper"></a>
-  </figcaption>
-  </figure>
-  
-
-  <figure class="gallery-group">
-  <img class="gallery-group-img" src="https://i.loli.net/2019/12/25/8t97aVlp4hgyBGu.jpg" alt="Group Image Gallery">
-  <figcaption>
-  <div class="gallery-group-name">漫威</div>
-  <p>关于漫威的图片</p>
-  <a href="/Gallery/marvel"></a>
-  </figcaption>
-  </figure>
-  
-
-  <figure class="gallery-group">
-  <img class="gallery-group-img" src="https://i.loli.net/2019/12/25/hOqbQ3BIwa6KWpo.jpg" alt="Group Image Gallery">
-  <figcaption>
-  <div class="gallery-group-name">OH MY GIRL</div>
-  <p>关于OH MY GIRL的图片</p>
-  <a href="/Gallery/ohmygirl"></a>
-  </figcaption>
-  </figure>
-  
-</div>
-</blockquote>
-<h1 id="Gallery相册"><a href="#Gallery相册" class="headerlink" title="Gallery相册"></a>Gallery相册</h1><figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">gallery</span> %&#125;</span></span><br><span class="line"><span class="xml">markdown 图片格式</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endgallery</span> %&#125;</span></span><br></pre></td></tr></table></figure>
-<p><strong>不能置于引用下，会导致图片不显示</strong></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% gallery %&#125;</span><br><span class="line">![](https://i.loli.net/2019/12/25/Fze9jchtnyJXMHN.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/ryLVePaqkYm4TEK.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/gEy5Zc1Ai6VuO4N.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/d6QHbytlSYO4FBG.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/6nepIJ1xTgufatZ.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/E7Jvr4eIPwUNmzq.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/mh19anwBSWIkGlH.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/2tu9JC8ewpBFagv.jpg)</span><br><span class="line">&#123;% endgallery %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="justified-gallery"><p><img src="https://i.loli.net/2019/12/25/Fze9jchtnyJXMHN.jpg"><br><img src="https://i.loli.net/2019/12/25/ryLVePaqkYm4TEK.jpg"><br><img src="https://i.loli.net/2019/12/25/gEy5Zc1Ai6VuO4N.jpg"><br><img src="https://i.loli.net/2019/12/25/d6QHbytlSYO4FBG.jpg"><br><img src="https://i.loli.net/2019/12/25/6nepIJ1xTgufatZ.jpg"><br><img src="https://i.loli.net/2019/12/25/E7Jvr4eIPwUNmzq.jpg"><br><img src="https://i.loli.net/2019/12/25/mh19anwBSWIkGlH.jpg"><br><img src="https://i.loli.net/2019/12/25/2tu9JC8ewpBFagv.jpg"></p>
-          </div>
-
-<h1 id="tag-hide"><a href="#tag-hide" class="headerlink" title="tag-hide"></a>tag-hide</h1><h2 id="Inline"><a href="#Inline" class="headerlink" title="Inline"></a>Inline</h2><p><code>inline</code> 在文本里面添加按钮隐藏内容，只限文字</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% hideInline <span class="attribute">content</span>,<span class="attribute">display</span>,bg,<span class="attribute">color</span> %&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>content</td>
-<td>文本内容<br>content不能包含英文逗号，可用<code>sbquo;</code></td>
-</tr>
-<tr>
-<td>display</td>
-<td>按钮显示的文字(可选)</td>
-</tr>
-<tr>
-<td>bg</td>
-<td>按钮的背景颜色(可选)</td>
-</tr>
-<tr>
-<td>color</td>
-<td>按钮文字的颜色(可选)</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>e.g.</strong></p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml">哪个英文字母最酷？ </span><span class="template-tag">&#123;% <span class="name">hideInline</span> 因为西装裤(C装酷),查看答案,#FF7242,#fff %&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">门里站着一个人? </span><span class="template-tag">&#123;% <span class="name">hideInline</span> 闪 %&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>哪个英文字母最酷？ <span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #FF7242;color: #fff">查看答案
-  </button><span class="hide-content">因为西装裤(C装酷)</span></span></p>
-<p>门里站着一个人? <span class="hide-inline"><button type="button" class="hide-button button--animated" style>Click
-  </button><span class="hide-content">闪</span></span></p>
-</blockquote>
-<h2 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h2><p><code>block</code>独立的block隐藏内容，可以隐藏很多内容，包括图片，代码块等等</p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">hideBlock</span> display,bg,color %&#125;</span></span><br><span class="line"><span class="xml">content</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endhideBlock</span> %&#125;</span></span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>content</td>
-<td>文本内容</td>
-</tr>
-<tr>
-<td>display</td>
-<td>按钮显示的文字(可选)<br> display 不能包含英文逗号，可用<code>&amp;sbquo;</code></td>
-</tr>
-<tr>
-<td>bg</td>
-<td>按钮的背景颜色(可选)</td>
-</tr>
-<tr>
-<td>color</td>
-<td>按钮文字的颜色(可选)</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>e.g.</strong></p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml">查看答案</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">hideBlock</span> 查看答案 %&#125;</span></span><br><span class="line"><span class="xml">傻子，怎么可能有答案</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endhideBlock</span> %&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>查看答案</p>
-<div class="hide-block"><button type="button" class="hide-button button--animated" style>查看答案
-    </button><div class="hide-content"><blockquote>
-<p>傻子，怎么可能有答案</p>
-</blockquote>
-</div></div>
-</blockquote>
-<h2 id="Toggle"><a href="#Toggle" class="headerlink" title="Toggle"></a>Toggle</h2><p>如果你需要展示的内容太多，可以把它隐藏在收缩框里，需要时再把它展开</p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">hideToggle</span> display,bg,color %&#125;</span></span><br><span class="line"><span class="xml">content</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endhideToggle</span> %&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>display 不能包含英文逗号，可用<code>&amp;sbquo</code></strong></p>
-<blockquote>
-<p><strong>e.g.</strong></p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">&#123;% hideToggle Butterfly安装方法 %&#125;</span><br><span class="line">在你的博客根目录里</span><br><span class="line"></span><br><span class="line">git <span class="keyword">clone</span> <span class="title">-b</span> <span class="keyword">master</span> <span class="title">https</span>://github.com/jerryc127/hexo-theme-butterfly.git themes/Butterfly</span><br><span class="line"></span><br><span class="line">如果想要安装比较新的dev分支，可以</span><br><span class="line"></span><br><span class="line">git <span class="keyword">clone</span> <span class="title">-b</span> dev https://github.com/jerryc127/hexo-theme-butterfly.git themes/Butterfly</span><br><span class="line"></span><br><span class="line">&#123;% endhideToggle %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>Butterfly安装方法</span></div>
-    <div class="hide-content"><blockquote>
-<p>在你的博客根目录里</p>
-<p>git clone -b master <a href="https://github.com/jerryc127/hexo-theme-butterfly.git">https://github.com/jerryc127/hexo-theme-butterfly.git</a> themes/Butterfly</p>
-<p>如果想要安装比较新的dev分支，可以</p>
-<p>git clone -b dev <a href="https://github.com/jerryc127/hexo-theme-butterfly.git">https://github.com/jerryc127/hexo-theme-butterfly.git</a> themes/Butterfly</p>
-</blockquote>
-</div></div>
-</blockquote>
-<h1 id="mermaid"><a href="#mermaid" class="headerlink" title="mermaid"></a>mermaid</h1><blockquote>
-<p>mermaid标签不允许嵌套于一些隐藏属性的标签外挂，例如: tag-hide内的标签外挂和tabs标签外挂，这会导致mermaid图示无法正常显示，使用时请留意</p>
-<p><strong>请不要压缩html代码，不然会导致mermaid显示异常</strong></p>
-</blockquote>
-<p>使用mermaid标签可以绘制Flowchart（流程图）、Sequence diagram（时序图 ）、Class Diagram（类别图）、State Diagram（状态图）、Gantt（甘特图）和Pie Chart（圆形图）</p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">mermaid</span> %&#125;</span></span><br><span class="line"><span class="xml">内容</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endmermaid</span> %&#125;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>e.g.</strong></p>
-<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">&#123;% mermaid %&#125;</span><br><span class="line">pie</span><br><span class="line">    title Key elements <span class="keyword">in</span> Product X</span><br><span class="line">    <span class="string">&quot;Calcium&quot;</span> : 42.96</span><br><span class="line">    <span class="string">&quot;Potassium&quot;</span> : 50.05</span><br><span class="line">    <span class="string">&quot;Magnesium&quot;</span> : 10.01</span><br><span class="line">    <span class="string">&quot;Iron&quot;</span> :  5</span><br><span class="line">&#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="mermaid">&gt; pie
-&gt;     title Key elements in Product X
-&gt;     &quot;Calcium&quot; : 42.96
-&gt;     &quot;Potassium&quot; : 50.05
-&gt;     &quot;Magnesium&quot; : 10.01
-&gt;     &quot;Iron&quot; :  5
-&gt; </div>
-</blockquote>
-<h1 id="Tabs"><a href="#Tabs" class="headerlink" title="Tabs"></a>Tabs</h1><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs Unique name, [index] %&#125;</span><br><span class="line">&lt;!-- tab [Tab caption] [@icon] --&gt;</span><br><span class="line">Any content (support inline tags too).</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br><span class="line"></span><br><span class="line">Unique name   : Unique name of tabs block tag without comma.</span><br><span class="line"><span class="code">                Will be used in #id&#x27;s as prefix for each tab with their index numbers.</span></span><br><span class="line"><span class="code">                If there are whitespaces in name, for generate #id all whitespaces will replaced by dashes.</span></span><br><span class="line"><span class="code">                Only for current url of post/page must be unique!</span></span><br><span class="line"><span class="code">[index]       : Index number of active tab.</span></span><br><span class="line"><span class="code">                If not specified, first tab (1) will be selected.</span></span><br><span class="line"><span class="code">                If index is -1, no tab will be selected. It&#x27;s will be something like spoiler.</span></span><br><span class="line"><span class="code">                Optional parameter.</span></span><br><span class="line"><span class="code">[Tab caption] : Caption of current tab.</span></span><br><span class="line"><span class="code">                If not caption specified, unique name with tab index suffix will be used as caption of tab.</span></span><br><span class="line"><span class="code">                If not caption specified, but specified icon, caption will empty.</span></span><br><span class="line"><span class="code">                Optional parameter.</span></span><br><span class="line"><span class="code">[@icon]       : FontAwesome icon name (full-name, look like &#x27;fas fa-font&#x27;)</span></span><br><span class="line"><span class="code">                Can be specified with or without space; e.g. &#x27;Tab caption @icon&#x27; similar to &#x27;Tab caption@icon&#x27;.</span></span><br><span class="line"><span class="code">                Optional parameter.</span></span><br></pre></td></tr></table></figure>
-
-<div class="note info flat"><p>Demo1 -  预设选择第一个【默认】</p>
-</div>
-
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test1 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 1.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 2.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 3.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">test1 1</button></li><li class="tab"><button type="button" data-href="#test1-2">test1 2</button></li><li class="tab"><button type="button" data-href="#test1-3">test1 3</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><p><strong>This is Tab 1.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test1-2"><p><strong>This is Tab 2.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test1-3"><p><strong>This is Tab 3.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<div class="note info flat"><p>Demo 2 - 预设选择tabs</p>
-</div>
-
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test2, 3 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 1.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 2.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 3.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="tabs" id="test2"><ul class="nav-tabs"><li class="tab"><button type="button" data-href="#test2-1">test2 1</button></li><li class="tab"><button type="button" data-href="#test2-2">test2 2</button></li><li class="tab active"><button type="button" data-href="#test2-3">test2 3</button></li></ul><div class="tab-contents"><div class="tab-item-content" id="test2-1"><p><strong>This is Tab 1.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test2-2"><p><strong>This is Tab 2.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content active" id="test2-3"><p><strong>This is Tab 3.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<div class="note info flat"><p>Demo 3 - 没有预设值</p>
-</div>
-
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test3, -1 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 1.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 2.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 3.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="tabs" id="test3"><ul class="nav-tabs"><li class="tab"><button type="button" data-href="#test3-1">test3 1</button></li><li class="tab"><button type="button" data-href="#test3-2">test3 2</button></li><li class="tab"><button type="button" data-href="#test3-3">test3 3</button></li></ul><div class="tab-contents"><div class="tab-item-content" id="test3-1"><p><strong>This is Tab 1.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test3-2"><p><strong>This is Tab 2.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test3-3"><p><strong>This is Tab 3.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<div class="note info flat"><p>Demo 4 - 自定义Tab名 + 只有icon + icon和Tab名</p>
-</div>
-
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test4 %&#125;</span><br><span class="line">&lt;!-- tab 第一个Tab --&gt;</span><br><span class="line"><span class="strong">**tab名字为第一个Tab**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab @fab fa-apple-pay --&gt;</span><br><span class="line"><span class="strong">**只有图标 没有Tab名字**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab 炸弹@fas fa-bomb --&gt;</span><br><span class="line"><span class="strong">**名字+icon**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
-
-<div class="tabs" id="test4"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test4-1">第一个Tab</button></li><li class="tab"><button type="button" data-href="#test4-2"><i class="fab fa-apple-pay" style="text-align: center;"></i></button></li><li class="tab"><button type="button" data-href="#test4-3"><i class="fas fa-bomb"></i>炸弹</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test4-1"><p><strong>tab名字为第一个Tab</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test4-2"><p><strong>只有图标 没有Tab名字</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test4-3"><p><strong>名字+icon</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<h1 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h1><figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">&#123;% btn <span class="comment">[url]</span>,<span class="comment">[text]</span>,<span class="comment">[icon]</span>,<span class="comment">[color]</span> <span class="comment">[style]</span> <span class="comment">[layout]</span> <span class="comment">[position]</span> <span class="comment">[size]</span> %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">[url]</span>         : 链接</span><br><span class="line"><span class="comment">[text]</span>        : 按钮文字</span><br><span class="line"><span class="comment">[icon]</span>        : <span class="comment">[可选]</span> 图标</span><br><span class="line"><span class="comment">[color]</span>       : <span class="comment">[可选]</span> 按钮背景顔色(默认style时）</span><br><span class="line">                      按钮字体和边框顔色(outline时)</span><br><span class="line">                      default/blue/pink/red/purple/orange/green</span><br><span class="line"><span class="comment">[style]</span>       : <span class="comment">[可选]</span> 按钮样式 默认实心</span><br><span class="line">                      outline/留空</span><br><span class="line"><span class="comment">[layout]</span>      : <span class="comment">[可选]</span> 按钮佈局 默认为line</span><br><span class="line">                      block/留空</span><br><span class="line"><span class="comment">[position]</span>    : <span class="comment">[可选]</span> 按钮位置 前提是设置了layout为block 默认为左边</span><br><span class="line">                      center/right/留空</span><br><span class="line"><span class="comment">[size]</span>        : <span class="comment">[可选]</span> 按钮大小</span><br><span class="line">                      larger/留空</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<figure class="highlight puppet"><table><tr><td class="code"><pre><span class="line">This is my website, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-point-right %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,,outline %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-point-right,outline %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-point-right,larger %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>This is my website, click the button <a class="btn-beautify button--animated " href="https://butterfly.js.org/" title="Butterfly"><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated " href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated outline" href="https://butterfly.js.org/" title="Butterfly"><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated outline" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a></p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">&#123;% <span class="keyword">btn </span><span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,<span class="keyword">Butterfly,far </span>fa-hand-point-right,<span class="keyword">block </span>%&#125;</span><br><span class="line">&#123;% <span class="keyword">btn </span><span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,<span class="keyword">Butterfly,far </span>fa-hand-point-right,<span class="keyword">block </span>center larger %&#125;</span><br><span class="line">&#123;% <span class="keyword">btn </span><span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,<span class="keyword">Butterfly,far </span>fa-hand-point-right,<span class="keyword">block </span>right outline larger %&#125;</span><br></pre></td></tr></table></figure>
-
-<a class="btn-beautify button--animated block" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated block center larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated block right outline larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-
-<figure class="highlight processing"><table><tr><td class="code"><pre><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,<span class="built_in">blue</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,pink larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,<span class="built_in">red</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,purple larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,orange larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,<span class="built_in">green</span> larger %&#125;</span><br></pre></td></tr></table></figure>
-
-<a class="btn-beautify button--animated larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated blue larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated pink larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated red larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated purple larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated orange larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated green larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-
-<figure class="highlight processing"><table><tr><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;btn-center&quot;</span>&gt;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline <span class="built_in">blue</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline pink larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline <span class="built_in">red</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline purple larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline orange larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline <span class="built_in">green</span> larger %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<div class="btn-center">
-<a class="btn-beautify button--animated outline larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated outline blue larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated outline pink larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated outline red larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated outline purple larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated outline orange larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-<a class="btn-beautify button--animated outline green larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
-</div>
-</blockquote>
-<h1 id="inlineImg"><a href="#inlineImg" class="headerlink" title="inlineImg"></a>inlineImg</h1><p>主题中的图片都是默认以块级元素显示，如果你想以内联元素显示，可以使用这个标签外挂</p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">&#123;% inlineImg <span class="comment">[src]</span> <span class="comment">[height]</span> %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">[src]</span>      :    图片链接</span><br><span class="line"><span class="comment">[height]</span>   ：   图片高度限制【可选】</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>e.g.</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">你看我长得漂亮不</span><br><span class="line"></span><br><span class="line">![](https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">03</span><span class="regexp">/19/</span><span class="number">2</span>P6ivUGsdaEXSFI.png)</span><br><span class="line"></span><br><span class="line">我觉得很漂亮 &#123;% inlineImg https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">03</span><span class="regexp">/19/</span><span class="number">5</span>M4jUB3ynq7ePgw.png <span class="number">150</span>px %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>你看我长得漂亮不</p>
-<p><img src="https://i.loli.net/2021/03/19/2P6ivUGsdaEXSFI.png"></p>
-<p>我觉得很漂亮 <img class="inline-img" src="https://i.loli.net/2021/03/19/5M4jUB3ynq7ePgw.png" style="height:150px"></p>
-</blockquote>
-<h1 id="label"><a href="#label" class="headerlink" title="label"></a>label</h1><figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">&#123;% label <span class="keyword">text</span> <span class="keyword">color</span> %&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>text</td>
-<td>文字</td>
-</tr>
-<tr>
-<td>color</td>
-<td>【可选】背景颜色，默认为<code>default</code><br>default/blue/pink/red/purple/orange/green</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>e.g.</strong></p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml">臣亮言：</span><span class="template-tag">&#123;% <span class="name">label</span> 先帝 %&#125;</span><span class="xml">创业未半，而</span><span class="template-tag">&#123;% <span class="name">label</span> 中道崩殂 blue %&#125;</span><span class="xml">。今天下三分，</span><span class="template-tag">&#123;% <span class="name">label</span> 益州疲敝 pink %&#125;</span><span class="xml">，此诚</span><span class="template-tag">&#123;% <span class="name">label</span> 危急存亡之秋 red %&#125;</span><span class="xml">也！然侍衞之臣，不懈于内；</span><span class="template-tag">&#123;% <span class="name">label</span> 忠志之士 purple %&#125;</span><span class="xml">，忘身于外者，盖追先帝之殊遇，欲报之于陛下也。诚宜开张圣听，以光先帝遗德，恢弘志士之气；不宜妄自菲薄，引喻失义，以塞忠谏之路也。</span></span><br><span class="line"><span class="xml">宫中、府中，俱为一体；陟罚臧否，不宜异同。若有</span><span class="template-tag">&#123;% <span class="name">label</span> 作奸 orange %&#125;</span><span class="xml">、</span><span class="template-tag">&#123;% <span class="name">label</span> 犯科 green %&#125;</span><span class="xml">，及为忠善者，宜付有司，论其刑赏，以昭陛下平明之治；不宜偏私，使内外异法也。</span></span><br></pre></td></tr></table></figure>
-
-<p>臣亮言：<mark class="hl-label default">先帝</mark> 创业未半，而<mark class="hl-label blue">中道崩殂</mark> 。今天下三分，<mark class="hl-label pink">益州疲敝</mark> ，此诚<mark class="hl-label red">危急存亡之秋</mark> 也！然侍衞之臣，不懈于内；<mark class="hl-label purple">忠志之士</mark> ，忘身于外者，盖追先帝之殊遇，欲报之于陛下也。诚宜开张圣听，以光先帝遗德，恢弘志士之气；不宜妄自菲薄，引喻失义，以塞忠谏之路也。<br>宫中、府中，俱为一体；陟罚臧否，不宜异同。若有<mark class="hl-label orange">作奸</mark> 、<mark class="hl-label green">犯科</mark> ，及为忠善者，宜付有司，论其刑赏，以昭陛下平明之治；不宜偏私，使内外异法也。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>博客搭建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP学习记录</title>
-    <url>/2021/07/12/HTTP%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="URI和URL"><a href="#URI和URL" class="headerlink" title="URI和URL"></a>URI和URL</h2><h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>统一资源标识符（Uniform Resource Identifier，URI)是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义</p>
-<img src="/2021/07/12/HTTP%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg" style="zoom: 50%;">
-
-<p>绝对路径格式</p>
-<blockquote>
-<p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
-<p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
-<p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#110;&#46;&#68;&#x6f;&#x65;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;">&#74;&#111;&#x68;&#110;&#46;&#68;&#x6f;&#x65;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;</a>    </p>
-<p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
-<p>tel:+1-816-555-1212    </p>
-<p>telnet://192.0.2.16:80/    </p>
-<p>urn:oasis:names:specification:docbook:dtd:xml:4.1.2</p>
-</blockquote>
-<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3>]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>HTTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>GKCTF × DASCTF 2021 WP</title>
-    <url>/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/</url>
-    <content><![CDATA[<h1 id="easycms"><a href="#easycms" class="headerlink" title="easycms"></a>easycms</h1><p>打开是一个CMS做的企业用户网站，翻到最下面找到CMS类型</p>
-<p><img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/1.jpg"></p>
-<p>百度此类型CMS漏洞或后台等信息，在官网搜到</p>
-<p><img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/2.jpg"></p>
-<p>打开<code>http://xxx.node3.buuoj.cn/admin.php</code></p>
-<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/3.jpg" style="zoom:33%;">
-
-<p>根据提示密码是五位弱口令，而Email还可以是用户名</p>
-<p>正好主页</p>
-<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/4.jpg" style="zoom: 50%;">
-
-<p>于是我就输入了这个邮箱，尝试11111，12345等最常见的五位弱口令，不对！…</p>
-<p>后来经过出题人的提示才知道用户名不需要信息收集…</p>
-<p>最后以admin/12345成功登录</p>
-<p>登录后台后，查资料得到蝉知后台getshell的方法</p>
-<p><a href="https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/%E7%A6%85%E7%9F%A5/%E7%A6%85%E7%9F%A5%E5%90%8E%E5%8F%B0getshell/">禅知后台getshell - Wiki</a></p>
-<p>进行测试发现由于版本不同，此版本已无法进行复现此漏洞</p>
-<p>在后台模板尝试修改</p>
-<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/5.jpg" style="zoom: 25%;">
-
-<p>为了创建文件找到可以上传文件的地方</p>
-<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/6.jpg" style="zoom: 25%;">
-
-<p>随便上传一个txt文件，修改文件名</p>
-<p>然后再编辑模板即可保存</p>
-<p>编辑后返回前台得到flag</p>
-<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/7.jpg" style="zoom: 25%;">
-
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>WP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>渗透靶场实战记录</title>
-    <url>/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><h2 id="爆破练习"><a href="#爆破练习" class="headerlink" title="爆破练习"></a>爆破练习</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>“暴力破解”是一攻击具手段，在web攻击中，一般会使用这种手段对应用系统的认证信息进行获取。 其过程就是使用大量的认证信息在认证接口进行尝试登录，直到得到正确的结果。 为了提高效率，暴力破解一般会使用带有字典的工具来进行自动化操作</p>
-<p>理论上来说，大多数系统都是可以被暴力破解的，只要攻击者有足够强大的计算能力和时间，所以断定一个系统是否存在暴力破解漏洞，其条件也不是绝对的。 我们说一个web应用系统存在暴力破解漏洞，一般是指该web应用系统没有采用或者采用了比较弱的认证安全策略，导致其被暴力破解的“可能性”变的比较高。 这里的认证安全策略, 包括：</p>
-<p>1.是否要求用户设置复杂的密码；<br>2.是否每次认证都使用安全的验证码（想想你买火车票时输的验证码～）或者手机otp；<br>3.是否对尝试登录的行为进行判断和限制（如：连续5次错误登录，进行账号锁定或IP地址锁定等）；<br>4.是否采用了双因素认证；<br>等等…<br>千万不要小看暴力破解漏洞,往往这种简单粗暴的攻击方式带来的效果是超出预期的</p>
-<blockquote>
-<p>从来没有哪个时代的黑客像今天一样热衷于猜解密码 ——奥斯特洛夫斯基</p>
-</blockquote>
-<h3 id="基于表单的暴力破解"><a href="#基于表单的暴力破解" class="headerlink" title="基于表单的暴力破解"></a>基于表单的暴力破解</h3><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/1.jpg" style="zoom:80%;">
-
-<p>一个登陆界面的表单，随便试试，然后BP抓包，发送到爆破模块，读字典爆破</p>
-<p>(离谱的是Chrome抓不了包，应该是localhost的问题，火狐通过<code>about:config</code>修改一下抓取localhost的设定就好了，应该是Chrome的问题)</p>
-<h3 id="验证码绕过-on-server"><a href="#验证码绕过-on-server" class="headerlink" title="验证码绕过(on server)"></a>验证码绕过(on server)</h3><h3 id="验证码绕过-on-client"><a href="#验证码绕过-on-client" class="headerlink" title="验证码绕过(on client)"></a>验证码绕过(on client)</h3><h2 id="XSS练习"><a href="#XSS练习" class="headerlink" title="XSS练习"></a>XSS练习</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>Cross-Site Scripting 简称为“CSS”，为避免与前端叠成样式表的缩写”CSS”冲突，故又称XSS。一般XSS可以分为如下几种常见类型：<br>  1.反射性XSS;<br>  2.存储型XSS;<br>  3.DOM型XSS;</p>
-<p>XSS漏洞一直被评估为web漏洞中危害较大的漏洞，在OWASP TOP10的排名中一直属于前三的江湖地位<br>XSS是一种发生在前端浏览器端的漏洞，所以其危害的对象也是前端用户<br>形成XSS漏洞的主要原因是程序对输入和输出没有做合适的处理，导致“精心构造”的字符输出在前端时被浏览器当作有效代码解析执行从而产生危害<br>因此在XSS漏洞的防范上，一般会采用“对输入进行过滤”和“输出进行转义”的方式进行处理:<br> 输入过滤：对输入进行过滤，不允许可能导致XSS攻击的字符输入;<br> 输出转义：根据输出点的位置对输出到前端的内容进行适当转义</p>
-<h3 id="反射型XSS-get"><a href="#反射型XSS-get" class="headerlink" title="反射型XSS(get)"></a>反射型XSS(get)</h3><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/2.jpg" style="zoom:80%;">
-
-<p>是一个文本框，随便输一个测试功能正常</p>
-<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/3.jpg" style="zoom:80%;">
-
-<p>输入特殊符号<code>&#39;</code> <code>&lt;</code>等发现无过滤</p>
-<p>尝试输入payload发现文本框限制了字符数</p>
-<p>审查元素修改一下<code>maxlength</code></p>
-<p>再输入payload:  <code>&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;</code></p>
-<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/4.jpg" style="zoom:80%;">
-
-<p>成功触发XSS</p>
-<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/5.jpg" style="zoom: 50%;">
-
-<p>ps: 或者直接在地址栏输入</p>
-<p><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/6.jpg"></p>
-<p>也可以成功触发XSS</p>
-<h3 id="反射型XSS-post"><a href="#反射型XSS-post" class="headerlink" title="反射型XSS(post)"></a>反射型XSS(post)</h3><p>多一步登录的步骤</p>
-<p>登陆后文本框同上题</p>
-<p>同理输入payload，成功触发XSS</p>
-<h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/7.jpg" style="zoom: 50%;">
-
-<p>是一个留言板，可以存入数据库，每次打开此页面都会显示之前的留言</p>
-<p>并且，经测试，发现输入特殊符号<code>&#39;</code> <code>&lt;</code>无过滤</p>
-<p>输入payload:  <code>&lt;script&gt;alert(&#39;存储型xss&#39;)&lt;/script&gt;</code></p>
-<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/8.jpg" style="zoom: 80%;">
-
-<p>成功触发XSS，并且由于留言板写入数据库，每次打开此页面都会触发XSS</p>
-<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/9.jpg" style="zoom:67%;">
-
-<h1 id="sqli-labs"><a href="#sqli-labs" class="headerlink" title="sqli-labs"></a>sqli-labs</h1><h1 id="upload-labs"><a href="#upload-labs" class="headerlink" title="upload-labs"></a>upload-labs</h1><h2 id="pass-01"><a href="#pass-01" class="headerlink" title="pass-01"></a>pass-01</h2><p>本题根据前端js对文件类型进行验证</p>
-<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/10.jpg" style="zoom: 50%;">
-
-<p>删除，提交，成功</p>
-<h1 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h1>]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>渗透测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CTF学习笔记</title>
     <url>/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><h3 id="ASCII-编码参考手册"><a href="#ASCII-编码参考手册" class="headerlink" title="ASCII 编码参考手册"></a>ASCII 编码参考手册</h3><table>
@@ -4194,6 +3332,868 @@
       </categories>
       <tags>
         <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BUU-web</title>
+    <url>/2021/08/22/BUU-web/</url>
+    <content><![CDATA[<h1 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h1><img src="/2021/08/22/BUU-web/21.jpg" style="zoom:50%;">
+
+<p>撸猫(<em>/ω＼</em>) 猫猫最可爱了</p>
+<p>审计源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cat</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;cat&#x27;</span>];</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$cat</span>;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$cat</span>==<span class="string">&#x27;dog&#x27;</span>)&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;Syc&#123;cat_cat_cat_cat&#125;&#x27;</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在URL后面<code>?cat=dog</code>，得到flag</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>BUU</tag>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CTFHub-技能树</title>
+    <url>/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="web前置技能"><a href="#web前置技能" class="headerlink" title="web前置技能"></a>web前置技能</h1><h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><h3 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h3><p>HTTP/1.1 八种请求方式: GET,POST,HEAD,OPTIONS,PUT,DELETE,TRACE,CONNECT</p>
+<p>打开环境提示HTTP方法为GET，使用CTFHUB方法，我会给你flag</p>
+<p>bp抓包改包重放，得到flag</p>
+<h3 id="302跳转"><a href="#302跳转" class="headerlink" title="302跳转"></a>302跳转</h3><p>看了wp才做出来</p>
+<p>打开环境，点击got flag后没反应，f12查看新出现了一个302的index.php页面，使用curl工具<code>-v</code>参数输出通信的整个过程，得到flag</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>打开环境提示管理员才能得到flag</p>
+<p>使用EditThisCookie查看，有一个名为admin的cookie值为0，修改为1，刷新得到flag</p>
+<h3 id="基础认证"><a href="#基础认证" class="headerlink" title="基础认证"></a>基础认证</h3><p>打开环境，有个获得flag的click按钮，点一下弹出窗口需要登陆验证，随便输一个<code>admin/123</code>，bp抓包</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/1.jpg" style="zoom:33%;">
+
+<p>头部有一个Authorization字段，后面的值解码发现是base64加密的<code>admin:123</code></p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/2.jpg" style="zoom:33%;">
+
+<p>在返回包里发现提示</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/3.jpg" style="zoom:33%;">
+
+<p>猜测用户名为admin</p>
+<p>下面就可以尝试爆破了，发送到Intruder模块，添加payload position</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/4.jpg" style="zoom:33%;">
+
+<p>选择模式，加载字典</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/5.jpg" style="zoom: 33%;">
+
+<p>添加前缀<code>admin:</code>，并对密码进行base64加密处理（同时取消勾选URL编码，不然你会看到 base64 之后的 <code>=</code> 会被转成 <code>%3d</code> ，你就算爆破到天荒地老也不会出来）</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/6.jpg" style="zoom:33%;">
+
+<p>最后在一个状态码为200的响应返回包中发现flag</p>
+<h3 id="响应包源代码"><a href="#响应包源代码" class="headerlink" title="响应包源代码"></a>响应包源代码</h3><p>饿饿. 打开环境查看源码 发现flag…我人傻了</p>
+<h1 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h1><h2 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h2><blockquote>
+<p>目录遍历（路径遍历）是由于web服务器或者web应用程序对用户输入的文件名称的安全性验证不足而导致的一种安全漏洞，使得攻击者通过利用一些特殊字符就可以绕过服务器的安全限制，访问任意的文件（可以是web根目录以外的文件），甚至执行系统命令</p>
+</blockquote>
+<p>打开环境 点击按钮，会跳到这个界面</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/8.jpg" style="zoom:33%;">
+
+<p>对目录进行地毯式搜索，可找到一个flag.txt文件，打开得到flag</p>
+<h2 id="phpinfo"><a href="#phpinfo" class="headerlink" title="phpinfo"></a>phpinfo</h2><blockquote>
+<p><code>phpinfo()</code> 是php中查看相关信息的函数，当在页面中执行<code>phpinfo()</code>函数时，php会将自身的所有信息全部打印出来。在phpinfo中会泄露很多服务端的一些信息，例如安装的一些模块、网站绝对路径、服务器自身的操作系统、使用的组件版本等等，在phpinfo中获得的这些信息会为下一步的渗透/做题提供一些帮助</p>
+</blockquote>
+<p>正好之前碰到的一个漏洞就是phpinfo信息泄露，要不然还不了解这个</p>
+<p>就是在本题的phpinfo页面中<code>ctrl+f</code>，查找ctfhub，然后就找到flag了</p>
+<h2 id="备份文件下载"><a href="#备份文件下载" class="headerlink" title="备份文件下载"></a>备份文件下载</h2><h3 id="网站源码"><a href="#网站源码" class="headerlink" title="网站源码"></a>网站源码</h3><blockquote>
+<p>常见的网站源码备份文件名：<code>web</code>，<code>website</code>，<code>backup</code>，<code>back</code>，<code>www</code>，<code>wwwroot</code>，<code>temp</code><br>常见的网站源码备份文件后缀：<code>.zip</code>，<code>.rar</code>，<code>.tar</code>，<code>.tar.gz</code>，<code>.7z</code>，<code>.bak</code>，<code>.txt</code> ，<code>.old</code>，<code>.temp</code></p>
+</blockquote>
+<p>试了一下<code>www.zip</code>   一发入魂</p>
+<p>下载到本地解压发现一个<code>flag_46657223.txt</code>文件，但打开没有flag</p>
+<p>然后回到环境中，在URL尾部添加<code>/flag_46657223.txt</code>打开，得到flag</p>
+<h3 id="bak文件"><a href="#bak文件" class="headerlink" title="bak文件"></a>bak文件</h3><blockquote>
+<p>常见的备份文件后缀名有: <code>.git</code>， <code>.svn</code>， <code>.swp</code>， <code>.svn</code> ，<code>.~</code> ，<code>.bak</code> ，<code>.bash_history</code></p>
+</blockquote>
+<p>打开环境提示flag在index.php的源码里，根据题目信息，在URL尾部添加<code>/index.php.bak</code>，下载文件到本地打开 得到flag</p>
+<h3 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h3><blockquote>
+<p>原理同<strong>ctfshow/web入门/信息搜集/web9</strong></p>
+</blockquote>
+<p>但本题需在URL尾部添加<code>/.index.php.swp</code>  （奇了个怪</p>
+<h3 id="DS-Store"><a href="#DS-Store" class="headerlink" title=".DS_Store"></a>.DS_Store</h3><blockquote>
+<p><code>.DS_Store</code> 是 Mac OS 保存文件夹的自定义属性的隐藏文件，通过<code>.DS_Store</code>可以知道这个目录里面所有文件的清单</p>
+</blockquote>
+<p>在URL尾部添加<code>/.DS_Store</code>下载到本地打开为乱码，得不到有效信息，使用<a href="https://github.com/gehaxelt/Python-dsstore">github</a>上的一个工具对DS_Store文件进行解析</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/9.jpg" style="zoom: 50%;">
+
+<p>得到一个文件名，在URL尾部添加后读取到flag</p>
+<h2 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h2><blockquote>
+<p>开发人员会使用 git 进行版本控制，对站点自动部署。但如果配置不当，可能会将 .git 文件夹直接部署到线上环境，这就引起了 git 泄露漏洞，我们可以利用这个漏洞直接获得网页源码</p>
+</blockquote>
+<h3 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h3><blockquote>
+<p><code>git log</code>命令可以查看历史版本信息</p>
+</blockquote>
+<p>git泄露肯定要用到githack工具</p>
+<p>打开环境用githack克隆一下发现没啥东西？？？</p>
+<p>看了wp发现差的不是一点半点啊，</p>
+<p>后来才知道现在用的这个工具不行…（被工具背刺 妹想到的</p>
+<p>换了个工具克隆，这回没问题了</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/10.jpg" style="zoom:33%;">
+
+<p>打开克隆的文件夹，根据题目信息，使用<code>git log</code>命令查看版本信息</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/11.jpg" style="zoom:33%;">
+
+<p>可以看到现在的版本将flag移除，回退到上一个版本即可得到flag</p>
+<p><code>git reset --hard HEAD^</code>回退到上一个版本</p>
+<blockquote>
+<p>在Git中，用HEAD表示当前版本，</p>
+<p>所以回退到上一个版本就只需要使用命令：<code>git reset --hard HEAD^ </code></p>
+<p>回退到上上个版本则使用命令：<code>git reset --hard HEAD^^</code></p>
+<p>要是需要回退到20个版本之前的话，就可以使用命令：<code>git reset --hard HEAD~20</code></p>
+</blockquote>
+<p>本题还可以使用<code>git reset --hard 358fe9789f3d1f9eaafe913bb335df0c6c517d3e</code>来回退</p>
+<p>回退后使用<code>ls</code>命令查看目录，然后使用<code>cat</code>命令查看文件 得到flag</p>
+<img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/12.jpg" style="zoom:33%;">
+
+<h3 id="Stash"><a href="#Stash" class="headerlink" title="Stash"></a>Stash</h3><h2 id="SVN泄露"><a href="#SVN泄露" class="headerlink" title="SVN泄露"></a>SVN泄露</h2><p><a href="http://www.qishunwang.net/news_show_62103.aspx">http://www.qishunwang.net/news_show_62103.aspx</a></p>
+<p><a href="https://www.freesion.com/article/98721217183/">https://www.freesion.com/article/98721217183/</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTFHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Bugku-web</title>
+    <url>/2021/08/22/Bugku-web/</url>
+    <content><![CDATA[<h1 id="web1"><a href="#web1" class="headerlink" title="web1"></a>web1</h1><p>…滑稽脸<br><img src="https://z3.ax1x.com/2021/04/16/cf8LQK.jpg" style="zoom: 25%;"><br>F12打开源码，找到flag</p>
+<h1 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h1><p>是一个填写验证码的输入框，然后发现无法输入两个字符，F12审查元素，果然输入框限制了maxlength，修改maxlength为2即可</p>
+<h1 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h1><p>打开场景是一段PHP代码，</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$what</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;what&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$what</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$what</span>==<span class="string">&#x27;flag&#x27;</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;flag&#123;****&#125;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>审计，是要通过get的方式提交一个变量<code>what=flag</code>，<br>在地址栏输入<code>http://114.67.246.176:16477/?what=flag</code>即可得到flag</p>
+<h1 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h1><p>打开场景又是一段PHP代码，</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$what</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;what&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$what</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$what</span>==<span class="string">&#x27;flag&#x27;</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;flag&#123;****&#125;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>审计，是要通过post的方式提交一个变量<code>what=flag</code>,通过hackbar post一下即可</p>
+<h1 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h1><p>打开场景又是一段PHP代码，</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$num</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!is_numeric(<span class="variable">$num</span>))</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$num</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$num</span>==<span class="number">1</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;flag&#123;**********&#125;&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>审计，是弱类型比较，要求num变量既不是数字又满足等于1的条件，所以在1后面加一个字母即可<br>通过get方式提交<code>http://114.67.246.176:12222/?num=1a</code><br>得到flag</p>
+<h1 id="web6"><a href="#web6" class="headerlink" title="web6"></a>web6</h1><p>打开场景一堆弹窗，关都关不完，查看网页源码，<br><img src="https://z3.ax1x.com/2021/04/13/cyMAh9.png" style="zoom:33%;"><br>…发现写了一堆alert…绝了<br>在最下面发现了注释掉的编码，<br><img src="https://z3.ax1x.com/2021/04/13/cyMunK.png" style="zoom: 33%;"><br>查了一下是Unicode编码，通过工具Unicode转ASCII得到flag</p>
+<h1 id="web7"><a href="#web7" class="headerlink" title="web7"></a>web7</h1><p>弹窗提示停止网页刷新可得到flag<br>查看网页源代码，发现<br><img src="https://z3.ax1x.com/2021/04/20/cH8KiT.jpg" style="zoom: 50%;"><br>并且前面的图片命名为num.jpg，于是尝试刷新，发现图片num确实随着刷新改变，然后不断刷新，最后在一次刷新后圈圈的地方出现flag</p>
+<h1 id="web8"><a href="#web8" class="headerlink" title="web8"></a>web8</h1><blockquote>
+<p>PHP暂略</p>
+</blockquote>
+<h1 id="web9"><a href="#web9" class="headerlink" title="web9"></a>web9</h1><blockquote>
+<p>PHP暂略</p>
+</blockquote>
+<h1 id="web10"><a href="#web10" class="headerlink" title="web10"></a>web10</h1><p>打开页面显示什么也没有？信个鬼<br>根据描述头等舱，联想到消息头，BP抓包，在消息头中得到flag</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+        <tag>Bugku</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CTFshow-crypto</title>
+    <url>/2021/08/22/CTFshow-crypto/</url>
+    <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><h2 id="密码学签到"><a href="#密码学签到" class="headerlink" title="密码学签到"></a>密码学签到</h2><p>倒置即可</p>
+<h2 id="crypto2"><a href="#crypto2" class="headerlink" title="crypto2"></a>crypto2</h2>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTFshow</tag>
+        <tag>CRYPTO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CTFshow-misc入门</title>
+    <url>/2021/08/22/CTFshow-misc%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h1 id="图片篇（基础操作）"><a href="#图片篇（基础操作）" class="headerlink" title="图片篇（基础操作）"></a>图片篇（基础操作）</h1><h2 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h2><p>一个简单的图片，通过识别文字获取flag</p>
+<h2 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h2><blockquote>
+<p><a href="https://sheeprooo.top/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F">十六进制文件头</a></p>
+</blockquote>
+<p>一个<strong>txt</strong>文件 打开之后是乱码，使用winhex查看16进制文件头发现是<code>.png</code>格式，修改后缀名打开即可得到flag</p>
+<h2 id="misc3"><a href="#misc3" class="headerlink" title="misc3"></a>misc3</h2><p>是一个bpg文件，可使用Bandzip附带的Honeyview打开查看，得到flag</p>
+<h2 id="misc4"><a href="#misc4" class="headerlink" title="misc4"></a>misc4</h2><p>一共六个txt文件，使用winhex查看文件头，通过对照<a href="https://sheeprooo.top/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F">十六进制文件头</a>中的信息，将其分别修改为<code>.jpg</code>，<code>.png</code>，<code> </code></p>
+<h1 id="图片篇（信息附加）"><a href="#图片篇（信息附加）" class="headerlink" title="图片篇（信息附加）"></a>图片篇（信息附加）</h1><h2 id="misc5"><a href="#misc5" class="headerlink" title="misc5"></a>misc5</h2>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTFshow</tag>
+        <tag>MISC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CTFshow-web</title>
+    <url>/2021/08/22/CTFshow-web/</url>
+    <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><h2 id="web签到题"><a href="#web签到题" class="headerlink" title="web签到题"></a>web签到题</h2><p>f12查看源码发现一串注释的字符，丢到<strong>hasher</strong>里解码，在<strong>base64</strong>解码后得到flag</p>
+<h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+        <tag>CTFshow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tag Plugins</title>
+    <url>/2021/08/15/Butterfly%E4%B8%BB%E9%A2%98%E6%A0%87%E7%AD%BE%E5%A4%96%E6%8C%82/</url>
+    <content><![CDATA[<blockquote>
+<p>标签外挂是Hexo独有的功能，并不是标准的Markdown格式</p>
+<p>以下的写法，只适用于Butterfly主题，用在其它主题上不会有效果，甚至可能会报错，使用前请留意</p>
+</blockquote>
+<h1 id="Note-Bootstrap-Callout"><a href="#Note-Bootstrap-Callout" class="headerlink" title="Note (Bootstrap Callout)"></a>Note (Bootstrap Callout)</h1><h2 id="用法一"><a href="#用法一" class="headerlink" title="用法一"></a>用法一</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">Any content (support inline tags too.io).</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>class</td>
+<td>【可选】标识，不同的标识有不同的配色<br>（ default / primary / success / info / warning / danger ）</td>
+</tr>
+<tr>
+<td>no-icon</td>
+<td>【可选】不显示 icon</td>
+</tr>
+<tr>
+<td>style</td>
+<td>【可选】可以覆盖配置中的 style<br>（simple/modern/flat/disabled）</td>
+</tr>
+</tbody></table>
+<h3 id="simple"><a href="#simple" class="headerlink" title="simple"></a>simple</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note simple %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default simple %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary simple %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success simple %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info simple %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning simple %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger simple %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note simple"><p>默认 提示块标籤</p>
+</div>
+
+<div class="note default simple"><p>default 提示块标籤</p>
+</div>
+
+<div class="note primary simple"><p>primary 提示块标籤</p>
+</div>
+
+<div class="note success simple"><p>success 提示块标籤</p>
+</div>
+
+<div class="note info simple"><p>info 提示块标籤</p>
+</div>
+
+<div class="note warning simple"><p>warning 提示块标籤</p>
+</div>
+
+<div class="note danger simple"><p>danger 提示块标籤</p>
+</div>
+
+<h3 id="modern"><a href="#modern" class="headerlink" title="modern"></a>modern</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note modern %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default modern %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary modern %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success modern %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info modern %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning modern %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger modern %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note modern"><p>默认 提示块标籤</p>
+</div>
+
+<div class="note default modern"><p>default 提示块标籤</p>
+</div>
+
+<div class="note primary modern"><p>primary 提示块标籤</p>
+</div>
+
+<div class="note success modern"><p>success 提示块标籤</p>
+</div>
+
+<div class="note info modern"><p>info 提示块标籤</p>
+</div>
+
+<div class="note warning modern"><p>warning 提示块标籤</p>
+</div>
+
+<div class="note danger modern"><p>danger 提示块标籤</p>
+</div>
+
+<h3 id="flat"><a href="#flat" class="headerlink" title="flat"></a>flat</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note flat %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default flat %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary flat %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success flat %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info flat %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning flat %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger flat %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note flat"><p>默认 提示块标籤</p>
+</div>
+
+<div class="note default flat"><p>default 提示块标籤</p>
+</div>
+
+<div class="note primary flat"><p>primary 提示块标籤</p>
+</div>
+
+<div class="note success flat"><p>success 提示块标籤</p>
+</div>
+
+<div class="note info flat"><p>info 提示块标籤</p>
+</div>
+
+<div class="note warning flat"><p>warning 提示块标籤</p>
+</div>
+
+<div class="note danger flat"><p>danger 提示块标籤</p>
+</div>
+
+<h3 id="disabled"><a href="#disabled" class="headerlink" title="disabled"></a>disabled</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note disabled %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default disabled %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary disabled %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success disabled %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info disabled %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning disabled %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger disabled %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note disabled"><p>默认 提示块标籤</p>
+</div>
+
+<div class="note default disabled"><p>default 提示块标籤</p>
+</div>
+
+<div class="note primary disabled"><p>primary 提示块标籤</p>
+</div>
+
+<div class="note success disabled"><p>success 提示块标籤</p>
+</div>
+
+<div class="note info disabled"><p>info 提示块标籤</p>
+</div>
+
+<div class="note warning disabled"><p>warning 提示块标籤</p>
+</div>
+
+<div class="note danger disabled"><p>danger 提示块标籤</p>
+</div>
+
+<h3 id="no-icon"><a href="#no-icon" class="headerlink" title="no-icon"></a>no-icon</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note no-icon %&#125;</span><br><span class="line">默认 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default no-icon %&#125;</span><br><span class="line">default 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary no-icon %&#125;</span><br><span class="line">primary 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success no-icon %&#125;</span><br><span class="line">success 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info no-icon %&#125;</span><br><span class="line">info 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning no-icon %&#125;</span><br><span class="line">warning 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger no-icon %&#125;</span><br><span class="line">danger 提示块标籤</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note no-icon flat"><p>默认 提示块标籤</p>
+</div>
+
+<div class="note default no-icon flat"><p>default 提示块标籤</p>
+</div>
+
+<div class="note primary no-icon flat"><p>primary 提示块标籤</p>
+</div>
+
+<div class="note success no-icon flat"><p>success 提示块标籤</p>
+</div>
+
+<div class="note info no-icon flat"><p>info 提示块标籤</p>
+</div>
+
+<div class="note warning no-icon flat"><p>warning 提示块标籤</p>
+</div>
+
+<div class="note danger no-icon flat"><p>danger 提示块标籤</p>
+</div>
+
+<h2 id="用法二"><a href="#用法二" class="headerlink" title="用法二"></a>用法二</h2><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [color] [icon] [style] %&#125;</span><br><span class="line">Any content (support inline tags too.io).</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>color</td>
+<td>【可选】顔色<br>(default / blue / pink / red / purple / orange / green)</td>
+</tr>
+<tr>
+<td>icon</td>
+<td>【可选】可配置自定义 icon (只支持 fontawesome 图标, 也可以配置 no-icon )</td>
+</tr>
+<tr>
+<td>style</td>
+<td>【可选】可以覆盖配置中的 style<br>（simple/modern/flat/disabled）</td>
+</tr>
+</tbody></table>
+<h3 id="simple-1"><a href="#simple-1" class="headerlink" title="simple"></a>simple</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; simple %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; simple %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; simple %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; simple%&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; simple %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; simple %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; simple %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note icon simple"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note blue icon simple"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
+</div>
+<div class="note pink icon simple"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
+</div>
+<div class="note red icon simple"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
+</div>
+<div class="note orange icon simple"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note purple icon simple"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
+</div>
+<div class="note green icon simple"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
+</div>
+
+<h3 id="modern-1"><a href="#modern-1" class="headerlink" title="modern"></a>modern</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; modern %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; modern %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; modern %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; modern%&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; modern %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; modern %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; modern %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note icon modern"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note blue icon modern"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
+</div>
+<div class="note pink icon modern"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
+</div>
+<div class="note red icon modern"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
+</div>
+<div class="note orange icon modern"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note purple icon modern"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
+</div>
+<div class="note green icon modern"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
+</div>
+
+<h3 id="flat-1"><a href="#flat-1" class="headerlink" title="flat"></a>flat</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; flat %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; flat %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; flat %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; flat%&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; flat %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; flat %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; flat %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note icon flat"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
+</div>
+<div class="note pink icon flat"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
+</div>
+<div class="note red icon flat"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
+</div>
+<div class="note orange icon flat"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note purple icon flat"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
+</div>
+<div class="note green icon flat"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
+</div>
+
+<h3 id="disabled-1"><a href="#disabled-1" class="headerlink" title="disabled"></a>disabled</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note &#x27;fab fa-cc-visa&#x27; disabled %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue &#x27;fas fa-bullhorn&#x27; disabled %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink &#x27;fas fa-car-crash&#x27; disabled %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red &#x27;fas fa-fan&#x27; disabled %&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange &#x27;fas fa-battery-half&#x27; disabled %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple &#x27;far fa-hand-scissors&#x27; disabled %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green &#x27;fab fa-internet-explorer&#x27; disabled %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note icon disabled"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note blue icon disabled"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p>
+</div>
+<div class="note pink icon disabled"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
+</div>
+<div class="note red icon disabled"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
+</div>
+<div class="note orange icon disabled"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note purple icon disabled"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
+</div>
+<div class="note green icon disabled"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
+</div>
+
+<h3 id="no-icon-1"><a href="#no-icon-1" class="headerlink" title="no-icon"></a>no-icon</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note no-icon %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note blue no-icon %&#125;</span><br><span class="line">2021年快到了....</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note pink no-icon %&#125;</span><br><span class="line">小心开车 安全至上</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note red no-icon %&#125;</span><br><span class="line">这是三片呢？还是四片？</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note orange no-icon %&#125;</span><br><span class="line">你是刷 Visa 还是 UnionPay</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note purple no-icon %&#125;</span><br><span class="line">剪刀石头布</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note green no-icon %&#125;</span><br><span class="line">前端最讨厌的浏览器</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note no-icon flat"><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note blue no-icon flat"><p>2021年快到了….</p>
+</div>
+<div class="note pink no-icon flat"><p>小心开车 安全至上</p>
+</div>
+<div class="note red no-icon flat"><p>这是三片呢？还是四片？</p>
+</div>
+<div class="note orange no-icon flat"><p>你是刷 Visa 还是 UnionPay</p>
+</div>
+<div class="note purple no-icon flat"><p>剪刀石头布</p>
+</div>
+<div class="note green no-icon flat"><p>前端最讨厌的浏览器</p>
+</div>
+
+<h1 id="Gallery相册图库"><a href="#Gallery相册图库" class="headerlink" title="Gallery相册图库"></a>Gallery相册图库</h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;gallery-group-main&quot;</span>&gt;</span></span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>图库名字</td>
+</tr>
+<tr>
+<td>description</td>
+<td>图库描述</td>
+</tr>
+<tr>
+<td>link</td>
+<td>连接到对应相册的地址</td>
+</tr>
+<tr>
+<td>img-url</td>
+<td>图库封面的地址</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>e.g.</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;gallery-group-main&quot;</span>&gt;</span></span><br><span class="line">&#123;% galleryGroup &#x27;壁纸&#x27; &#x27;收藏的一些壁纸&#x27; &#x27;/Gallery/wallpaper&#x27; https://i.loli.net/2019/11/10/T7Mu8Aod3egmC4Q.png %&#125;</span><br><span class="line">&#123;% galleryGroup &#x27;漫威&#x27; &#x27;关于漫威的图片&#x27; &#x27;/Gallery/marvel&#x27; https://i.loli.net/2019/12/25/8t97aVlp4hgyBGu.jpg %&#125;</span><br><span class="line">&#123;% galleryGroup &#x27;OH MY GIRL&#x27; &#x27;关于OH MY GIRL的图片&#x27; &#x27;/Gallery/ohmygirl&#x27; https://i.loli.net/2019/12/25/hOqbQ3BIwa6KWpo.jpg %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div class="gallery-group-main">
+
+  <figure class="gallery-group">
+  <img class="gallery-group-img" src="https://i.loli.net/2019/11/10/T7Mu8Aod3egmC4Q.png" alt="Group Image Gallery">
+  <figcaption>
+  <div class="gallery-group-name">壁纸</div>
+  <p>收藏的一些壁纸</p>
+  <a href="/Gallery/wallpaper"></a>
+  </figcaption>
+  </figure>
+  
+
+  <figure class="gallery-group">
+  <img class="gallery-group-img" src="https://i.loli.net/2019/12/25/8t97aVlp4hgyBGu.jpg" alt="Group Image Gallery">
+  <figcaption>
+  <div class="gallery-group-name">漫威</div>
+  <p>关于漫威的图片</p>
+  <a href="/Gallery/marvel"></a>
+  </figcaption>
+  </figure>
+  
+
+  <figure class="gallery-group">
+  <img class="gallery-group-img" src="https://i.loli.net/2019/12/25/hOqbQ3BIwa6KWpo.jpg" alt="Group Image Gallery">
+  <figcaption>
+  <div class="gallery-group-name">OH MY GIRL</div>
+  <p>关于OH MY GIRL的图片</p>
+  <a href="/Gallery/ohmygirl"></a>
+  </figcaption>
+  </figure>
+  
+</div>
+</blockquote>
+<h1 id="Gallery相册"><a href="#Gallery相册" class="headerlink" title="Gallery相册"></a>Gallery相册</h1><figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">gallery</span> %&#125;</span></span><br><span class="line"><span class="xml">markdown 图片格式</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endgallery</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>不能置于引用下，会导致图片不显示</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% gallery %&#125;</span><br><span class="line">![](https://i.loli.net/2019/12/25/Fze9jchtnyJXMHN.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/ryLVePaqkYm4TEK.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/gEy5Zc1Ai6VuO4N.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/d6QHbytlSYO4FBG.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/6nepIJ1xTgufatZ.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/E7Jvr4eIPwUNmzq.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/mh19anwBSWIkGlH.jpg)</span><br><span class="line">![](https://i.loli.net/2019/12/25/2tu9JC8ewpBFagv.jpg)</span><br><span class="line">&#123;% endgallery %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="justified-gallery"><p><img src="https://i.loli.net/2019/12/25/Fze9jchtnyJXMHN.jpg"><br><img src="https://i.loli.net/2019/12/25/ryLVePaqkYm4TEK.jpg"><br><img src="https://i.loli.net/2019/12/25/gEy5Zc1Ai6VuO4N.jpg"><br><img src="https://i.loli.net/2019/12/25/d6QHbytlSYO4FBG.jpg"><br><img src="https://i.loli.net/2019/12/25/6nepIJ1xTgufatZ.jpg"><br><img src="https://i.loli.net/2019/12/25/E7Jvr4eIPwUNmzq.jpg"><br><img src="https://i.loli.net/2019/12/25/mh19anwBSWIkGlH.jpg"><br><img src="https://i.loli.net/2019/12/25/2tu9JC8ewpBFagv.jpg"></p>
+          </div>
+
+<h1 id="tag-hide"><a href="#tag-hide" class="headerlink" title="tag-hide"></a>tag-hide</h1><h2 id="Inline"><a href="#Inline" class="headerlink" title="Inline"></a>Inline</h2><p><code>inline</code> 在文本里面添加按钮隐藏内容，只限文字</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% hideInline <span class="attribute">content</span>,<span class="attribute">display</span>,bg,<span class="attribute">color</span> %&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>content</td>
+<td>文本内容<br>content不能包含英文逗号，可用<code>sbquo;</code></td>
+</tr>
+<tr>
+<td>display</td>
+<td>按钮显示的文字(可选)</td>
+</tr>
+<tr>
+<td>bg</td>
+<td>按钮的背景颜色(可选)</td>
+</tr>
+<tr>
+<td>color</td>
+<td>按钮文字的颜色(可选)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>e.g.</strong></p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml">哪个英文字母最酷？ </span><span class="template-tag">&#123;% <span class="name">hideInline</span> 因为西装裤(C装酷),查看答案,#FF7242,#fff %&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">门里站着一个人? </span><span class="template-tag">&#123;% <span class="name">hideInline</span> 闪 %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>哪个英文字母最酷？ <span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #FF7242;color: #fff">查看答案
+  </button><span class="hide-content">因为西装裤(C装酷)</span></span></p>
+<p>门里站着一个人? <span class="hide-inline"><button type="button" class="hide-button button--animated" style>Click
+  </button><span class="hide-content">闪</span></span></p>
+</blockquote>
+<h2 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h2><p><code>block</code>独立的block隐藏内容，可以隐藏很多内容，包括图片，代码块等等</p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">hideBlock</span> display,bg,color %&#125;</span></span><br><span class="line"><span class="xml">content</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endhideBlock</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>content</td>
+<td>文本内容</td>
+</tr>
+<tr>
+<td>display</td>
+<td>按钮显示的文字(可选)<br> display 不能包含英文逗号，可用<code>&amp;sbquo;</code></td>
+</tr>
+<tr>
+<td>bg</td>
+<td>按钮的背景颜色(可选)</td>
+</tr>
+<tr>
+<td>color</td>
+<td>按钮文字的颜色(可选)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>e.g.</strong></p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml">查看答案</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">hideBlock</span> 查看答案 %&#125;</span></span><br><span class="line"><span class="xml">傻子，怎么可能有答案</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endhideBlock</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看答案</p>
+<div class="hide-block"><button type="button" class="hide-button button--animated" style>查看答案
+    </button><div class="hide-content"><blockquote>
+<p>傻子，怎么可能有答案</p>
+</blockquote>
+</div></div>
+</blockquote>
+<h2 id="Toggle"><a href="#Toggle" class="headerlink" title="Toggle"></a>Toggle</h2><p>如果你需要展示的内容太多，可以把它隐藏在收缩框里，需要时再把它展开</p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">hideToggle</span> display,bg,color %&#125;</span></span><br><span class="line"><span class="xml">content</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endhideToggle</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>display 不能包含英文逗号，可用<code>&amp;sbquo</code></strong></p>
+<blockquote>
+<p><strong>e.g.</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">&#123;% hideToggle Butterfly安装方法 %&#125;</span><br><span class="line">在你的博客根目录里</span><br><span class="line"></span><br><span class="line">git <span class="keyword">clone</span> <span class="title">-b</span> <span class="keyword">master</span> <span class="title">https</span>://github.com/jerryc127/hexo-theme-butterfly.git themes/Butterfly</span><br><span class="line"></span><br><span class="line">如果想要安装比较新的dev分支，可以</span><br><span class="line"></span><br><span class="line">git <span class="keyword">clone</span> <span class="title">-b</span> dev https://github.com/jerryc127/hexo-theme-butterfly.git themes/Butterfly</span><br><span class="line"></span><br><span class="line">&#123;% endhideToggle %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>Butterfly安装方法</span></div>
+    <div class="hide-content"><blockquote>
+<p>在你的博客根目录里</p>
+<p>git clone -b master <a href="https://github.com/jerryc127/hexo-theme-butterfly.git">https://github.com/jerryc127/hexo-theme-butterfly.git</a> themes/Butterfly</p>
+<p>如果想要安装比较新的dev分支，可以</p>
+<p>git clone -b dev <a href="https://github.com/jerryc127/hexo-theme-butterfly.git">https://github.com/jerryc127/hexo-theme-butterfly.git</a> themes/Butterfly</p>
+</blockquote>
+</div></div>
+</blockquote>
+<h1 id="mermaid"><a href="#mermaid" class="headerlink" title="mermaid"></a>mermaid</h1><blockquote>
+<p>mermaid标签不允许嵌套于一些隐藏属性的标签外挂，例如: tag-hide内的标签外挂和tabs标签外挂，这会导致mermaid图示无法正常显示，使用时请留意</p>
+<p><strong>请不要压缩html代码，不然会导致mermaid显示异常</strong></p>
+</blockquote>
+<p>使用mermaid标签可以绘制Flowchart（流程图）、Sequence diagram（时序图 ）、Class Diagram（类别图）、State Diagram（状态图）、Gantt（甘特图）和Pie Chart（圆形图）</p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">mermaid</span> %&#125;</span></span><br><span class="line"><span class="xml">内容</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endmermaid</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>e.g.</strong></p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">&#123;% mermaid %&#125;</span><br><span class="line">pie</span><br><span class="line">    title Key elements <span class="keyword">in</span> Product X</span><br><span class="line">    <span class="string">&quot;Calcium&quot;</span> : 42.96</span><br><span class="line">    <span class="string">&quot;Potassium&quot;</span> : 50.05</span><br><span class="line">    <span class="string">&quot;Magnesium&quot;</span> : 10.01</span><br><span class="line">    <span class="string">&quot;Iron&quot;</span> :  5</span><br><span class="line">&#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="mermaid">&gt; pie
+&gt;     title Key elements in Product X
+&gt;     &quot;Calcium&quot; : 42.96
+&gt;     &quot;Potassium&quot; : 50.05
+&gt;     &quot;Magnesium&quot; : 10.01
+&gt;     &quot;Iron&quot; :  5
+&gt; </div>
+</blockquote>
+<h1 id="Tabs"><a href="#Tabs" class="headerlink" title="Tabs"></a>Tabs</h1><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs Unique name, [index] %&#125;</span><br><span class="line">&lt;!-- tab [Tab caption] [@icon] --&gt;</span><br><span class="line">Any content (support inline tags too).</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br><span class="line"></span><br><span class="line">Unique name   : Unique name of tabs block tag without comma.</span><br><span class="line"><span class="code">                Will be used in #id&#x27;s as prefix for each tab with their index numbers.</span></span><br><span class="line"><span class="code">                If there are whitespaces in name, for generate #id all whitespaces will replaced by dashes.</span></span><br><span class="line"><span class="code">                Only for current url of post/page must be unique!</span></span><br><span class="line"><span class="code">[index]       : Index number of active tab.</span></span><br><span class="line"><span class="code">                If not specified, first tab (1) will be selected.</span></span><br><span class="line"><span class="code">                If index is -1, no tab will be selected. It&#x27;s will be something like spoiler.</span></span><br><span class="line"><span class="code">                Optional parameter.</span></span><br><span class="line"><span class="code">[Tab caption] : Caption of current tab.</span></span><br><span class="line"><span class="code">                If not caption specified, unique name with tab index suffix will be used as caption of tab.</span></span><br><span class="line"><span class="code">                If not caption specified, but specified icon, caption will empty.</span></span><br><span class="line"><span class="code">                Optional parameter.</span></span><br><span class="line"><span class="code">[@icon]       : FontAwesome icon name (full-name, look like &#x27;fas fa-font&#x27;)</span></span><br><span class="line"><span class="code">                Can be specified with or without space; e.g. &#x27;Tab caption @icon&#x27; similar to &#x27;Tab caption@icon&#x27;.</span></span><br><span class="line"><span class="code">                Optional parameter.</span></span><br></pre></td></tr></table></figure>
+
+<div class="note info flat"><p>Demo1 -  预设选择第一个【默认】</p>
+</div>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test1 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 1.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 2.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 3.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">test1 1</button></li><li class="tab"><button type="button" data-href="#test1-2">test1 2</button></li><li class="tab"><button type="button" data-href="#test1-3">test1 3</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><p><strong>This is Tab 1.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test1-2"><p><strong>This is Tab 2.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test1-3"><p><strong>This is Tab 3.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<div class="note info flat"><p>Demo 2 - 预设选择tabs</p>
+</div>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test2, 3 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 1.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 2.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 3.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="tabs" id="test2"><ul class="nav-tabs"><li class="tab"><button type="button" data-href="#test2-1">test2 1</button></li><li class="tab"><button type="button" data-href="#test2-2">test2 2</button></li><li class="tab active"><button type="button" data-href="#test2-3">test2 3</button></li></ul><div class="tab-contents"><div class="tab-item-content" id="test2-1"><p><strong>This is Tab 1.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test2-2"><p><strong>This is Tab 2.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content active" id="test2-3"><p><strong>This is Tab 3.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<div class="note info flat"><p>Demo 3 - 没有预设值</p>
+</div>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test3, -1 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 1.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 2.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line"><span class="strong">**This is Tab 3.**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="tabs" id="test3"><ul class="nav-tabs"><li class="tab"><button type="button" data-href="#test3-1">test3 1</button></li><li class="tab"><button type="button" data-href="#test3-2">test3 2</button></li><li class="tab"><button type="button" data-href="#test3-3">test3 3</button></li></ul><div class="tab-contents"><div class="tab-item-content" id="test3-1"><p><strong>This is Tab 1.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test3-2"><p><strong>This is Tab 2.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test3-3"><p><strong>This is Tab 3.</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<div class="note info flat"><p>Demo 4 - 自定义Tab名 + 只有icon + icon和Tab名</p>
+</div>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% tabs test4 %&#125;</span><br><span class="line">&lt;!-- tab 第一个Tab --&gt;</span><br><span class="line"><span class="strong">**tab名字为第一个Tab**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab @fab fa-apple-pay --&gt;</span><br><span class="line"><span class="strong">**只有图标 没有Tab名字**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- tab 炸弹@fas fa-bomb --&gt;</span><br><span class="line"><span class="strong">**名字+icon**</span></span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="tabs" id="test4"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test4-1">第一个Tab</button></li><li class="tab"><button type="button" data-href="#test4-2"><i class="fab fa-apple-pay" style="text-align: center;"></i></button></li><li class="tab"><button type="button" data-href="#test4-3"><i class="fas fa-bomb"></i>炸弹</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test4-1"><p><strong>tab名字为第一个Tab</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test4-2"><p><strong>只有图标 没有Tab名字</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test4-3"><p><strong>名字+icon</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<h1 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h1><figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">&#123;% btn <span class="comment">[url]</span>,<span class="comment">[text]</span>,<span class="comment">[icon]</span>,<span class="comment">[color]</span> <span class="comment">[style]</span> <span class="comment">[layout]</span> <span class="comment">[position]</span> <span class="comment">[size]</span> %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">[url]</span>         : 链接</span><br><span class="line"><span class="comment">[text]</span>        : 按钮文字</span><br><span class="line"><span class="comment">[icon]</span>        : <span class="comment">[可选]</span> 图标</span><br><span class="line"><span class="comment">[color]</span>       : <span class="comment">[可选]</span> 按钮背景顔色(默认style时）</span><br><span class="line">                      按钮字体和边框顔色(outline时)</span><br><span class="line">                      default/blue/pink/red/purple/orange/green</span><br><span class="line"><span class="comment">[style]</span>       : <span class="comment">[可选]</span> 按钮样式 默认实心</span><br><span class="line">                      outline/留空</span><br><span class="line"><span class="comment">[layout]</span>      : <span class="comment">[可选]</span> 按钮佈局 默认为line</span><br><span class="line">                      block/留空</span><br><span class="line"><span class="comment">[position]</span>    : <span class="comment">[可选]</span> 按钮位置 前提是设置了layout为block 默认为左边</span><br><span class="line">                      center/right/留空</span><br><span class="line"><span class="comment">[size]</span>        : <span class="comment">[可选]</span> 按钮大小</span><br><span class="line">                      larger/留空</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<figure class="highlight puppet"><table><tr><td class="code"><pre><span class="line">This is my website, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-point-right %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,,outline %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-point-right,outline %&#125;</span><br><span class="line"><span class="keyword">This</span> <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">website</span>, click the <span class="keyword">button</span> &#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-point-right,larger %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This is my website, click the button <a class="btn-beautify button--animated " href="https://butterfly.js.org/" title="Butterfly"><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated " href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated outline" href="https://butterfly.js.org/" title="Butterfly"><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated outline" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a><br>This is my website, click the button <a class="btn-beautify button--animated larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a></p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">&#123;% <span class="keyword">btn </span><span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,<span class="keyword">Butterfly,far </span>fa-hand-point-right,<span class="keyword">block </span>%&#125;</span><br><span class="line">&#123;% <span class="keyword">btn </span><span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,<span class="keyword">Butterfly,far </span>fa-hand-point-right,<span class="keyword">block </span>center larger %&#125;</span><br><span class="line">&#123;% <span class="keyword">btn </span><span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,<span class="keyword">Butterfly,far </span>fa-hand-point-right,<span class="keyword">block </span>right outline larger %&#125;</span><br></pre></td></tr></table></figure>
+
+<a class="btn-beautify button--animated block" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated block center larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated block right outline larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+
+<figure class="highlight processing"><table><tr><td class="code"><pre><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,<span class="built_in">blue</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,pink larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,<span class="built_in">red</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,purple larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,orange larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,<span class="built_in">green</span> larger %&#125;</span><br></pre></td></tr></table></figure>
+
+<a class="btn-beautify button--animated larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated blue larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated pink larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated red larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated purple larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated orange larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated green larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+
+<figure class="highlight processing"><table><tr><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;btn-center&quot;</span>&gt;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline <span class="built_in">blue</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline pink larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline <span class="built_in">red</span> larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline purple larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline orange larger %&#125;</span><br><span class="line">&#123;% btn <span class="string">&#x27;https://butterfly.js.org/&#x27;</span>,Butterfly,far fa-hand-<span class="built_in">point</span>-right,outline <span class="built_in">green</span> larger %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<div class="btn-center">
+<a class="btn-beautify button--animated outline larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated outline blue larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated outline pink larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated outline red larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated outline purple larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated outline orange larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+<a class="btn-beautify button--animated outline green larger" href="https://butterfly.js.org/" title="Butterfly"><i class="far fa-hand-point-right"></i><span>Butterfly</span></a>
+</div>
+</blockquote>
+<h1 id="inlineImg"><a href="#inlineImg" class="headerlink" title="inlineImg"></a>inlineImg</h1><p>主题中的图片都是默认以块级元素显示，如果你想以内联元素显示，可以使用这个标签外挂</p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">&#123;% inlineImg <span class="comment">[src]</span> <span class="comment">[height]</span> %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">[src]</span>      :    图片链接</span><br><span class="line"><span class="comment">[height]</span>   ：   图片高度限制【可选】</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>e.g.</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">你看我长得漂亮不</span><br><span class="line"></span><br><span class="line">![](https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">03</span><span class="regexp">/19/</span><span class="number">2</span>P6ivUGsdaEXSFI.png)</span><br><span class="line"></span><br><span class="line">我觉得很漂亮 &#123;% inlineImg https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">03</span><span class="regexp">/19/</span><span class="number">5</span>M4jUB3ynq7ePgw.png <span class="number">150</span>px %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你看我长得漂亮不</p>
+<p><img src="https://i.loli.net/2021/03/19/2P6ivUGsdaEXSFI.png"></p>
+<p>我觉得很漂亮 <img class="inline-img" src="https://i.loli.net/2021/03/19/5M4jUB3ynq7ePgw.png" style="height:150px"></p>
+</blockquote>
+<h1 id="label"><a href="#label" class="headerlink" title="label"></a>label</h1><figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">&#123;% label <span class="keyword">text</span> <span class="keyword">color</span> %&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>text</td>
+<td>文字</td>
+</tr>
+<tr>
+<td>color</td>
+<td>【可选】背景颜色，默认为<code>default</code><br>default/blue/pink/red/purple/orange/green</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>e.g.</strong></p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml">臣亮言：</span><span class="template-tag">&#123;% <span class="name">label</span> 先帝 %&#125;</span><span class="xml">创业未半，而</span><span class="template-tag">&#123;% <span class="name">label</span> 中道崩殂 blue %&#125;</span><span class="xml">。今天下三分，</span><span class="template-tag">&#123;% <span class="name">label</span> 益州疲敝 pink %&#125;</span><span class="xml">，此诚</span><span class="template-tag">&#123;% <span class="name">label</span> 危急存亡之秋 red %&#125;</span><span class="xml">也！然侍衞之臣，不懈于内；</span><span class="template-tag">&#123;% <span class="name">label</span> 忠志之士 purple %&#125;</span><span class="xml">，忘身于外者，盖追先帝之殊遇，欲报之于陛下也。诚宜开张圣听，以光先帝遗德，恢弘志士之气；不宜妄自菲薄，引喻失义，以塞忠谏之路也。</span></span><br><span class="line"><span class="xml">宫中、府中，俱为一体；陟罚臧否，不宜异同。若有</span><span class="template-tag">&#123;% <span class="name">label</span> 作奸 orange %&#125;</span><span class="xml">、</span><span class="template-tag">&#123;% <span class="name">label</span> 犯科 green %&#125;</span><span class="xml">，及为忠善者，宜付有司，论其刑赏，以昭陛下平明之治；不宜偏私，使内外异法也。</span></span><br></pre></td></tr></table></figure>
+
+<p>臣亮言：<mark class="hl-label default">先帝</mark> 创业未半，而<mark class="hl-label blue">中道崩殂</mark> 。今天下三分，<mark class="hl-label pink">益州疲敝</mark> ，此诚<mark class="hl-label red">危急存亡之秋</mark> 也！然侍衞之臣，不懈于内；<mark class="hl-label purple">忠志之士</mark> ，忘身于外者，盖追先帝之殊遇，欲报之于陛下也。诚宜开张圣听，以光先帝遗德，恢弘志士之气；不宜妄自菲薄，引喻失义，以塞忠谏之路也。<br>宫中、府中，俱为一体；陟罚臧否，不宜异同。若有<mark class="hl-label orange">作奸</mark> 、<mark class="hl-label green">犯科</mark> ，及为忠善者，宜付有司，论其刑赏，以昭陛下平明之治；不宜偏私，使内外异法也。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP学习记录</title>
+    <url>/2021/07/12/HTTP%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="URI和URL"><a href="#URI和URL" class="headerlink" title="URI和URL"></a>URI和URL</h2><h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>统一资源标识符（Uniform Resource Identifier，URI)是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义</p>
+<img src="/2021/07/12/HTTP%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg" style="zoom: 50%;">
+
+<p>绝对路径格式</p>
+<blockquote>
+<p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
+<p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
+<p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#x68;&#110;&#x2e;&#68;&#x6f;&#x65;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#x4a;&#x6f;&#x68;&#110;&#x2e;&#68;&#x6f;&#x65;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a>    </p>
+<p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
+<p>tel:+1-816-555-1212    </p>
+<p>telnet://192.0.2.16:80/    </p>
+<p>urn:oasis:names:specification:docbook:dtd:xml:4.1.2</p>
+</blockquote>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3>]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>HTTP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GKCTF × DASCTF 2021 WP</title>
+    <url>/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/</url>
+    <content><![CDATA[<h1 id="easycms"><a href="#easycms" class="headerlink" title="easycms"></a>easycms</h1><p>打开是一个CMS做的企业用户网站，翻到最下面找到CMS类型</p>
+<p><img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/1.jpg"></p>
+<p>百度此类型CMS漏洞或后台等信息，在官网搜到</p>
+<p><img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/2.jpg"></p>
+<p>打开<code>http://xxx.node3.buuoj.cn/admin.php</code></p>
+<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/3.jpg" style="zoom:33%;">
+
+<p>根据提示密码是五位弱口令，而Email还可以是用户名</p>
+<p>正好主页</p>
+<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/4.jpg" style="zoom: 50%;">
+
+<p>于是我就输入了这个邮箱，尝试11111，12345等最常见的五位弱口令，不对！…</p>
+<p>后来经过出题人的提示才知道用户名不需要信息收集…</p>
+<p>最后以admin/12345成功登录</p>
+<p>登录后台后，查资料得到蝉知后台getshell的方法</p>
+<p><a href="https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/%E7%A6%85%E7%9F%A5/%E7%A6%85%E7%9F%A5%E5%90%8E%E5%8F%B0getshell/">禅知后台getshell - Wiki</a></p>
+<p>进行测试发现由于版本不同，此版本已无法进行复现此漏洞</p>
+<p>在后台模板尝试修改</p>
+<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/5.jpg" style="zoom: 25%;">
+
+<p>为了创建文件找到可以上传文件的地方</p>
+<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/6.jpg" style="zoom: 25%;">
+
+<p>随便上传一个txt文件，修改文件名</p>
+<p>然后再编辑模板即可保存</p>
+<p>编辑后返回前台得到flag</p>
+<img src="/2021/06/26/GKCTF-%C3%97-DASCTF-2021-WP/7.jpg" style="zoom: 25%;">
+
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>WP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>渗透靶场实战记录</title>
+    <url>/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><h2 id="爆破练习"><a href="#爆破练习" class="headerlink" title="爆破练习"></a>爆破练习</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>“暴力破解”是一攻击具手段，在web攻击中，一般会使用这种手段对应用系统的认证信息进行获取。 其过程就是使用大量的认证信息在认证接口进行尝试登录，直到得到正确的结果。 为了提高效率，暴力破解一般会使用带有字典的工具来进行自动化操作</p>
+<p>理论上来说，大多数系统都是可以被暴力破解的，只要攻击者有足够强大的计算能力和时间，所以断定一个系统是否存在暴力破解漏洞，其条件也不是绝对的。 我们说一个web应用系统存在暴力破解漏洞，一般是指该web应用系统没有采用或者采用了比较弱的认证安全策略，导致其被暴力破解的“可能性”变的比较高。 这里的认证安全策略, 包括：</p>
+<p>1.是否要求用户设置复杂的密码；<br>2.是否每次认证都使用安全的验证码（想想你买火车票时输的验证码～）或者手机otp；<br>3.是否对尝试登录的行为进行判断和限制（如：连续5次错误登录，进行账号锁定或IP地址锁定等）；<br>4.是否采用了双因素认证；<br>等等…<br>千万不要小看暴力破解漏洞,往往这种简单粗暴的攻击方式带来的效果是超出预期的</p>
+<blockquote>
+<p>从来没有哪个时代的黑客像今天一样热衷于猜解密码 ——奥斯特洛夫斯基</p>
+</blockquote>
+<h3 id="基于表单的暴力破解"><a href="#基于表单的暴力破解" class="headerlink" title="基于表单的暴力破解"></a>基于表单的暴力破解</h3><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/1.jpg" style="zoom:80%;">
+
+<p>一个登陆界面的表单，随便试试，然后BP抓包，发送到爆破模块，读字典爆破</p>
+<p>(离谱的是Chrome抓不了包，应该是localhost的问题，火狐通过<code>about:config</code>修改一下抓取localhost的设定就好了，应该是Chrome的问题)</p>
+<h3 id="验证码绕过-on-server"><a href="#验证码绕过-on-server" class="headerlink" title="验证码绕过(on server)"></a>验证码绕过(on server)</h3><h3 id="验证码绕过-on-client"><a href="#验证码绕过-on-client" class="headerlink" title="验证码绕过(on client)"></a>验证码绕过(on client)</h3><h2 id="XSS练习"><a href="#XSS练习" class="headerlink" title="XSS练习"></a>XSS练习</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>Cross-Site Scripting 简称为“CSS”，为避免与前端叠成样式表的缩写”CSS”冲突，故又称XSS。一般XSS可以分为如下几种常见类型：<br>  1.反射性XSS;<br>  2.存储型XSS;<br>  3.DOM型XSS;</p>
+<p>XSS漏洞一直被评估为web漏洞中危害较大的漏洞，在OWASP TOP10的排名中一直属于前三的江湖地位<br>XSS是一种发生在前端浏览器端的漏洞，所以其危害的对象也是前端用户<br>形成XSS漏洞的主要原因是程序对输入和输出没有做合适的处理，导致“精心构造”的字符输出在前端时被浏览器当作有效代码解析执行从而产生危害<br>因此在XSS漏洞的防范上，一般会采用“对输入进行过滤”和“输出进行转义”的方式进行处理:<br> 输入过滤：对输入进行过滤，不允许可能导致XSS攻击的字符输入;<br> 输出转义：根据输出点的位置对输出到前端的内容进行适当转义</p>
+<h3 id="反射型XSS-get"><a href="#反射型XSS-get" class="headerlink" title="反射型XSS(get)"></a>反射型XSS(get)</h3><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/2.jpg" style="zoom:80%;">
+
+<p>是一个文本框，随便输一个测试功能正常</p>
+<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/3.jpg" style="zoom:80%;">
+
+<p>输入特殊符号<code>&#39;</code> <code>&lt;</code>等发现无过滤</p>
+<p>尝试输入payload发现文本框限制了字符数</p>
+<p>审查元素修改一下<code>maxlength</code></p>
+<p>再输入payload:  <code>&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;</code></p>
+<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/4.jpg" style="zoom:80%;">
+
+<p>成功触发XSS</p>
+<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/5.jpg" style="zoom: 50%;">
+
+<p>ps: 或者直接在地址栏输入</p>
+<p><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/6.jpg"></p>
+<p>也可以成功触发XSS</p>
+<h3 id="反射型XSS-post"><a href="#反射型XSS-post" class="headerlink" title="反射型XSS(post)"></a>反射型XSS(post)</h3><p>多一步登录的步骤</p>
+<p>登陆后文本框同上题</p>
+<p>同理输入payload，成功触发XSS</p>
+<h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/7.jpg" style="zoom: 50%;">
+
+<p>是一个留言板，可以存入数据库，每次打开此页面都会显示之前的留言</p>
+<p>并且，经测试，发现输入特殊符号<code>&#39;</code> <code>&lt;</code>无过滤</p>
+<p>输入payload:  <code>&lt;script&gt;alert(&#39;存储型xss&#39;)&lt;/script&gt;</code></p>
+<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/8.jpg" style="zoom: 80%;">
+
+<p>成功触发XSS，并且由于留言板写入数据库，每次打开此页面都会触发XSS</p>
+<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/9.jpg" style="zoom:67%;">
+
+<h1 id="sqli-labs"><a href="#sqli-labs" class="headerlink" title="sqli-labs"></a>sqli-labs</h1><h1 id="upload-labs"><a href="#upload-labs" class="headerlink" title="upload-labs"></a>upload-labs</h1><h2 id="pass-01"><a href="#pass-01" class="headerlink" title="pass-01"></a>pass-01</h2><p>本题根据前端js对文件类型进行验证</p>
+<img src="/2021/06/16/%E6%B8%97%E9%80%8F%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/10.jpg" style="zoom: 50%;">
+
+<p>删除，提交，成功</p>
+<h1 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h1>]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>渗透测试</tag>
       </tags>
   </entry>
   <entry>
