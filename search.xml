@@ -890,7 +890,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#110;&#46;&#x44;&#111;&#101;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#x4a;&#x6f;&#104;&#110;&#46;&#x44;&#111;&#101;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#110;&#46;&#68;&#x6f;&#x65;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;">&#74;&#111;&#x68;&#110;&#46;&#68;&#x6f;&#x65;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -1005,7 +1005,7 @@
   <entry>
     <title>CTF学习笔记</title>
     <url>/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><h3 id="ASCII-编码参考手册"><a href="#ASCII-编码参考手册" class="headerlink" title="ASCII 编码参考手册"></a>ASCII 编码参考手册</h3><table>
+    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><h3 id="ASCII-编码参考手册"><a href="#ASCII-编码参考手册" class="headerlink" title="ASCII 编码参考手册"></a>ASCII 编码参考手册</h3><table>
 <thead>
 <tr>
 <th align="left">字符</th>
@@ -2215,7 +2215,18 @@
 <p>登录界面必然会与数据库进行交互，所以是SQL注入的经典位置</p>
 </blockquote>
 <p>常见登陆界面SQL语句<code>select * from admin where username = &#39;用户输入的用户名&#39; and password = &#39;用户输入的密码&#39;</code><br>万能用户名:<code>&#39; or 1=1 -- </code>     (<code>-- </code>后面有一个空格)<br>第一个<code>&#39;</code>用于闭合SQL语句用户名的单引号，<code>1=1</code>永远为真，<code>-- </code>用于注释其后的密码语句，从而绕过登录验证 </p>
-<h1 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h1><h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><table>
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="类型比较"><a href="#类型比较" class="headerlink" title="类型比较"></a>类型比较</h3><ul>
+<li><code>==</code>：松散比较，只比较值，不比较类型</li>
+<li><code>===</code>：严格比较，除了比较值，也比较类型</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="literal">false</span>: <span class="keyword">bool</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="number">0</span> === <span class="literal">false</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">0</span> == <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="number">0</span> === <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="literal">false</span> == <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="literal">false</span> === <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;0&quot;</span> == <span class="literal">false</span>: <span class="keyword">bool</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="string">&quot;0&quot;</span> === <span class="literal">false</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;0&quot;</span> == <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line"><span class="string">&quot;0&quot;</span> === <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;</span> == <span class="literal">false</span>: <span class="keyword">bool</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="string">&quot;&quot;</span> === <span class="literal">false</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;</span> == <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="string">&quot;&quot;</span> === <span class="literal">null</span>: <span class="keyword">bool</span>(<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.runoob.com/wp-content/uploads/2019/05/1791863413-572055b100304_articlex.png" style="zoom: 67%;">
+
+<img src="https://www.runoob.com/wp-content/uploads/2019/05/xxxxphp.png" style="zoom:67%;">
+
+<p>参考链接：<a href="https://www.runoob.com/php/php-types-comparisons.html">菜鸟教程 | PHP类型比较</a></p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><table>
 <thead>
 <tr>
 <th align="center"><strong>扩展名</strong></th>
@@ -3091,7 +3102,7 @@
 <tr>
 <td align="center">jpg; jpeg</td>
 <td align="left">FF D8 FF</td>
-<td align="left"></td>
+<td align="left">(以FF D9结尾)</td>
 </tr>
 <tr>
 <td align="center">jpg; jpe; jpeg</td>
