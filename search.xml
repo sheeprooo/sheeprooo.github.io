@@ -3335,6 +3335,33 @@
       </tags>
   </entry>
   <entry>
+    <title>CTFshow-网络迷踪</title>
+    <url>/2021/09/16/CTFshow-%E7%BD%91%E7%BB%9C%E8%BF%B7%E8%B8%AA/</url>
+    <content><![CDATA[<h1 id="新手上路"><a href="#新手上路" class="headerlink" title="新手上路"></a>新手上路</h1><p>提交图片中桥的名字</p>
+<img src="/2021/09/16/CTFshow-%E7%BD%91%E7%BB%9C%E8%BF%B7%E8%B8%AA/1.jpg" style="zoom: 50%;">
+
+<p>百度搜索图片，显示是三亚</p>
+<p>再根据下面给出的途牛旅行网的介绍，逐一搜索三亚景点，得到此景点为三亚的<strong>蜈支洲岛</strong></p>
+<p>再搜索蜈支洲岛的桥，可得桥名为<strong>情人桥</strong></p>
+<p>提交ctfshow{情人桥}</p>
+<h1 id="初学乍练"><a href="#初学乍练" class="headerlink" title="初学乍练"></a>初学乍练</h1><p>提交这架飞机的目的地</p>
+<img src="/2021/09/16/CTFshow-%E7%BD%91%E7%BB%9C%E8%BF%B7%E8%B8%AA/2.jpg" style="zoom:50%;">
+
+<p>百度搜索图片，打开原文链接</p>
+<img src="/2021/09/16/CTFshow-%E7%BD%91%E7%BB%9C%E8%BF%B7%E8%B8%AA/3.jpg" style="zoom: 50%;">
+
+<p>得到目的地为<strong>苏黎世</strong></p>
+<p>提交ctfshow{苏黎世}</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+        <tag>CTFshow</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BUU-web</title>
     <url>/2021/08/22/BUU-web/</url>
     <content><![CDATA[<h1 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h1><img src="/2021/08/22/BUU-web/21.jpg" style="zoom:50%;">
@@ -4084,7 +4111,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#x68;&#110;&#x2e;&#68;&#x6f;&#x65;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#x4a;&#x6f;&#x68;&#110;&#x2e;&#68;&#x6f;&#x65;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#111;&#104;&#110;&#x2e;&#x44;&#111;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;">&#x4a;&#111;&#104;&#110;&#x2e;&#x44;&#111;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
