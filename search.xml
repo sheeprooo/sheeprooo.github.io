@@ -3335,6 +3335,18 @@
       </tags>
   </entry>
   <entry>
+    <title>攻防世界-web高手进阶</title>
+    <url>/2021/09/20/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-web%E9%AB%98%E6%89%8B%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<h1 id="baby-web"><a href="#baby-web" class="headerlink" title="baby_web"></a>baby_web</h1>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+        <tag>攻防世界</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CTFshow-网络迷踪</title>
     <url>/2021/09/16/CTFshow-%E7%BD%91%E7%BB%9C%E8%BF%B7%E8%B8%AA/</url>
     <content><![CDATA[<h1 id="新手上路"><a href="#新手上路" class="headerlink" title="新手上路"></a>新手上路</h1><p>提交图片中桥的名字</p>
@@ -3383,17 +3395,17 @@
   <entry>
     <title>CTFHub-技能树</title>
     <url>/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="web前置技能"><a href="#web前置技能" class="headerlink" title="web前置技能"></a>web前置技能</h1><h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><h3 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h3><p>HTTP/1.1 八种请求方式: GET,POST,HEAD,OPTIONS,PUT,DELETE,TRACE,CONNECT</p>
-<p>打开环境提示HTTP方法为GET，使用CTFHUB方法，我会给你flag</p>
+    <content><![CDATA[<h1 id="web前置技能"><a href="#web前置技能" class="headerlink" title="web前置技能"></a>web前置技能</h1><h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><h3 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h3><p>HTTP/1.1 八种请求方式: <code>GET</code>,<code>POST</code>,<code>HEAD</code>,<code>OPTIONS</code>,<code>PUT</code>,<code>DELETE</code>,<code>TRACE</code>,<code>CONNECT</code></p>
+<p>打开环境提示HTTP方法为<strong>GET</strong>，使用<strong>CTFHUB</strong>方法，我会给你flag</p>
 <p>bp抓包改包重放，得到flag</p>
 <h3 id="302跳转"><a href="#302跳转" class="headerlink" title="302跳转"></a>302跳转</h3><p>看了wp才做出来</p>
-<p>打开环境，点击got flag后没反应，f12查看新出现了一个302的index.php页面，使用curl工具<code>-v</code>参数输出通信的整个过程，得到flag</p>
+<p>打开环境，点击got flag后没反应，f12查看新出现了一个302的index.php页面，使用<strong>curl</strong>工具<code>-v</code>参数输出通信的整个过程，得到flag</p>
 <h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>打开环境提示管理员才能得到flag</p>
-<p>使用EditThisCookie查看，有一个名为admin的cookie值为0，修改为1，刷新得到flag</p>
+<p>使用<strong>EditThisCookie</strong>查看，有一个名为admin的<strong>cookie</strong>值为0，修改为1，刷新得到flag</p>
 <h3 id="基础认证"><a href="#基础认证" class="headerlink" title="基础认证"></a>基础认证</h3><p>打开环境，有个获得flag的click按钮，点一下弹出窗口需要登陆验证，随便输一个<code>admin/123</code>，bp抓包</p>
 <img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/1.jpg" style="zoom:33%;">
 
-<p>头部有一个Authorization字段，后面的值解码发现是base64加密的<code>admin:123</code></p>
+<p>头部有一个<strong>Authorization</strong>字段，后面的值解码发现是base64加密的<code>admin:123</code></p>
 <img src="/2021/08/22/CTFHub-%E6%8A%80%E8%83%BD%E6%A0%91/2.jpg" style="zoom:33%;">
 
 <p>在返回包里发现提示</p>
@@ -3553,7 +3565,13 @@
     <title>CTFshow-web</title>
     <url>/2021/08/22/CTFshow-web/</url>
     <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><h2 id="web签到题"><a href="#web签到题" class="headerlink" title="web签到题"></a>web签到题</h2><p>f12查看源码发现一串注释的字符，丢到<strong>hasher</strong>里解码，在<strong>base64</strong>解码后得到flag</p>
-<h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2>]]></content>
+<h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><h1 id="吃瓜杯"><a href="#吃瓜杯" class="headerlink" title="吃瓜杯"></a>吃瓜杯</h1><h2 id="热身"><a href="#热身" class="headerlink" title="热身"></a>热身</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-16 11:25:09</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-18 16:53:59</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$num</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$num</span>==<span class="number">4476</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;no no no!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;/[a-z]|\./i&quot;</span>, <span class="variable">$num</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;no no no!!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!strpos(<span class="variable">$num</span>, <span class="string">&quot;0&quot;</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;no no no!!!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(intval(<span class="variable">$num</span>,<span class="number">0</span>)===<span class="number">4476</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要用<strong>get</strong>方法提交一个num变量使其等于4476</p>
+<p>审计发现num为4476，或包含字母/小数点，或首位为0均不行</p>
+<p>可以以八进制方式提交，但首位不能为0</p>
+<p><code>?num=+010574</code>即可得到flag</p>
+]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -4111,7 +4129,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#111;&#104;&#110;&#x2e;&#x44;&#111;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;">&#x4a;&#111;&#104;&#110;&#x2e;&#x44;&#111;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#110;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#120;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#111;&#x6d;">&#74;&#x6f;&#x68;&#110;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#120;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#111;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
