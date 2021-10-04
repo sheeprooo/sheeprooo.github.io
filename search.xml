@@ -1364,6 +1364,315 @@
 <img src="https://www.runoob.com/wp-content/uploads/2019/05/xxxxphp.png" style="zoom:67%;">
 
 <p>参考链接：<a href="https://www.runoob.com/php/php-types-comparisons.html">菜鸟教程 | PHP类型比较</a></p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">名称</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">a . b</td>
+<td align="left">并置</td>
+<td align="left">连接两个字符串</td>
+<td align="left">“Hi” . “Ha”</td>
+<td align="left">HiHa</td>
+</tr>
+</tbody></table>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">等同于</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">a .= b</td>
+<td align="left">a = a . b</td>
+<td align="left">连接两个字符串</td>
+</tr>
+</tbody></table>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">名称</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x == y</td>
+<td align="left">等于</td>
+<td align="left">如果 x 等于 y，则返回 true</td>
+<td align="left">5==8 返回 false</td>
+</tr>
+<tr>
+<td align="left">x === y</td>
+<td align="left">绝对等于</td>
+<td align="left">如果 x 等于 y，且它们类型相同，则返回 true</td>
+<td align="left">5===”5” 返回 false</td>
+</tr>
+<tr>
+<td align="left">x != y</td>
+<td align="left">不等于</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+<td align="left">5!=8 返回 true</td>
+</tr>
+<tr>
+<td align="left">x &lt;&gt; y</td>
+<td align="left">不等于</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+<td align="left">5&lt;&gt;8 返回 true</td>
+</tr>
+<tr>
+<td align="left">x !== y</td>
+<td align="left">绝对不等于</td>
+<td align="left">如果 x 不等于 y，或它们类型不相同，则返回 true</td>
+<td align="left">5!==”5” 返回 true</td>
+</tr>
+<tr>
+<td align="left">x &gt; y</td>
+<td align="left">大于</td>
+<td align="left">如果 x 大于 y，则返回 true</td>
+<td align="left">5&gt;8 返回 false</td>
+</tr>
+<tr>
+<td align="left">x &lt; y</td>
+<td align="left">小于</td>
+<td align="left">如果 x 小于 y，则返回 true</td>
+<td align="left">5&lt;8 返回 true</td>
+</tr>
+<tr>
+<td align="left">x &gt;= y</td>
+<td align="left">大于等于</td>
+<td align="left">如果 x 大于或者等于 y，则返回 true</td>
+<td align="left">5&gt;=8 返回 false</td>
+</tr>
+<tr>
+<td align="left">x &lt;= y</td>
+<td align="left">小于等于</td>
+<td align="left">如果 x 小于或者等于 y，则返回 true</td>
+<td align="left">5&lt;=8 返回 true</td>
+</tr>
+</tbody></table>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">名称</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x and y</td>
+<td align="left">与</td>
+<td align="left">如果 x 和 y 都为 true，则返回 true</td>
+<td align="left">x=6 y=3 (x &lt; 10 and y &gt; 1) 返回 true</td>
+</tr>
+<tr>
+<td align="left">x or y</td>
+<td align="left">或</td>
+<td align="left">如果 x 和 y 至少有一个为 true，则返回 true</td>
+<td align="left">x=6 y=3 (x==6 or y==5) 返回 true</td>
+</tr>
+<tr>
+<td align="left">x xor y</td>
+<td align="left">异或</td>
+<td align="left">如果 x 和 y 有且仅有一个为 true，则返回 true</td>
+<td align="left">x=6 y=3 (x==6 xor y==3) 返回 false</td>
+</tr>
+<tr>
+<td align="left">x &amp;&amp; y</td>
+<td align="left">与</td>
+<td align="left">如果 x 和 y 都为 true，则返回 true</td>
+<td align="left">x=6 y=3 (x &lt; 10 &amp;&amp; y &gt; 1) 返回 true</td>
+</tr>
+<tr>
+<td align="left">x || y</td>
+<td align="left">或</td>
+<td align="left">如果 x 和 y 至少有一个为 true，则返回 true</td>
+<td align="left">x=6 y=3 (x==5 || y==5) 返回 false</td>
+</tr>
+<tr>
+<td align="left">! x</td>
+<td align="left">非</td>
+<td align="left">如果 x 不为 true，则返回 true</td>
+<td align="left">x=6 y=3 !(x==y) 返回 true</td>
+</tr>
+</tbody></table>
+<h4 id="数组运算符"><a href="#数组运算符" class="headerlink" title="数组运算符"></a>数组运算符</h4><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x + y</td>
+<td align="left">集合</td>
+<td align="left">x 和 y 的集合</td>
+</tr>
+<tr>
+<td align="left">x == y</td>
+<td align="left">相等</td>
+<td align="left">如果 x 和 y 具有相同的键/值对，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x === y</td>
+<td align="left">恒等</td>
+<td align="left">如果 x 和 y 具有相同的键/值对，且顺序相同类型相同，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x != y</td>
+<td align="left">不相等</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x &lt;&gt; y</td>
+<td align="left">不相等</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x !== y</td>
+<td align="left">不恒等</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+</tr>
+</tbody></table>
+<h4 id="组合比较符-PHP7"><a href="#组合比较符-PHP7" class="headerlink" title="组合比较符(PHP7+)"></a>组合比较符(PHP7+)</h4><blockquote>
+<p>组合比较运算符可以轻松实现两个变量的比较，当然不仅限于数值类数据的比较</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$c</span> = <span class="variable">$a</span> &lt;=&gt; <span class="variable">$b</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果 <strong>$a &gt; $b</strong>, 则 <strong>$c</strong> 的值为 <strong>1</strong></li>
+<li>如果 <strong>$a == $b</strong>, 则 <strong>$c</strong> 的值为 <strong>0</strong></li>
+<li>如果 <strong>$a &lt; $b</strong>, 则 <strong>$c</strong> 的值为 <strong>-1</strong></li>
+</ul>
+<h4 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h4><table>
+<thead>
+<tr>
+<th align="left">结合方向</th>
+<th align="left">运算符</th>
+<th align="left">附加信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">无</td>
+<td align="left">clone new</td>
+<td align="left">clone 和 new</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">[</td>
+<td align="left">array()</td>
+</tr>
+<tr>
+<td align="left">右</td>
+<td align="left">++ – ~ (int) (float) (string) (array) (object) (bool) @</td>
+<td align="left">类型和递增／递减</td>
+</tr>
+<tr>
+<td align="left">无</td>
+<td align="left">instanceof</td>
+<td align="left">类型</td>
+</tr>
+<tr>
+<td align="left">右</td>
+<td align="left">!</td>
+<td align="left">逻辑运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">* / %</td>
+<td align="left">算术运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">+ – .</td>
+<td align="left">算术运算符和字符串运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">&lt;&lt; &gt;&gt;</td>
+<td align="left">位运算符</td>
+</tr>
+<tr>
+<td align="left">无</td>
+<td align="left">== != === !== &lt;&gt;</td>
+<td align="left">比较运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">&amp;</td>
+<td align="left">位运算符和引用</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">^</td>
+<td align="left">位运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">|</td>
+<td align="left">位运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">&amp;&amp;</td>
+<td align="left">逻辑运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">||</td>
+<td align="left">逻辑运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">? :</td>
+<td align="left">三元运算符</td>
+</tr>
+<tr>
+<td align="left">右</td>
+<td align="left">= += -= *= /= .= %= &amp;= |= ^= &lt;&lt;= &gt;&gt;= =&gt;</td>
+<td align="left">赋值运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">and</td>
+<td align="left">逻辑运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">xor</td>
+<td align="left">逻辑运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">or</td>
+<td align="left">逻辑运算符</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">,</td>
+<td align="left">多处用到</td>
+</tr>
+</tbody></table>
+<div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>优先级示例</span></div>
+    <div class="hide-content"><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 优先级： &amp;&amp;  &gt;  =  &gt;  and</span></span><br><span class="line"><span class="comment">// 优先级： ||  &gt;  =  &gt;  or</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">$a</span> = <span class="number">3</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="variable">$c</span> = <span class="variable">$a</span> <span class="keyword">or</span> <span class="variable">$b</span>;</span><br><span class="line">var_dump(<span class="variable">$c</span>);          <span class="comment">// 这里的 $c 为 int 值3，而不是 boolean 值 true</span></span><br><span class="line"><span class="variable">$d</span> = <span class="variable">$a</span> || <span class="variable">$b</span>;</span><br><span class="line">var_dump(<span class="variable">$d</span>);          <span class="comment">//这里的 $d 就是 boolean 值 true </span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>原因：<code>||</code>优先级大于<code>=</code>，<code>or</code>优先级小于<code>=</code></p>
+</div></div>
+
+
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="var-dump"><a href="#var-dump" class="headerlink" title="var_dump()"></a>var_dump()</h4><p>返回括号内类型</p>
 <h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><table>
 <thead>
 <tr>
@@ -3388,8 +3697,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WEB</tag>
         <tag>BUU</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -3525,8 +3834,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>Bugku</tag>
         <tag>WEB</tag>
+        <tag>Bugku</tag>
       </tags>
   </entry>
   <entry>
@@ -4129,7 +4438,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#111;&#x68;&#x6e;&#46;&#x44;&#x6f;&#x65;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x4a;&#111;&#x68;&#x6e;&#46;&#x44;&#x6f;&#x65;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#111;&#x68;&#x6e;&#x2e;&#x44;&#111;&#x65;&#64;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#x6d;">&#x4a;&#111;&#x68;&#x6e;&#x2e;&#x44;&#111;&#x65;&#64;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
