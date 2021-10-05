@@ -1706,6 +1706,29 @@
 <p>substr() 函数返回字符串的一部分</p>
 </blockquote>
 <p><strong>语法</strong>：<code>substr(string,start,length)</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>string</em></td>
+<td align="left">必需。规定要返回其中一部分的字符串。</td>
+</tr>
+<tr>
+<td align="left"><em>start</em></td>
+<td align="left">必需。规定在字符串的何处开始。正数 - 在字符串的指定位置开始负数 - 在从字符串结尾的指定位置开始0 - 在字符串中的第一个字符处开始</td>
+</tr>
+<tr>
+<td align="left"><em>length</em></td>
+<td align="left">可选。规定要返回的字符串长度。默认是直到字符串的结尾。正数 - 从 start 参数所在的位置返回负数 - 从字符串末端返回</td>
+</tr>
+</tbody></table>
+<h4 id="intval"><a href="#intval" class="headerlink" title="intval()"></a>intval()</h4><blockquote>
+<p><strong>intval()</strong> 函数用于获取变量的整数值</p>
+</blockquote>
 <h4 id="var-dump"><a href="#var-dump" class="headerlink" title="var_dump()"></a>var_dump()</h4><blockquote>
 <p>返回括号内类型</p>
 </blockquote>
@@ -3733,8 +3756,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>BUU</tag>
         <tag>WEB</tag>
+        <tag>BUU</tag>
       </tags>
   </entry>
   <entry>
@@ -3870,8 +3893,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WEB</tag>
         <tag>Bugku</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -4474,7 +4497,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#x65;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#74;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#x65;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#110;&#x2e;&#x44;&#x6f;&#101;&#64;&#101;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#111;&#x6d;">&#74;&#x6f;&#x68;&#110;&#x2e;&#x44;&#x6f;&#101;&#64;&#101;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#111;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
