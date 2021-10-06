@@ -1681,9 +1681,9 @@
 
 
 <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="md5"><a href="#md5" class="headerlink" title="md5()"></a>md5()</h4><blockquote>
-<p>计算字符串的 MD5 散列</p>
+<p>md5() 函数计算字符串的 MD5 散列</p>
 <p>如果成功则返回已计算的 MD5 散列，如果失败则返回 FALSE</p>
-<p>md5() 函数不能处理数组，数组都返回 null，<strong>md5(a[])</strong> 结果为 <strong>null</strong></p>
+<p>md5() 函数不能处理数组，数组都返回 null，md5(a[]) 结果为 null</p>
 </blockquote>
 <p><strong>语法</strong>：<code>md5(string,raw)</code></p>
 <table>
@@ -1727,8 +1727,37 @@
 </tr>
 </tbody></table>
 <h4 id="intval"><a href="#intval" class="headerlink" title="intval()"></a>intval()</h4><blockquote>
-<p><strong>intval()</strong> 函数用于获取变量的整数值</p>
+<p>intval() 函数用于获取变量的整数值</p>
+<p>intval() 函数通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1</p>
 </blockquote>
+<p><strong>语法</strong>：<code>intval($var,$base)</code></p>
+<p><strong>参数</strong>：</p>
+<ul>
+<li>$var：要转换成 integer 的数量值</li>
+<li>$base：转化所使用的进制</li>
+</ul>
+<p>如果 base 是 0，通过检测 var 的格式来决定使用的进制：</p>
+<ul>
+<li>如果字符串包括了 “0x” (或 “0X”) 的前缀，使用 16 进制 (hex)；否则，</li>
+<li>如果字符串以 “0” 开始，使用 8 进制(octal)；否则，</li>
+<li>将使用 10 进制 (decimal)</li>
+</ul>
+<p><strong>返回值</strong>：</p>
+<p>成功时返回 var 的 integer 值，失败时返回 0。 空的 array 返回 0，非空的 array 返回 1</p>
+<p>最大的值取决于操作系统。 32 位系统最大带符号的 integer 范围是 -2147483648 到 2147483647。举例，在这样的系统上， intval(‘1000000000000’) 会返回 2147483647。64 位系统上，最大带符号的 integer 值是 9223372036854775807</p>
+<p>字符串有可能返回 0，虽然取决于字符串最左侧的字符</p>
+<h4 id="mt-srand"><a href="#mt-srand" class="headerlink" title="mt_srand()"></a>mt_srand()</h4><blockquote>
+<p>mt_srand() 函数播种 Mersenne Twister 随机数生成器</p>
+</blockquote>
+<p><strong>语法</strong>：种子：<code>mt_srand(seed);</code></p>
+<p>​            输出：<code>mt_rand();</code></p>
+<div class="note info flat"><p>种子不变时，得到的随机数不变</p>
+</div>
+
+<div class="note warning flat"><p>php版本不同时，同一种子得到的随机数不同</p>
+</div>
+
+<p><strong>参数</strong>：seek：可选，规定播种值</p>
 <h4 id="var-dump"><a href="#var-dump" class="headerlink" title="var_dump()"></a>var_dump()</h4><blockquote>
 <p>返回括号内类型</p>
 </blockquote>
@@ -3756,8 +3785,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WEB</tag>
         <tag>BUU</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -3893,8 +3922,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>Bugku</tag>
         <tag>WEB</tag>
+        <tag>Bugku</tag>
       </tags>
   </entry>
   <entry>
@@ -4497,7 +4526,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#110;&#x2e;&#x44;&#x6f;&#101;&#64;&#101;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#111;&#x6d;">&#74;&#x6f;&#x68;&#110;&#x2e;&#x44;&#x6f;&#101;&#64;&#101;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#111;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#110;&#x2e;&#68;&#x6f;&#101;&#64;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;">&#x4a;&#x6f;&#104;&#110;&#x2e;&#68;&#x6f;&#101;&#64;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
