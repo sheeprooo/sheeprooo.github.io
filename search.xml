@@ -172,9 +172,6 @@
 
 <p>需要通过<strong>Get</strong>方式传一个参数c，当c中不包含字符串”flag”时执行c中的代码</p>
 <p>因此c无法传参为<code>?c=system(&quot;cat flag.php&quot;);</code>或<code>?c=system(&quot;cp flag.php 1.txt&quot;);</code></p>
-<blockquote>
-<p>Linux命令<code>cp</code>可将<strong>flag.php</strong>拷贝重命名为<strong>1.txt</strong></p>
-</blockquote>
 <p>测试<code>?c=system(&quot;ls&quot;);</code>可以看到网站目录中有<strong>flag.php</strong>及<strong>index.php</strong></p>
 <p>利用<code>?</code>和<code>*</code>的特性绕过</p>
 <blockquote>
@@ -183,9 +180,23 @@
 <p><code>?c=system(&quot;cp fla?.php 1.txt&quot;);</code></p>
 <p>或<code>?c=system(&quot;cp ?lag.php 1.txt&quot;);</code></p>
 <p>或<code>?c=system(&quot;cp fl*.php 1.txt&quot;);</code></p>
+<p>或<code>?c=system(&quot;cp *g.php 1.txt&quot;);</code></p>
+<blockquote>
+<p>Linux命令<code>cp</code>可将<strong>flag.php</strong>拷贝重命名为<strong>1.txt</strong></p>
+<p>或用<code>mv</code>指令将<strong>flag.php</strong>重命名为<strong>1.txt</strong></p>
+</blockquote>
 <p>将<strong>flag.php</strong>重命名为<strong>1.txt</strong></p>
 <p>即可通过<code>/1.txt</code>打开查看flag</p>
-<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h2><p>打开环境有提示前端验证不可靠，试着提交几个webshell，确实<code>php</code>格式不行，但是<code>jpg</code>竟然也不行???</p>
+<h2 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:42:26</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/flag|system|php/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>原理同上，但过滤了参数c中的”flag”,”system”,”php”字符，</p>
+<p>可用<code>?c=`cp fl??.??? 1.txt`;</code></p>
+<blockquote>
+<p>PHP中<code>` `</code>相当于<code>system()</code></p>
+<p>但不知道为什么<code>ls</code>指令无效</p>
+</blockquote>
+<p>访问即可拿到flag</p>
+<h2 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h2><h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h2><p>打开环境有提示前端验证不可靠，试着提交几个webshell，确实<code>php</code>格式不行，但是<code>jpg</code>竟然也不行???</p>
 <p><code>png</code>格式可以（瞧不起我？.jpg</p>
 <p>提交一个png的webshell，然后bp改包将扩展名改成<code>.php</code></p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/26.jpg" style="zoom: 50%;">
@@ -1343,7 +1354,146 @@
 <td align="left">%C3%BF</td>
 </tr>
 </tbody></table>
-<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><table>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>SQL速查手册</span></div>
+    <div class="hide-content"><table>
+<thead>
+<tr>
+<th align="left">SQL 语句</th>
+<th align="left">语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AND / OR</td>
+<td align="left">SELECT column_name(s) FROM table_name WHERE condition AND|OR condition</td>
+</tr>
+<tr>
+<td align="left">ALTER TABLE</td>
+<td align="left">ALTER TABLE table_name ADD column_name datatypeorALTER TABLE table_name DROP COLUMN column_name</td>
+</tr>
+<tr>
+<td align="left">AS (alias)</td>
+<td align="left">SELECT column_name AS column_alias FROM table_nameorSELECT column_name FROM table_name AS table_alias</td>
+</tr>
+<tr>
+<td align="left">BETWEEN</td>
+<td align="left">SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2</td>
+</tr>
+<tr>
+<td align="left">CREATE DATABASE</td>
+<td align="left">CREATE DATABASE database_name</td>
+</tr>
+<tr>
+<td align="left">CREATE TABLE</td>
+<td align="left">CREATE TABLE table_name ( column_name1 data_type, column_name2 data_type, column_name2 data_type, … )</td>
+</tr>
+<tr>
+<td align="left">CREATE INDEX</td>
+<td align="left">CREATE INDEX index_name ON table_name (column_name)orCREATE UNIQUE INDEX index_name ON table_name (column_name)</td>
+</tr>
+<tr>
+<td align="left">CREATE VIEW</td>
+<td align="left">CREATE VIEW view_name AS SELECT column_name(s) FROM table_name WHERE condition</td>
+</tr>
+<tr>
+<td align="left">DELETE</td>
+<td align="left">DELETE FROM table_name WHERE some_column=some_valueorDELETE FROM table_name (<strong>Note:</strong> Deletes the entire table!!)DELETE * FROM table_name (<strong>Note:</strong> Deletes the entire table!!)</td>
+</tr>
+<tr>
+<td align="left">DROP DATABASE</td>
+<td align="left">DROP DATABASE database_name</td>
+</tr>
+<tr>
+<td align="left">DROP INDEX</td>
+<td align="left">DROP INDEX table_name.index_name (SQL Server) DROP INDEX index_name ON table_name (MS Access) DROP INDEX index_name (DB2/Oracle) ALTER TABLE table_name DROP INDEX index_name (MySQL)</td>
+</tr>
+<tr>
+<td align="left">DROP TABLE</td>
+<td align="left">DROP TABLE table_name</td>
+</tr>
+<tr>
+<td align="left">GROUP BY</td>
+<td align="left">SELECT column_name, aggregate_function(column_name) FROM table_name WHERE column_name operator value GROUP BY column_name</td>
+</tr>
+<tr>
+<td align="left">HAVING</td>
+<td align="left">SELECT column_name, aggregate_function(column_name) FROM table_name WHERE column_name operator value GROUP BY column_name HAVING aggregate_function(column_name) operator value</td>
+</tr>
+<tr>
+<td align="left">IN</td>
+<td align="left">SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,..)</td>
+</tr>
+<tr>
+<td align="left">INSERT INTO</td>
+<td align="left">INSERT INTO table_name VALUES (value1, value2, value3,….)<em>or</em>INSERT INTO table_name (column1, column2, column3,…) VALUES (value1, value2, value3,….)</td>
+</tr>
+<tr>
+<td align="left">INNER JOIN</td>
+<td align="left">SELECT column_name(s) FROM table_name1 INNER JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+</tr>
+<tr>
+<td align="left">LEFT JOIN</td>
+<td align="left">SELECT column_name(s) FROM table_name1 LEFT JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+</tr>
+<tr>
+<td align="left">RIGHT JOIN</td>
+<td align="left">SELECT column_name(s) FROM table_name1 RIGHT JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+</tr>
+<tr>
+<td align="left">FULL JOIN</td>
+<td align="left">SELECT column_name(s) FROM table_name1 FULL JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+</tr>
+<tr>
+<td align="left">LIKE</td>
+<td align="left">SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern</td>
+</tr>
+<tr>
+<td align="left">ORDER BY</td>
+<td align="left">SELECT column_name(s) FROM table_name ORDER BY column_name [ASC|DESC]</td>
+</tr>
+<tr>
+<td align="left">SELECT</td>
+<td align="left">SELECT column_name(s) FROM table_name</td>
+</tr>
+<tr>
+<td align="left">SELECT *</td>
+<td align="left">SELECT * FROM table_name</td>
+</tr>
+<tr>
+<td align="left">SELECT DISTINCT</td>
+<td align="left">SELECT DISTINCT column_name(s) FROM table_name</td>
+</tr>
+<tr>
+<td align="left">SELECT INTO</td>
+<td align="left">SELECT * INTO new_table_name [IN externaldatabase] FROM old_table_name<em>or</em>SELECT column_name(s) INTO new_table_name [IN externaldatabase] FROM old_table_name</td>
+</tr>
+<tr>
+<td align="left">SELECT TOP</td>
+<td align="left">SELECT TOP number|percent column_name(s) FROM table_name</td>
+</tr>
+<tr>
+<td align="left">TRUNCATE TABLE</td>
+<td align="left">TRUNCATE TABLE table_name</td>
+</tr>
+<tr>
+<td align="left">UNION</td>
+<td align="left">SELECT column_name(s) FROM table_name1 UNION SELECT column_name(s) FROM table_name2</td>
+</tr>
+<tr>
+<td align="left">UNION ALL</td>
+<td align="left">SELECT column_name(s) FROM table_name1 UNION ALL SELECT column_name(s) FROM table_name2</td>
+</tr>
+<tr>
+<td align="left">UPDATE</td>
+<td align="left">UPDATE table_name SET column1=value, column2=value,… WHERE some_column=some_value</td>
+</tr>
+<tr>
+<td align="left">WHERE</td>
+<td align="left">SELECT column_name(s) FROM table_name WHERE column_name operator value</td>
+</tr>
+</tbody></table>
+</div></div>
+
+<table>
 <thead>
 <tr>
 <th>语句</th>
@@ -1791,6 +1941,34 @@
 <p>该函数是用于把文件的内容读入到一个字符串中的首选方法。如果服务器操作系统支持，还会使用内存映射技术来增强性能</p>
 </blockquote>
 <p><strong>语法</strong>：<code>file_get_contents(path,include_path,context,start,max_length)</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">path</td>
+<td align="left">必需。规定要读取的文件。</td>
+</tr>
+<tr>
+<td align="left">include_path</td>
+<td align="left">可选。如果您还想在 include_path（在 php.ini 中）中搜索文件的话，请设置该参数为 ‘1’。</td>
+</tr>
+<tr>
+<td align="left">context</td>
+<td align="left">可选。规定文件句柄的环境。context 是一套可以修改流的行为的选项。若使用 NULL，则忽略。</td>
+</tr>
+<tr>
+<td align="left">start</td>
+<td align="left">可选。规定在文件中开始读取的位置。该参数是 PHP 5.1 中新增的。</td>
+</tr>
+<tr>
+<td align="left">max_length</td>
+<td align="left">可选。规定读取的字节数。该参数是 PHP 5.1 中新增的。</td>
+</tr>
+</tbody></table>
 <h4 id="intval"><a href="#intval" class="headerlink" title="intval()"></a>intval()</h4><blockquote>
 <p>intval() 函数用于获取变量的整数值</p>
 <p>intval() 函数通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1</p>
@@ -3941,8 +4119,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WEB</tag>
         <tag>BUU</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -4078,8 +4256,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>Bugku</tag>
         <tag>WEB</tag>
+        <tag>Bugku</tag>
       </tags>
   </entry>
   <entry>
@@ -4682,7 +4860,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#110;&#x2e;&#68;&#111;&#x65;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#74;&#111;&#x68;&#110;&#x2e;&#68;&#111;&#x65;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#110;&#x2e;&#x44;&#x6f;&#x65;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#x6d;">&#74;&#111;&#x68;&#110;&#x2e;&#x44;&#x6f;&#x65;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
