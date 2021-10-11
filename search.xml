@@ -223,10 +223,10 @@
 <p>使用php协议</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</span><br></pre></td></tr></table></figure>
 
+<p>返回的为base64编码后的内容</p>
+<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">PD<span class="number">9</span>waHA<span class="symbol">NCg0</span>KLyo<span class="symbol">NCiMgLSotIGNvZGluZzogdXRmLTggLSotDQojIEBBdXRob3</span>I<span class="number">6</span>IGgxeGE<span class="symbol">NCiMgQERhdGU6</span>ICAgMjAyMC<span class="number">0</span>wOS<span class="number">0</span>x<span class="symbol">NiAxMDo1</span><span class="symbol">NToxMQ0</span>KIyBATGFzdCB<span class="symbol">Nb2</span>RpZmllZCBieTogICBoMXhhDQojIEBMYX<span class="symbol">N0</span>IE<span class="number">1</span>vZGlmaWVkIHRpbWU<span class="number">6</span>IDIwMjAtMDktMTYgMTA<span class="number">6</span><span class="symbol">NTU6</span>MjA<span class="symbol">NCiMgQGVtYWlsOiBoMXhhQGN0</span>ZmVyLm<span class="symbol">NvbQ0</span>KIyBAbGluazogaHR<span class="number">0</span>cH<span class="name">M6</span>Ly<span class="number">9</span>jdGZlci<span class="number">5</span>jb<span class="number">20</span><span class="symbol">NCg0</span>KKi<span class="number">8</span><span class="symbol">NCg0</span>KDQokZmxhZz<span class="number">0</span>iY<span class="number">3</span>Rmc<span class="number">2</span>hvd<span class="number">3</span>s<span class="number">1</span><span class="symbol">N2</span>Fj<span class="name">M2</span><span class="name">M0</span>MS<span class="number">1</span>jYzllLTRmMDAtODc<span class="number">5</span>YS<span class="number">0</span>zYT<span class="name">g0</span>MTU<span class="number">0</span><span class="name">M2</span>YxZG<span class="symbol">N9</span>Ijs=</span><br></pre></td></tr></table></figure>
 
-
-
-
+<p>解码后即可得到flag</p>
 <h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h2><p>打开环境有提示前端验证不可靠，试着提交几个webshell，确实<code>php</code>格式不行，但是<code>jpg</code>竟然也不行???</p>
 <p><code>png</code>格式可以（瞧不起我？.jpg</p>
 <p>提交一个png的webshell，然后bp改包将扩展名改成<code>.php</code></p>
@@ -1393,7 +1393,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#110;&#46;&#68;&#111;&#101;&#x40;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#74;&#x6f;&#x68;&#110;&#46;&#68;&#111;&#101;&#x40;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#111;&#104;&#x6e;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#x4a;&#111;&#104;&#x6e;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
