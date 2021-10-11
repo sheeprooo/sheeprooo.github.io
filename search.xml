@@ -1386,14 +1386,14 @@
 </tr>
 </tbody></table>
 <h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h3 id="URI和URL"><a href="#URI和URL" class="headerlink" title="URI和URL"></a>URI和URL</h3><h4 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h4><p>统一资源标识符（Uniform Resource Identifier，URI)是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义</p>
-<img src="/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Blog/source/_posts/HTTP学习记录/1.jpg" style="zoom: 50%;">
+<img src="/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1.jpg" style="zoom: 50%;">
 
 <p>绝对路径格式</p>
 <blockquote>
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#x6e;&#x2e;&#68;&#x6f;&#101;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;">&#74;&#111;&#x68;&#x6e;&#x2e;&#68;&#x6f;&#101;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#110;&#46;&#68;&#111;&#101;&#x40;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#74;&#x6f;&#x68;&#110;&#46;&#68;&#111;&#101;&#x40;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
