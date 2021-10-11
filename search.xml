@@ -224,7 +224,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</span><br></pre></td></tr></table></figure>
 
 <p>返回的为base64编码后的内容</p>
-<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">PD<span class="number">9</span>waHA<span class="symbol">NCg0</span>KLyo<span class="symbol">NCiMgLSotIGNvZGluZzogdXRmLTggLSotDQojIEBBdXRob3</span>I<span class="number">6</span>IGgxeGE<span class="symbol">NCiMgQERhdGU6</span>ICAgMjAyMC<span class="number">0</span>wOS<span class="number">0</span>x<span class="symbol">NiAxMDo1</span><span class="symbol">NToxMQ0</span>KIyBATGFzdCB<span class="symbol">Nb2</span>RpZmllZCBieTogICBoMXhhDQojIEBMYX<span class="symbol">N0</span>IE<span class="number">1</span>vZGlmaWVkIHRpbWU<span class="number">6</span>IDIwMjAtMDktMTYgMTA<span class="number">6</span><span class="symbol">NTU6</span>MjA<span class="symbol">NCiMgQGVtYWlsOiBoMXhhQGN0</span>ZmVyLm<span class="symbol">NvbQ0</span>KIyBAbGluazogaHR<span class="number">0</span>cH<span class="name">M6</span>Ly<span class="number">9</span>jdGZlci<span class="number">5</span>jb<span class="number">20</span><span class="symbol">NCg0</span>KKi<span class="number">8</span><span class="symbol">NCg0</span>KDQokZmxhZz<span class="number">0</span>iY<span class="number">3</span>Rmc<span class="number">2</span>hvd<span class="number">3</span>s<span class="number">1</span><span class="symbol">N2</span>Fj<span class="name">M2</span><span class="name">M0</span>MS<span class="number">1</span>jYzllLTRmMDAtODc<span class="number">5</span>YS<span class="number">0</span>zYT<span class="name">g0</span>MTU<span class="number">0</span><span class="name">M2</span>YxZG<span class="symbol">N9</span>Ijs=</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PD9waHANCg0KLyoNCiMgLSotIGNvZGluZzogdXRmLTggLSotDQojIEBBdXRob3I6IGgxeGENCiMgQERhdGU6ICAgMjAyMC0wOS0xNiAxMDo1NToxMQ0KIyBATGFzdCBNb2RpZmllZCBieTogICBoMXhhDQojIEBMYXN0IE1vZGlmaWVkIHRpbWU6IDIwMjAtMDktMTYgMTA6NTU6MjANCiMgQGVtYWlsOiBoMXhhQGN0ZmVyLmNvbQ0KIyBAbGluazogaHR0cHM6Ly9jdGZlci5jb20NCg0KKi8NCg0KDQokZmxhZz0iY3Rmc2hvd3s1N2FjM2M0MS1jYzllLTRmMDAtODc5YS0zYTg0MTU0M2YxZGN9Ijs&#x3D;</span><br></pre></td></tr></table></figure>
 
 <p>解码后即可得到flag</p>
 <h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h2><p>打开环境有提示前端验证不可靠，试着提交几个webshell，确实<code>php</code>格式不行，但是<code>jpg</code>竟然也不行???</p>
@@ -256,7 +256,9 @@
   <entry>
     <title>CTF学习笔记</title>
     <url>/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><h3 id="ASCII-编码参考手册"><a href="#ASCII-编码参考手册" class="headerlink" title="ASCII 编码参考手册"></a>ASCII 编码参考手册</h3><table>
+    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>URL编码</span></div>
+    <div class="hide-content"><p>ASCII 编码参考手册</p>
+<table>
 <thead>
 <tr>
 <th align="left">字符</th>
@@ -1385,6 +1387,8 @@
 <td align="left">%C3%BF</td>
 </tr>
 </tbody></table>
+</div></div>
+
 <h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h3 id="URI和URL"><a href="#URI和URL" class="headerlink" title="URI和URL"></a>URI和URL</h3><h4 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h4><p>统一资源标识符（Uniform Resource Identifier，URI)是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义</p>
 <img src="/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1.jpg" style="zoom: 50%;">
 
@@ -1393,7 +1397,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#111;&#104;&#x6e;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#x4a;&#111;&#104;&#x6e;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#111;&#104;&#x6e;&#46;&#x44;&#x6f;&#101;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#74;&#111;&#104;&#x6e;&#46;&#x44;&#x6f;&#101;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2146,7 +2150,8 @@
 <p>var_dump() 函数显示关于一个或多个表达式的结构信息，包括表达式的类型与值，数组将递归展开值，通过缩进显示其结构</p>
 </blockquote>
 <p><strong>语法</strong>：<code>var_dump($expression)</code></p>
-<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><table>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>文件格式</span></div>
+    <div class="hide-content"><table>
 <thead>
 <tr>
 <th align="center"><strong>扩展名</strong></th>
@@ -4108,6 +4113,7 @@
 <blockquote>
 <p><a href="https://blog.csdn.net/u011611925/article/details/83780916">参考链接</a></p>
 </blockquote>
+</div></div>
 ]]></content>
       <categories>
         <category>学习</category>
