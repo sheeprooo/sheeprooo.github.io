@@ -20,3 +20,8 @@
     background-color: #49b1f5;
 }
 
+@font-face{
+  font-family:'Candyhome' ;  /* 字体名自定义即可 */
+  src:url('../fonts/ZhuZiAWan.woff2'); /* 字体文件路径 */
+  font-display : swap;
+}
