@@ -1741,7 +1741,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#110;&#x2e;&#x44;&#x6f;&#x65;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#99;&#111;&#109;">&#x4a;&#x6f;&#104;&#110;&#x2e;&#x44;&#x6f;&#x65;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#99;&#111;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#101;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;">&#x4a;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#101;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2358,25 +2358,44 @@
 <p><code>include()</code>,  <code>include_once()</code>,  <code>require()</code>,  <code>require_once()</code></p>
 </blockquote>
 <p>文件包含有两种类型，本地文件包含和远程文件包含</p>
-<ul>
-<li><p><strong>本地文件包含</strong></p>
-<p>直接读取目标机上的flag文件</p>
-<p>可以使用php伪协议读取flag文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">eg: php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</span><br></pre></td></tr></table></figure>
-
-
+<h3 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h3><ul>
+<li><p>直接读取目标机上的flag文件</p>
 </li>
-<li><p><strong>远程文件包含</strong></p>
-<p>指定第三方服务器上可运行的的PHP木马，getshell，查看flag</p>
-<p><em>php.ini</em>中<code>allow_url_fopen = on</code>，且<code>allow_url_include = on</code>时才可以远程文件包含</p>
+<li><p>使用php伪协议读取flag文件</p>
+<ul>
+<li>file://<ul>
+<li>用于访问本地文件系统，CTF中通常用来读取本地文件</li>
+<li>用法：file://[文件的绝对路径和文件名]</li>
+<li>条件：<em>php.ini</em> 中<code>allow_url_fopen = off</code>且<code>allow_url_include = off</code>也可以</li>
+</ul>
+</li>
+<li>php://filter<ul>
+<li>用法：php://filter读取网页源代码</li>
+<li>条件：<em>php.ini</em> 中<code>allow_url_fopen = off</code>且<code>allow_url_include = off</code>也可以</li>
+</ul>
+</li>
+<li>php://input<ul>
+<li>用法：可以访问请求的原始数据的只读流，将post请求中的数据作为PHP代码执行</li>
+<li>条件：<em>php.ini</em> 中<code>allow_url_include = on</code>即可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>写入PHP木马获取webshell，查看flag</p>
+</li>
+</ul>
+<h3 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h3><p>指定第三方服务器上可运行的的PHP木马，getshell，查看flag</p>
+<p><em>php.ini</em> 中<code>allow_url_fopen = on</code>，且<code>allow_url_include = on</code>时才可以远程文件包含</p>
 <blockquote>
 <ul>
 <li><code>allow_url_fopen = on/off</code>    -&gt;    允许URLs像files对象一样被打开</li>
 <li><code>allow_url_include = on/off</code>    -&gt;    允许包含URL对象文件</li>
 </ul>
 </blockquote>
-</li>
-</ul>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><h3 id="截断"><a href="#截断" class="headerlink" title="截断"></a>截断</h3><h4 id="0x00截断"><a href="#0x00截断" class="headerlink" title="0x00截断"></a>0x00截断</h4><p>抓包使用十六进制阅读，将某处更改为<strong>00</strong>，即可使后面的字符不被读取</p>
+<p><strong>原理</strong>：0x00这个特殊字符会使系统认为字符串已结束而不再向后读取字符</p>
+<h4 id="00截断"><a href="#00截断" class="headerlink" title="%00截断"></a>%00截断</h4><p>URL被发送到服务器后会进行URL解码，%00解码后就是0x00</p>
+<h4 id="截断-1"><a href="#截断-1" class="headerlink" title="?截断"></a><em>?截断</em></h4><p>远程文件包含的URL<code>?</code>后面的代码被解释为querystring</p>
 <h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="快速参照表-1"><a href="#快速参照表-1" class="headerlink" title="快速参照表"></a>快速参照表</h2><h3 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h3><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>文件格式</span></div>
     <div class="hide-content"><table>
 <thead>
