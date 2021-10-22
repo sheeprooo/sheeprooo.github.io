@@ -1741,7 +1741,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#101;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;">&#x4a;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#101;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#110;&#x2e;&#68;&#111;&#101;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;">&#x4a;&#x6f;&#104;&#110;&#x2e;&#68;&#111;&#101;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2353,7 +2353,40 @@
 <p>var_dump() 函数显示关于一个或多个表达式的结构信息，包括表达式的类型与值，数组将递归展开值，通过缩进显示其结构</p>
 </blockquote>
 <p><strong>语法</strong>：<code>var_dump($expression)</code></p>
-<h2 id="文件包含题"><a href="#文件包含题" class="headerlink" title="文件包含题"></a>文件包含题</h2><blockquote>
+<h3 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h3><ul>
+<li><p>php:// — 访问各个输入/输出流（I/O streams） </p>
+<ul>
+<li>php://filter</li>
+<li>php://input</li>
+</ul>
+</li>
+<li><p>file:// — 访问本地文件系统 </p>
+</li>
+<li><p>phar:// — PHP 归档 </p>
+</li>
+<li><p>zlib:// — 压缩流 </p>
+</li>
+<li><p>data:// — 数据（RFC 2397）</p>
+</li>
+<li><p>http:// — 访问 HTTP(s) 网址 </p>
+</li>
+<li><p>ftp:// — 访问 FTP(s) URLs </p>
+</li>
+<li><p>glob:// — 查找匹配的文件路径模式 </p>
+</li>
+<li><p>ssh2:// — Secure Shell 2 </p>
+</li>
+<li><p>rar:// — RAR </p>
+</li>
+<li><p>ogg:// — 音频流</p>
+</li>
+<li><p>expect:// — 处理交互式的流</p>
+</li>
+</ul>
+<h2 id="文件包含题"><a href="#文件包含题" class="headerlink" title="文件包含题"></a>文件包含题</h2><div class="note warning flat"><p>文件包含类题在PHP版本 ≤ 5.2时支持%00截断</p>
+</div>
+
+<blockquote>
 <p>导致文件包含漏洞的PHP危险函数：</p>
 <p><code>include()</code>,  <code>include_once()</code>,  <code>require()</code>,  <code>require_once()</code></p>
 </blockquote>
