@@ -192,7 +192,7 @@
 <p>原理同上，但过滤了参数c中的”flag”,”system”,”php”字符，</p>
 <p>可用<code>?c=`cp fl??.??? 1.txt`;</code></p>
 <blockquote>
-<p>PHP中<code>` `</code>相当于<code>system()</code></p>
+<p>PHP中<code>` `</code>相当于<code>shell_exec()                                                                                                                                                                                                            </code></p>
 <p><del>但不知道为什么<code>ls</code>指令无效</del></p>
 <p>↑ 因为<code>` `</code>默认无回显</p>
 </blockquote>
@@ -1741,7 +1741,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#110;&#x2e;&#68;&#111;&#101;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;">&#x4a;&#x6f;&#104;&#110;&#x2e;&#68;&#111;&#101;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#101;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#x4a;&#x6f;&#x68;&#x6e;&#46;&#68;&#111;&#101;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2156,18 +2156,26 @@
 <p>该函数设置当前脚本的错误报告级别</p>
 <p>该函数返回旧的错误报告级别</p>
 </blockquote>
-<p><strong>语法</strong>：<code>error_reporting(report_level)</code></p>
-<p><strong>例</strong>：<code>error_reporting(0);</code>=&gt;屏蔽错误</p>
+<ul>
+<li><p><strong>语法</strong>：<code>error_reporting(report_level)</code></p>
+</li>
+<li><p><strong>示例</strong>：<code>error_reporting(0);</code>=&gt;屏蔽错误</p>
+</li>
+</ul>
 <h4 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h4><blockquote>
 <p>eval() 函数把字符串按照 PHP 代码来计算</p>
 <p>该字符串必须是合法的 PHP 代码，且必须以分号结尾</p>
 </blockquote>
-<p><strong>语法</strong>：<code>eval(phpcode)</code></p>
+<ul>
+<li><strong>语法</strong>：<code>eval(phpcode)</code></li>
+</ul>
 <h4 id="file"><a href="#file" class="headerlink" title="file()"></a>file()</h4><blockquote>
 <p>file() 函数把整个文件读入一个数组中</p>
 <p>数组中的每个元素都是文件中相应的一行，包括换行符在内</p>
 </blockquote>
-<p><strong>语法</strong>：<code>file(path,include_path,context)</code></p>
+<ul>
+<li><strong>语法</strong>：<code>file(path,include_path,context)</code></li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -2192,7 +2200,9 @@
 <p>file_get_contents() 把整个文件读入一个字符串中</p>
 <p>该函数是用于把文件的内容读入到一个字符串中的首选方法。如果服务器操作系统支持，还会使用内存映射技术来增强性能</p>
 </blockquote>
-<p><strong>语法</strong>：<code>file_get_contents(path,include_path,context,start,max_length)</code></p>
+<ul>
+<li><strong>语法</strong>：<code>file_get_contents(path,include_path,context,start,max_length)</code></li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -2225,8 +2235,10 @@
 <p>intval() 函数用于获取变量的整数值</p>
 <p>intval() 函数通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1</p>
 </blockquote>
-<p><strong>语法</strong>：<code>intval($var,$base)</code></p>
-<p><strong>参数</strong>：</p>
+<ul>
+<li><p><strong>语法</strong>：<code>intval($var,$base)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <ul>
 <li>$var：要转换成 integer 的数量值</li>
 <li>$base：转化所使用的进制</li>
@@ -2237,23 +2249,29 @@
 <li>如果字符串以 “0” 开始，使用 8 进制(octal)；否则，</li>
 <li>将使用 10 进制 (decimal)</li>
 </ul>
-<p><strong>返回值</strong>：</p>
-<p>成功时返回 var 的 integer 值，失败时返回 0。 空的 array 返回 0，非空的 array 返回 1</p>
-<p>最大的值取决于操作系统。 32 位系统最大带符号的 integer 范围是 -2147483648 到 2147483647。举例，在这样的系统上， intval(‘1000000000000’) 会返回 2147483647。64 位系统上，最大带符号的 integer 值是 9223372036854775807</p>
+</li>
+<li><p><strong>返回值</strong>：成功时返回 var 的 integer 值，失败时返回 0；空的 array 返回 0，非空的 array 返回 1。最大的值取决于操作系统，32 位系统最大带符号的 integer 范围是 -2147483648 到 2147483647。举例，在这样的系统上，intval(‘1000000000000’) 会返回 2147483647；64 位系统上，最大带符号的 integer 值是 9223372036854775807</p>
 <p>字符串有可能返回 0，虽然取决于字符串最左侧的字符</p>
+</li>
+</ul>
 <h4 id="is-numeric"><a href="#is-numeric" class="headerlink" title="is_numeric()"></a>is_numeric()</h4><blockquote>
 <p>is_numeric() 函数用于检测变量是否为数字或数字字符串</p>
 </blockquote>
-<p><strong>语法</strong>：<code>is_numeric($var)</code></p>
-<p><strong>返回值</strong>：如果指定的变量是数字和数字字符串则返回 TRUE，否则返回 FALSE，注意浮点型返回 1，即 TRUE</p>
-<p><a href="https://www.runoob.com/php/php-is_numeric-function.html">菜鸟教程</a></p>
+<ul>
+<li><p><strong>语法</strong>：<code>is_numeric($var)</code></p>
+</li>
+<li><p><strong>返回值</strong>：如果指定的变量是数字和数字字符串则返回 TRUE，否则返回 FALSE，注意浮点型返回 1，即 TRUE</p>
+</li>
+</ul>
 <h4 id="isset"><a href="#isset" class="headerlink" title="isset()"></a>isset()</h4><blockquote>
 <p>isset() 函数用于检测变量是否已设置并且非 NULL</p>
 <p>如果已经使用 unset() 释放了一个变量之后，再通过 isset() 判断将返回 FALSE</p>
 <p>若使用 isset() 测试一个被设置成 NULL 的变量，将返回 FALSE</p>
 <p>同时要注意的是 null 字符（”\0”）并不等同于 PHP 的 NULL 常量</p>
 </blockquote>
-<p><strong>语法</strong>：<code>isset($var)</code></p>
+<ul>
+<li><strong>语法</strong>：<code>isset($var)</code></li>
+</ul>
 <div class="note info flat"><p>如果一次传入多个参数，那么 isset() 只有在全部参数都被设置时返回 TRUE，计算过程从左至右，中途遇到没有设置的变量时就会立即停止</p>
 </div>
 
@@ -2262,7 +2280,9 @@
 <p>如果成功则返回已计算的 MD5 散列，如果失败则返回 FALSE</p>
 <p>md5() 函数不能处理数组，数组都返回 null，md5(a[]) 结果为 null</p>
 </blockquote>
-<p><strong>语法</strong>：<code>md5(string,raw)</code></p>
+<ul>
+<li><strong>语法</strong>：<code>md5(string,raw)</code></li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -2279,10 +2299,44 @@
 <td align="left">可选。规定十六进制或二进制输出格式：TRUE - 原始 16 字符二进制格式FALSE - 默认。32 字符十六进制数</td>
 </tr>
 </tbody></table>
+<ul>
+<li><p><strong>漏洞</strong>：</p>
+<ul>
+<li><p><code>$_GET[a] != $_GET[b] &amp;&amp; md5($_GET[a]) == md5($_GET[b])</code></p>
+<p>如</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>变量值</th>
+<th>md5值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$_GET[a]</td>
+<td>aabg7XSs</td>
+<td>0e087386482136013740957780965295</td>
+</tr>
+<tr>
+<td>$_GET[b]</td>
+<td>aabC9RqS</td>
+<td>0e041022518165728065344349536299</td>
+</tr>
+</tbody></table>
+<p>md5字符串都以”<strong>0e</strong>“开头，类型转换机制会将它识别为科学计数法表示的数字”<strong>0</strong>“，从而绕过**$a<strong>，</strong>$b<strong>不相等但</strong>md5**相等的判定</p>
+</li>
+<li><p><code>$_GET[a] != $_GET[b] &amp;&amp; md5($_GET[a]) === md5($_GET[b])</code></p>
+<p>传参<code>?a[]=1&amp;b[]=2</code>会使md5() 函数返回<strong>NULL</strong>，从而达到传参虽不相同但返回值都是NULL，绕过判定</p>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="mt-srand"><a href="#mt-srand" class="headerlink" title="mt_srand()"></a>mt_srand()</h4><blockquote>
 <p>mt_srand() 函数播种 Mersenne Twister 随机数生成器</p>
 </blockquote>
-<p><strong>语法</strong>：种子：<code>mt_srand(seed);</code></p>
+<ul>
+<li><strong>语法</strong>：种子：<code>mt_srand(seed);</code></li>
+</ul>
 <p>​            输出：<code>mt_rand();</code></p>
 <div class="note info flat"><p>种子不变时，得到的随机数不变</p>
 </div>
@@ -2290,12 +2344,18 @@
 <div class="note warning flat"><p>php版本不同时，同一种子得到的随机数不同</p>
 </div>
 
-<p><strong>参数</strong>：seek：可选，规定播种值</p>
+<ul>
+<li><p><strong>参数</strong>：</p>
+<p>seek：可选，规定播种值</p>
+</li>
+</ul>
 <h4 id="preg-match"><a href="#preg-match" class="headerlink" title="preg_match()"></a>preg_match()</h4><blockquote>
 <p>preg_match() 函数用于执行一个正则表达式匹配</p>
 </blockquote>
-<p><strong>语法</strong>：<code>int preg_match(string $pattern,string $subject[,array &amp;$matches[,int $flags=0[,int $offset=0]]])</code></p>
-<p><strong>参数</strong>：</p>
+<ul>
+<li><p><strong>语法</strong>：<code>int preg_match(string $pattern,string $subject[,array &amp;$matches[,int $flags=0[,int $offset=0]]])</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <ul>
 <li>$pattern: 要搜索的模式，字符串形式</li>
 <li>$subject: 输入字符串</li>
@@ -2306,25 +2366,51 @@
 </li>
 <li>offset: 通常，搜索从目标字符串的开始位置开始。可选参数 offset 用于 指定从目标字符串的某个未知开始搜索(单位是字节)</li>
 </ul>
-<p><strong>返回值</strong>：返回 pattern 的匹配次数。 它的值将是 0 次（不匹配）或 1 次，因为 preg_match() 在第一次匹配后 将会停止搜索，preg_match_all() 不同于此，它会一直搜索subject 直到到达结尾。 如果发生错误preg_match() 返回 FALSE</p>
-<p><a href="https://www.runoob.com/php/php-preg_match.html">菜鸟教程</a></p>
+</li>
+<li><p><strong>返回值</strong>：返回 pattern 的匹配次数。 它的值将是 0 次（不匹配）或 1 次，因为 preg_match() 在第一次匹配后 将会停止搜索，preg_match_all() 不同于此，它会一直搜索subject 直到到达结尾。 如果发生错误preg_match() 返回 FALSE</p>
+</li>
+</ul>
 <h4 id="preg-replace-callback"><a href="#preg-replace-callback" class="headerlink" title="preg_replace_callback()"></a><em>preg_replace_callback()</em></h4><blockquote>
 <p>preg_replace_callback 函数执行一个正则表达式搜索并且使用一个回调进行替换</p>
 </blockquote>
 <h4 id="print-r"><a href="#print-r" class="headerlink" title="print_r()"></a>print_r()</h4><blockquote>
 <p>print_r() 函数用于打印变量，以更容易理解的形式展示</p>
 </blockquote>
-<p><strong>语法</strong>：<code>print_r($expression,$return)</code></p>
-<p><strong>参数</strong>：</p>
+<ul>
+<li><p><strong>语法</strong>：<code>print_r($expression,$return)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <ul>
 <li>$expression: 要打印的变量，如果给出的是 string、integer 或 float 类型变量，将打印变量值本身，如果给出的是 array，将会按照一定格式显示键和元素，object 与数组类似</li>
 <li>$return: 可选，如果为 true 则不输出结果，而是将结果赋值给一个变量，false 则直接输出结果</li>
 </ul>
-<p><a href="https://www.runoob.com/php/php-print_r-function.html">菜鸟教程</a></p>
+</li>
+</ul>
+<h4 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a>shell_exec()</h4><blockquote>
+<p>shell_exec()  函数通过 shell 环境执行命令，并且将完整的输出以字符串的方式返回</p>
+<p>执行运算符<code>`</code> 的效果与本函数相同（当shell_exec() 函数被ban时反引号也是无效的）</p>
+</blockquote>
+<ul>
+<li><strong>语法</strong>：<code>shell_exec(string $cmd): string</code></li>
+</ul>
+<h4 id="strpos"><a href="#strpos" class="headerlink" title="strpos()"></a>strpos()</h4><blockquote>
+<p>strpos() 函数查找字符串首次出现的位置</p>
+</blockquote>
+<ul>
+<li><p><strong>语法</strong>：<code>strpos(string $haystack, mixed $needle, int $offset = 0): int</code></p>
+</li>
+<li><p><strong>作用</strong>：返回<strong>needle</strong>在<strong>haystack</strong>中首次出现的数字位置</p>
+</li>
+<li><p><strong>漏洞</strong>：<code>strpos($str1,$str2) == false</code></p>
+<p>​            当<strong>str1</strong>在<strong>str2</strong>开头时，函数返回值为0，而<code>0 == false</code>，从而绕过str1中不包含str2的判定</p>
+</li>
+</ul>
 <h4 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h4><blockquote>
 <p>substr() 函数返回字符串的一部分</p>
 </blockquote>
-<p><strong>语法</strong>：<code>substr(string,start,length)</code></p>
+<ul>
+<li><strong>语法</strong>：<code>substr(string,start,length)</code></li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -2352,7 +2438,13 @@
 <p>var_dump() 函数用于输出变量的相关信息</p>
 <p>var_dump() 函数显示关于一个或多个表达式的结构信息，包括表达式的类型与值，数组将递归展开值，通过缩进显示其结构</p>
 </blockquote>
-<p><strong>语法</strong>：<code>var_dump($expression)</code></p>
+<ul>
+<li><strong>语法</strong>：<code>var_dump($expression)</code></li>
+</ul>
+<h3 id="弱类型"><a href="#弱类型" class="headerlink" title="弱类型"></a>弱类型</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span> == <span class="number">0</span> ==<span class="literal">false</span></span><br><span class="line"><span class="string">&#x27;123&#x27;</span> == <span class="number">123</span></span><br><span class="line"><span class="string">&#x27;abc&#x27;</span> == <span class="number">0</span></span><br><span class="line"><span class="string">&#x27;123a&#x27;</span> == <span class="number">123</span></span><br><span class="line"><span class="string">&#x27;0x01&#x27;</span> == <span class="number">1</span></span><br><span class="line"><span class="string">&#x27;0e123456789&#x27;</span> == <span class="string">&#x27;0e987654321&#x27;</span></span><br><span class="line">[<span class="literal">false</span>] == [<span class="number">0</span>] == [<span class="literal">NULL</span>] == [<span class="string">&#x27;&#x27;</span>]</span><br><span class="line"><span class="literal">NULL</span> == <span class="literal">false</span> == <span class="number">0</span></span><br><span class="line"><span class="literal">true</span> == <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h3><ul>
 <li><p>php:// — 访问各个输入/输出流（I/O streams） </p>
 <ul>
