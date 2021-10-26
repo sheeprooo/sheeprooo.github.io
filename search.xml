@@ -289,7 +289,7 @@
   <entry>
     <title>CTF学习笔记</title>
     <url>/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="快速参照表"><a href="#快速参照表" class="headerlink" title="快速参照表"></a>快速参照表</h2><h3 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h3><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>URL编码</span></div>
+    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="快速参照表"><a href="#快速参照表" class="headerlink" title="快速参照表"></a>快速参照表</h2><h3 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h3><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>URL编码速查手册</span></div>
     <div class="hide-content"><p><strong>可显示字符</strong></p>
 <table>
 <thead>
@@ -1592,7 +1592,7 @@
 </tbody></table>
 </div></div>
 
-<div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>HTML符号编码速查手册</span></div>
+<h3 id="HTML符号编码"><a href="#HTML符号编码" class="headerlink" title="HTML符号编码"></a>HTML符号编码</h3><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>HTML符号编码速查手册</span></div>
     <div class="hide-content"><table>
 <thead>
 <tr>
@@ -2076,7 +2076,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#110;&#x2e;&#68;&#x6f;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;">&#74;&#111;&#x68;&#110;&#x2e;&#68;&#x6f;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#x6f;&#104;&#110;&#46;&#x44;&#111;&#x65;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;">&#74;&#x6f;&#104;&#110;&#46;&#x44;&#111;&#x65;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -5782,8 +5782,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WEB</tag>
         <tag>BUU</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -5919,8 +5919,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>Bugku</tag>
         <tag>WEB</tag>
+        <tag>Bugku</tag>
       </tags>
   </entry>
   <entry>
