@@ -6,6 +6,25 @@
     <content><![CDATA[<h1 id="JUST-A-TEST"><a href="#JUST-A-TEST" class="headerlink" title="JUST A TEST!"></a>JUST A TEST!</h1>]]></content>
   </entry>
   <entry>
+    <title>BUU-web</title>
+    <url>/2021/08/22/BUU-web/</url>
+    <content><![CDATA[<h1 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h1><img src="/2021/08/22/BUU-web/21.jpg" style="zoom:50%;">
+
+<p>撸猫(<em>/ω＼</em>) 猫猫最可爱了</p>
+<p>审计源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cat</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;cat&#x27;</span>];</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$cat</span>;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$cat</span>==<span class="string">&#x27;dog&#x27;</span>)&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;Syc&#123;cat_cat_cat_cat&#125;&#x27;</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在URL后面<code>?cat=dog</code>，得到flag</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>BUU</tag>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bugku-web</title>
     <url>/2021/08/22/Bugku-web/</url>
     <content><![CDATA[<h1 id="滑稽"><a href="#滑稽" class="headerlink" title="滑稽"></a>滑稽</h1><p>…滑稽脸<br><img src="https://z3.ax1x.com/2021/04/16/cf8LQK.jpg" style="zoom: 25%;"><br>F12打开源码，找到flag</p>
@@ -36,27 +55,8 @@
         <category>CTF</category>
       </categories>
       <tags>
+        <tag>WEB</tag>
         <tag>Bugku</tag>
-        <tag>WEB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BUU-web</title>
-    <url>/2021/08/22/BUU-web/</url>
-    <content><![CDATA[<h1 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h1><img src="/2021/08/22/BUU-web/21.jpg" style="zoom:50%;">
-
-<p>撸猫(<em>/ω＼</em>) 猫猫最可爱了</p>
-<p>审计源码</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cat</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;cat&#x27;</span>];</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$cat</span>;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$cat</span>==<span class="string">&#x27;dog&#x27;</span>)&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;Syc&#123;cat_cat_cat_cat&#125;&#x27;</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在URL后面<code>?cat=dog</code>，得到flag</p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>WEB</tag>
-        <tag>BUU</tag>
       </tags>
   </entry>
   <entry>
@@ -162,6 +162,19 @@
       </tags>
   </entry>
   <entry>
+    <title>CTFshow-crypto</title>
+    <url>/2021/08/22/CTFshow-crypto/</url>
+    <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><h2 id="密码学签到"><a href="#密码学签到" class="headerlink" title="密码学签到"></a>密码学签到</h2><p>倒置即可</p>
+<h2 id="crypto2"><a href="#crypto2" class="headerlink" title="crypto2"></a>crypto2</h2>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTFshow</tag>
+        <tag>CRYPTO</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CTFshow-misc入门</title>
     <url>/2021/08/22/CTFshow-misc%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h1 id="图片篇（基础操作）"><a href="#图片篇（基础操作）" class="headerlink" title="图片篇（基础操作）"></a>图片篇（基础操作）</h1><h2 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h2><p>一个简单的图片，通过识别文字获取flag</p>
@@ -178,19 +191,6 @@
       <tags>
         <tag>CTFshow</tag>
         <tag>MISC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTFshow-crypto</title>
-    <url>/2021/08/22/CTFshow-crypto/</url>
-    <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><h2 id="密码学签到"><a href="#密码学签到" class="headerlink" title="密码学签到"></a>密码学签到</h2><p>倒置即可</p>
-<h2 id="crypto2"><a href="#crypto2" class="headerlink" title="crypto2"></a>crypto2</h2>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTFshow</tag>
-        <tag>CRYPTO</tag>
       </tags>
   </entry>
   <entry>
@@ -3194,7 +3194,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#x6f;&#104;&#110;&#46;&#68;&#111;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#74;&#x6f;&#104;&#110;&#46;&#68;&#111;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#x68;&#x6e;&#x2e;&#x44;&#111;&#x65;&#64;&#x65;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#46;&#99;&#111;&#x6d;">&#x4a;&#x6f;&#x68;&#x6e;&#x2e;&#x44;&#111;&#x65;&#64;&#x65;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#46;&#99;&#111;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
