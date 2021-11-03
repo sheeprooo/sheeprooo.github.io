@@ -314,7 +314,11 @@
 <p>然后就可以读取flag.php的内容了</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?c&#x3D;show_source(next(array_reverse(scandir(pos(localeconv())))));</span><br><span class="line">或者</span><br><span class="line">?c&#x3D;show_ource(next(array_reverse(scandir(getcwd()))));</span><br></pre></td></tr></table></figure>
 
-<h2 id="web41"><a href="#web41" class="headerlink" title="web41"></a>web41</h2><h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><h2 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-16 10:52:43</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-16 10:54:20</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="web41"><a href="#web41" class="headerlink" title="web41"></a>web41</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: 羽</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-05 20:31:22</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-05 22:40:07</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: 1341963450<span class="doctag">@qq</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctf.show</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-/i&#x27;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">&quot;echo(<span class="subst">$c</span>);&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>用的羽师傅的脚本</p>
+<p><a href="https://blog.csdn.net/miuzzx/article/details/108569080"></a></p>
+<h2 id="web42"><a href="#web42" class="headerlink" title="web42"></a>web42</h2><h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><h2 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-16 10:52:43</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-16 10:54:20</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>通<strong>GET</strong>方式获取参数”file”，</p>
 <p>include语句可以包含文件</p>
@@ -2141,7 +2145,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#110;&#46;&#68;&#111;&#x65;&#64;&#x65;&#120;&#97;&#109;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#x4a;&#x6f;&#104;&#110;&#46;&#68;&#111;&#x65;&#64;&#x65;&#120;&#97;&#109;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#x6f;&#x68;&#x6e;&#46;&#68;&#x6f;&#x65;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#x6f;&#109;">&#74;&#x6f;&#x68;&#x6e;&#46;&#68;&#x6f;&#x65;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#x6f;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2556,6 +2560,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>array_reverse(array,preserve)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2598,6 +2604,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>current(array)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2642,6 +2650,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>file(path,include_path,context)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2670,6 +2680,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>file_get_contents(path,include_path,context,start,max_length)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2706,6 +2718,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>fopen(filename,mode,include_path,context)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2753,6 +2767,31 @@
 </ul>
 </li>
 </ul>
+<h4 id="get-defined-vars"><a href="#get-defined-vars" class="headerlink" title="get_defined_vars()"></a>get_defined_vars()</h4><blockquote>
+<p>get_defined_vars() 函数返回由所有已定义变量所组成的数组</p>
+<p>版本要求：PHP 4 &gt;= 4.0.4, PHP 5, PHP 7</p>
+</blockquote>
+<ul>
+<li><p><strong>语法</strong>：<code>array get_defined_vars ( void )</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li>void</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：返回一个包含所有已定义变量列表的多维数组，这些变量包括环境变量、服务器变量和用户定义的变量</p>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$b</span> = <span class="keyword">array</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>);</span><br><span class="line"> </span><br><span class="line"><span class="variable">$arr</span> = get_defined_vars();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 打印 $b</span></span><br><span class="line">print_r(<span class="variable">$arr</span>[<span class="string">&quot;b&quot;</span>]);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 打印 PHP 解释程序的路径（如果 PHP 作为 CGI 使用的话）</span></span><br><span class="line"><span class="comment">// 例如：/usr/local/bin/php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$arr</span>[<span class="string">&quot;_&quot;</span>];</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 打印命令行参数（如果有的话）</span></span><br><span class="line">print_r(<span class="variable">$arr</span>[<span class="string">&quot;argv&quot;</span>]);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 打印所有服务器变量</span></span><br><span class="line">print_r(<span class="variable">$arr</span>[<span class="string">&quot;_SERVER&quot;</span>]);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 打印变量数组的所有可用键值</span></span><br><span class="line">print_r(array_keys(get_defined_vars()));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>运行结果</span></div>
+    <div class="hide-content"><blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] &#x3D;&gt; 1</span><br><span class="line">    [1] &#x3D;&gt; 1</span><br><span class="line">    [2] &#x3D;&gt; 2</span><br><span class="line">    [3] &#x3D;&gt; 3</span><br><span class="line">    [4] &#x3D;&gt; 5</span><br><span class="line">    [5] &#x3D;&gt; 8</span><br><span class="line">)</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] &#x3D;&gt; &#x2F;tmp&#x2F;543750210&#x2F;main.php</span><br><span class="line">)</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [PATH] &#x3D;&gt; &#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;sbin:&#x2F;bin</span><br><span class="line">    [HOSTNAME] &#x3D;&gt; glot-runner</span><br><span class="line">    [PHPIZE_DEPS] &#x3D;&gt; autoconf         dpkg-dev         file         g++         gcc         libc-dev         make         pkg-config         re2c</span><br><span class="line">    [PHP_INI_DIR] &#x3D;&gt; &#x2F;usr&#x2F;local&#x2F;etc&#x2F;php</span><br><span class="line">    [PHP_CFLAGS] &#x3D;&gt; -fstack-protector-strong -fpic -fpie -O2</span><br><span class="line">    [PHP_CPPFLAGS] &#x3D;&gt; -fstack-protector-strong -fpic -fpie -O2</span><br><span class="line">    [PHP_LDFLAGS] &#x3D;&gt; -Wl,-O1 -Wl,--hash-style&#x3D;both -pie</span><br><span class="line">    [GPG_KEYS] &#x3D;&gt; 1729F83938DA44E27BA0F4D3DBDB397470D12172 B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F</span><br><span class="line">    [PHP_VERSION] &#x3D;&gt; 7.2.1</span><br><span class="line">    [PHP_URL] &#x3D;&gt; https:&#x2F;&#x2F;secure.php.net&#x2F;get&#x2F;php-7.2.1.tar.xz&#x2F;from&#x2F;this&#x2F;mirror</span><br><span class="line">    [PHP_ASC_URL] &#x3D;&gt; https:&#x2F;&#x2F;secure.php.net&#x2F;get&#x2F;php-7.2.1.tar.xz.asc&#x2F;from&#x2F;this&#x2F;mirror</span><br><span class="line">    [PHP_SHA256] &#x3D;&gt; 6c6cf82fda6660ed963821eb0525214bb3547e8e29f447b9c15b2d8e6efd8822</span><br><span class="line">    [PHP_MD5] &#x3D;&gt; </span><br><span class="line">    [HOME] &#x3D;&gt; &#x2F;home&#x2F;glot</span><br><span class="line">    [PHP_SELF] &#x3D;&gt; &#x2F;tmp&#x2F;543750210&#x2F;main.php</span><br><span class="line">    [SCRIPT_NAME] &#x3D;&gt; &#x2F;tmp&#x2F;543750210&#x2F;main.php</span><br><span class="line">    [SCRIPT_FILENAME] &#x3D;&gt; &#x2F;tmp&#x2F;543750210&#x2F;main.php</span><br><span class="line">    [PATH_TRANSLATED] &#x3D;&gt; &#x2F;tmp&#x2F;543750210&#x2F;main.php</span><br><span class="line">    [DOCUMENT_ROOT] &#x3D;&gt; </span><br><span class="line">    [REQUEST_TIME_FLOAT] &#x3D;&gt; 1524198667.12</span><br><span class="line">    [REQUEST_TIME] &#x3D;&gt; 1524198667</span><br><span class="line">    [argv] &#x3D;&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [0] &#x3D;&gt; &#x2F;tmp&#x2F;543750210&#x2F;main.php</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [argc] &#x3D;&gt; 1</span><br><span class="line">)</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] &#x3D;&gt; _GET</span><br><span class="line">    [1] &#x3D;&gt; _POST</span><br><span class="line">    [2] &#x3D;&gt; _COOKIE</span><br><span class="line">    [3] &#x3D;&gt; _FILES</span><br><span class="line">    [4] &#x3D;&gt; argv</span><br><span class="line">    [5] &#x3D;&gt; argc</span><br><span class="line">    [6] &#x3D;&gt; _SERVER</span><br><span class="line">    [7] &#x3D;&gt; b</span><br><span class="line">    [8] &#x3D;&gt; arr</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</blockquote>
+</div></div>
+
+</li>
+</ul>
 <h4 id="intval"><a href="#intval" class="headerlink" title="intval()"></a>intval()</h4><blockquote>
 <p>intval() 函数用于获取变量的整数值</p>
 <p>intval() 函数通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1</p>
@@ -2762,14 +2801,16 @@
 </li>
 <li><p><strong>参数</strong>：</p>
 <ul>
-<li>$var：要转换成 integer 的数量值</li>
-<li>$base：转化所使用的进制</li>
-</ul>
-<p>如果 base 是 0，通过检测 var 的格式来决定使用的进制：</p>
+<li><p>$var：要转换成 integer 的数量值</p>
+</li>
+<li><p>$base：转化所使用的进制，如果 base 是 0，</p>
+<p>通过检测 var 的格式来决定使用的进制：</p>
 <ul>
 <li>如果字符串包括了 “0x” (或 “0X”) 的前缀，使用 16 进制 (hex)；否则，</li>
 <li>如果字符串以 “0” 开始，使用 8 进制(octal)；否则，</li>
 <li>将使用 10 进制 (decimal)</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><strong>返回值</strong>：成功时返回 var 的 integer 值，失败时返回 0；空的 array 返回 0，非空的 array 返回 1。最大的值取决于操作系统，32 位系统最大带符号的 integer 范围是 -2147483648 到 2147483647。举例，在这样的系统上，intval(‘1000000000000’) 会返回 2147483647；64 位系统上，最大带符号的 integer 值是 9223372036854775807</p>
@@ -2848,6 +2889,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>md5(string,raw)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2914,8 +2957,9 @@
 </div>
 
 <ul>
-<li><p><strong>参数</strong>：</p>
-<p>seek：可选，规定播种值</p>
+<li><strong>参数</strong>：<ul>
+<li>seek：可选，规定播种值</li>
+</ul>
 </li>
 </ul>
 <h4 id="pos"><a href="#pos" class="headerlink" title="pos()"></a>pos()</h4><blockquote>
@@ -2948,6 +2992,29 @@
 <h4 id="preg-replace-callback"><a href="#preg-replace-callback" class="headerlink" title="preg_replace_callback()"></a><em>preg_replace_callback()</em></h4><blockquote>
 <p>preg_replace_callback 函数执行一个正则表达式搜索并且使用一个回调进行替换</p>
 </blockquote>
+<h4 id="print"><a href="#print" class="headerlink" title="print()"></a>print()</h4><blockquote>
+<p>print() 函数输出一个或多个字符串。</p>
+<p><strong>注释：</strong>print() 函数实际不是一个函数，所以您不必对它使用括号</p>
+<p><strong>提示：</strong>print() 函数比 echo() 速度稍慢</p>
+</blockquote>
+<ul>
+<li><p><strong>语法</strong>：<code>print(strings)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li>strings：必需，发送到输出的一个或多个字符串</li>
+</ul>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>技术细节</strong>：</p>
+<ul>
+<li>返回值：总是返回1</li>
+<li>PHP版本：4+</li>
+</ul>
+</li>
+</ul>
 <h4 id="print-r"><a href="#print-r" class="headerlink" title="print_r()"></a>print_r()</h4><blockquote>
 <p>print_r() 函数用于打印变量，以更容易理解的形式展示</p>
 </blockquote>
@@ -2968,6 +3035,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>scandir(directory,sorting_order,context);</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2989,16 +3058,16 @@
 </tr>
 </tbody></table>
 </li>
+<li><p><strong>示例</strong>：</p>
+<ul>
+<li><code>scandir(.)</code>    -&gt;    扫描当前目录</li>
+</ul>
+</li>
 <li><p><strong>技术细节</strong>：</p>
 <ul>
 <li>返回值：成功则返回文件和目录的数组，失败则返回 FALSE；如果 directory 不是一个目录，则抛出 E_WARNING 级别的错误</li>
 <li>PHP版本：5.0+</li>
 <li>更新日志：PHP 5.4：新增 sorting_order 常量</li>
-</ul>
-</li>
-<li><p><strong>示例</strong>：</p>
-<ul>
-<li><code>scandir(.)</code>    -&gt;    扫描当前目录</li>
 </ul>
 </li>
 </ul>
@@ -3017,6 +3086,8 @@
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>show_source(filename,return)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -3068,17 +3139,58 @@
 <li>如果同时需要对某个数组进行查找和替换，并且需要执行替换的元素少于查找到的元素的数量，那么多余的元素将用空字符串进行替换</li>
 <li>如果是对一个数组进行查找，但只对一个字符串进行替换，那么替代字符串将对所有查找到的值起作用</li>
 </ul>
-<p><strong>该函数是区分大小写的。请使用 str_ireplace() 函数执行不区分大小写的搜索</strong></p>
-<p><strong>该函数是二进制安全的</strong></p>
+<p><strong>注释</strong>：该函数是区分大小写的。请使用 str_ireplace() 函数执行不区分大小写的搜索</p>
+<p><strong>注释</strong>：该函数是二进制安全的</p>
 </blockquote>
 <ul>
-<li><strong>语法</strong>：<code>str_replace(find,replace,string,count)</code></li>
+<li><p><strong>语法</strong>：<code>str_replace(find,replace,string,count)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">find</td>
+<td align="left">必需，规定要查找的值</td>
+</tr>
+<tr>
+<td align="left">replace</td>
+<td align="left">必需，规定替换 find 中的值的值</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">必需，规定被搜索的字符串</td>
+</tr>
+<tr>
+<td align="left">count</td>
+<td align="left">可选，一个变量，对替换数进行计数</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> str_replace(<span class="string">&quot;world&quot;</span>,<span class="string">&quot;Peter&quot;</span>,<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p><strong>技术细节</strong>：</p>
+<ul>
+<li>返回值：返回带有替换值的字符串或数组</li>
+<li>PHP版本：4+</li>
+<li>更新日志：在 PHP 5.0 中，新增了 count 参数；在 PHP 4.3.3 之前，该函数的 find 和 replace 参数都为数组时将会遇到麻烦，会引起空的 find 索引在内部指针没有更换到 replace 数组上时被忽略，新的版本不会有这个问题；自 PHP 4.0.5 起，大多数参数可以是一个数组</li>
+</ul>
+</li>
 </ul>
 <h4 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h4><blockquote>
 <p>substr() 函数返回字符串的一部分</p>
 </blockquote>
 <ul>
 <li><p><strong>语法</strong>：<code>substr(string,start,length)</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
 <table>
 <thead>
 <tr>
