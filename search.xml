@@ -2429,7 +2429,7 @@
 <p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>   </p>
 <p><a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>    </p>
 <p>ldap://[2001:db8::7]/c=GB?objectClass?one    </p>
-<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#110;&#46;&#68;&#x6f;&#101;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;">&#x4a;&#x6f;&#104;&#110;&#46;&#68;&#x6f;&#101;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;</a>    </p>
+<p>mailto:<a href="mailto:&#x4a;&#x6f;&#104;&#x6e;&#x2e;&#68;&#x6f;&#101;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#109;">&#x4a;&#x6f;&#104;&#x6e;&#x2e;&#68;&#x6f;&#101;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#109;</a>    </p>
 <p>news:comp.infosystems.<a href="http://www.servers.unix/">www.servers.unix</a>    </p>
 <p>tel:+1-816-555-1212    </p>
 <p>telnet://192.0.2.16:80/    </p>
@@ -6927,6 +6927,109 @@
       </tags>
   </entry>
   <entry>
+    <title>云服务器搭建博客</title>
+    <url>/2022/01/10/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>正好最近腾讯云打折，就花了两百买了三年2核4G云服务器，拿来转移下博客阵地，也能深度学习下服务器方面的知识</p>
+<h1 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h1><p>购买服务器会让你先选择系统镜像，我选择的是Ubuntu 20.04，</p>
+<p>打开腾讯云的控制台，重置默认密码，然后就可以用shell工具连接服务器辣</p>
+<p>可以选择密码连接或者在控制台那里生成密钥，使用私钥连接（我选择密码，因为我懒x x）</p>
+<p>打开 <code>sshd_config</code> 配置文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>找到 <code>#Authentication</code>，将 <code>PasswordAuthentication</code> 参数修改为 yes</p>
+<blockquote>
+<p>若 <code>sshd_config</code> 配置文件中无此配置项，则添加 <code>PasswordAuthentication yes</code> 项即可</p>
+</blockquote>
+<p>重启 ssh 服务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>shell端选择的是FinallShell，新建会话，主机名输入控制台可以看到的公网IP，端口默认22，</p>
+<p><strong>注意：</strong>用户名是Ubuntu！！！不是root，也不是lighthouse，在这卡了好长时间，密码即刚才重置的新密码</p>
+<h1 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h1><p>然后想安装hexo，提示要先安装npm</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure>
+
+<p>然后报错了…</p>
+<p>正确流程</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install nodejs npm</span><br></pre></td></tr></table></figure>
+
+<p>但是这样安装完的node版本为<code>v10.19.0</code>，在安装hexo时还是会显示node版本过低报错</p>
+<p>更新node版本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo npm install -g n</span><br><span class="line">sudo n 12.22.1</span><br></pre></td></tr></table></figure>
+
+<p>这时<code>node -v</code>显示仍未旧版本，前面的操作提示说</p>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">If &quot;node --version&quot; shows the old version then start a new shell, or reset the location hash with:</span><br><span class="line">hash -r  (for bash, zsh, ash, dash, and ksh)</span><br><span class="line">rehash   (for csh and tcsh)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><code>hash -r</code>后即可</p>
+<p>然后<code>sudo npm install -g hexo-cli</code>下载hexo</p>
+<h1 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h1><p>添加用户git，并下载Git</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo adduser git</span><br><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
+
+<p>在<code>home</code>目录下建立一个<code>.ssh</code>目录，赋予其700权限<code>mkdir ~/.ssh &amp;&amp; chmod 700 ~/.ssh</code></p>
+<p>添加git用户的权限</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod 740 /etc/sudoers</span><br><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<p>找到这个内容：<code>root    ALL=(ALL:ALL)     ALL</code><br>加入：<code>git    ALL=(ALL:ALL)     ALL</code></p>
+<p>改回权限：<code>chmod 400 /etc/sudoers</code></p>
+<p>切换至git用户（很重要） 进行下面操作：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">su git</span><br><span class="line">mkdir ~/.ssh</span><br><span class="line">vim ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>修改<strong>authorized_keys</strong>中内容为服务器密钥对的公钥</p>
+<p>修改上面这两个文件的权限：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod 600 /home/git/.ssh/authorized_keys</span><br><span class="line">chmod 700 /home/git/.ssh</span><br></pre></td></tr></table></figure>
+
+<p>然后本地测试连接<code>ssh -v git@云服务器IP</code>，连接成功</p>
+<h1 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h1><p>建立文件路径：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mkdir /var/repo</span><br></pre></td></tr></table></figure>
+
+<p>修改权限：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chown -R $USER:$USER /var/repo/</span><br><span class="line">chmod -R 755 /var/repo/</span><br></pre></td></tr></table></figure>
+
+<p>创建远程Git仓库：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /var/repo</span><br><span class="line">git init --bare blog.git</span><br></pre></td></tr></table></figure>
+
+<p>安装Nginx：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get install nginx -y</span><br></pre></td></tr></table></figure>
+
+<p>配置 Nginx 托管文件目录：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo su root</span><br><span class="line">mkdir -p /var/hexo</span><br><span class="line">chown -R git:git /var/hexo</span><br><span class="line">chmod -R 755 /var/hexo</span><br></pre></td></tr></table></figure>
+
+<p>修改 Nginx 的 <code>default</code> 文件使得 root 指向刚刚创建的 <code>/var/hexo</code>目录：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
+
+<p>修改server字段的root部分为<code>root /var/hexo;</code></p>
+<p>然后重启 nginx 服务：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
+
+<p>这时访问公网IP显示403，因为未搭建任何东西，在<code>/hexo</code>目录下新建<strong>index.html</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is my Blog.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再打开公网IP即显示“This is my Blog.”</p>
+<h1 id="0x05"><a href="#0x05" class="headerlink" title="0x05"></a>0x05</h1><p>配置 git-hooks，即配置git推送后执行的脚本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /var/repo/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+
+<p>添加</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">git --work-tree=/var/hexo --git-dir=/var/repo/blog.git checkout -f</span><br></pre></td></tr></table></figure>
+
+<p>脚本目的是从<code>blog.git</code>仓库覆盖掉<code>/var/hexo</code>目录，达到更新的目的</p>
+<p>然后为其添加执行权限</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod +x /var/repo/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="0x10"><a href="#0x10" class="headerlink" title="0x10"></a>0x10</h1><p>上面创建的git用户可以通过ssh连接，进行任何操作。为了安全性，我们需要将git用户的活动限制在与Git相关的范围，也就是把git用户的shell改成 <code>git-shell</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo chsh git -s $(which git-shell)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python学习笔记</title>
     <url>/2022/01/09/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>命名只能包含字母、数字、下划线，变量名可以以字母或下划线开头，但不能以数字开头（慎用小写字母l、大写字母O，易与1和0混淆）</p>
@@ -7727,7 +7830,7 @@
         <category>学习</category>
       </categories>
       <tags>
-        <tag>博客搭建</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
